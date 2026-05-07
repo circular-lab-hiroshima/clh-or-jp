@@ -302,6 +302,12 @@
     .business-content { grid-template-columns: 1fr; gap: 40px; }
     .stats-grid { grid-template-columns: 1fr; gap: 32px; }
     .members-grid { grid-template-columns: 1fr; }
+    .sponsorship-grid { grid-template-columns: 1fr !important; }
+    .sponsorship-card { padding: 36px 24px !important; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 28px; }
+    .stat-num { font-size: 40px; }
   }
 </style>
 </head>
@@ -418,9 +424,9 @@
   <div class="section-tag">Sponsorship</div>
   <h2 class="section-title">企業協賛メニュー</h2>
   <p class="section-text">サーキュラーエコノミーの実現に向けた活動を、ともに推進しませんか。協賛企業として広島の資源循環を牽引する一員になれます。</p>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:60px;">
+  <div class="sponsorship-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:60px;">
 
-    <div style="border:2px solid #e0e8e0;border-radius:20px;padding:48px 40px;position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(45,106,79,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+    <div class="sponsorship-card" style="border:2px solid #e0e8e0;border-radius:20px;padding:48px 40px;position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(45,106,79,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
       <div style="font-size:11px;letter-spacing:0.15em;color:#52b788;font-weight:700;margin-bottom:12px;">MEMBER</div>
       <div style="font-size:26px;font-weight:800;color:#2d6a4f;margin-bottom:8px;">メンバー法人協賛</div>
       <div style="font-size:40px;font-weight:800;color:#2d6a4f;margin:24px 0 4px;line-height:1;">¥100,000</div>
@@ -435,7 +441,7 @@
       <a href="mailto:clh@shingi.co.jp" style="display:block;text-align:center;margin-top:36px;padding:13px;border:2px solid #2d6a4f;border-radius:40px;color:#2d6a4f;font-weight:700;font-size:14px;text-decoration:none;letter-spacing:0.05em;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#2d6a4f';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='#2d6a4f'">お問い合わせ</a>
     </div>
 
-    <div style="border:2px solid #2d6a4f;border-radius:20px;padding:48px 40px;background:linear-gradient(135deg,#edf4ef,#f8f9f4);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(45,106,79,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+    <div class="sponsorship-card" style="border:2px solid #5c3d2e;border-radius:20px;padding:48px 40px;background:linear-gradient(135deg,#f2e8de,#faf5ef);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(92,61,46,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
       <div style="position:absolute;top:20px;right:24px;background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:0.1em;">PREMIUM</div>
       <div style="font-size:11px;letter-spacing:0.15em;color:#52b788;font-weight:700;margin-bottom:12px;">PARTNER</div>
       <div style="font-size:26px;font-weight:800;color:#2d6a4f;margin-bottom:8px;">パートナー法人協賛</div>
