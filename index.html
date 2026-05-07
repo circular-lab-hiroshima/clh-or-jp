@@ -4,11 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>サーキュラー・ラボ・広島</title>
+<script src="content.js"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   :root {
-    --green: #5c3d2e;
-    --light-green: #c8763a;
+    --brown: #5c3d2e;
+    --light-brown: #c8763a;
     --bg: #faf5ef;
     --text: #2a1f1a;
     --muted: #7a6358;
@@ -19,291 +20,131 @@
     color: var(--text);
     line-height: 1.8;
   }
-
-  /* ナビ */
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
-    background: rgba(248,249,244,0.95);
+    background: rgba(250,245,239,0.95);
     backdrop-filter: blur(8px);
     padding: 16px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    border-bottom: 1px solid #e0e8e0;
+    border-bottom: 1px solid #e8d5c4;
   }
-  .logo {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--green);
-    letter-spacing: 0.05em;
-  }
+  .logo { font-size: 14px; font-weight: 700; color: var(--brown); letter-spacing: 0.05em; }
   .nav-links a {
-    text-decoration: none;
-    color: var(--muted);
-    font-size: 13px;
-    margin-left: 28px;
-    letter-spacing: 0.05em;
-    transition: color 0.2s;
+    text-decoration: none; color: var(--muted); font-size: 13px;
+    margin-left: 28px; letter-spacing: 0.05em; transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--green); }
-
-  /* ヒーロー */
+  .nav-links a:hover { color: var(--brown); }
   .hero {
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
     padding: 120px 10% 80px;
-    background: linear-gradient(135deg, #edf4ef 0%, #f8f9f4 60%, #e8f0e8 100%);
-    position: relative;
-    overflow: hidden;
+    background: linear-gradient(135deg, #f2e8de 0%, #faf5ef 60%, #ecdfd4 100%);
+    position: relative; overflow: hidden;
   }
   .hero::before {
-    content: '';
-    position: absolute;
-    right: -100px; top: -100px;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(82,183,136,0.15) 0%, transparent 70%);
+    content: ''; position: absolute; right: -100px; top: -100px;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,118,58,0.12) 0%, transparent 70%);
   }
-  .hero-tag {
-    font-size: 12px;
-    letter-spacing: 0.15em;
-    color: var(--light-green);
-    font-weight: 600;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-  }
-  .hero h1 {
-    font-size: clamp(32px, 5vw, 56px);
-    font-weight: 800;
-    line-height: 1.3;
-    color: var(--green);
-    margin-bottom: 12px;
-    letter-spacing: -0.01em;
-  }
-  .hero-sub {
-    font-size: clamp(16px, 2vw, 20px);
-    color: var(--muted);
-    margin-bottom: 40px;
-    max-width: 520px;
-  }
+  .hero-tag { font-size: 12px; letter-spacing: 0.15em; color: var(--light-brown); font-weight: 600; margin-bottom: 20px; }
+  .hero h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.3; color: var(--brown); margin-bottom: 12px; }
+  .hero-sub { font-size: clamp(16px, 2vw, 20px); color: var(--muted); margin-bottom: 40px; max-width: 520px; }
   .hero-btn {
-    display: inline-block;
-    background: var(--green);
-    color: #fff;
-    padding: 14px 36px;
-    border-radius: 40px;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    transition: background 0.2s, transform 0.2s;
+    display: inline-block; background: var(--brown); color: #fff;
+    padding: 14px 36px; border-radius: 40px; text-decoration: none;
+    font-size: 14px; font-weight: 600; letter-spacing: 0.08em; transition: background 0.2s, transform 0.2s;
   }
-  .hero-btn:hover { background: var(--light-green); transform: translateY(-2px); }
-
-  /* セクション共通 */
+  .hero-btn:hover { background: var(--light-brown); transform: translateY(-2px); }
   section { padding: 100px 10%; }
-  .section-tag {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    color: var(--light-green);
-    font-weight: 700;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
-  .section-title {
-    font-size: clamp(24px, 3vw, 36px);
-    font-weight: 800;
-    color: var(--green);
-    margin-bottom: 24px;
-    line-height: 1.4;
-  }
-  .section-text {
-    color: var(--muted);
-    max-width: 640px;
-    font-size: 15px;
-  }
-
-  /* ミッション */
+  .section-tag { font-size: 11px; letter-spacing: 0.2em; color: var(--light-brown); font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
+  .section-title { font-size: clamp(24px, 3vw, 36px); font-weight: 800; color: var(--brown); margin-bottom: 24px; line-height: 1.4; }
+  .section-text { color: var(--muted); max-width: 640px; font-size: 15px; }
   .mission { background: #fff; }
-  .mission-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 32px;
-    margin-top: 60px;
-  }
+  .mission-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 60px; }
   .mission-card {
-    background: var(--bg);
-    border-radius: 16px;
-    padding: 36px 28px;
-    border: 1px solid #e0e8e0;
-    transition: transform 0.2s, box-shadow 0.2s;
+    background: var(--bg); border-radius: 16px; padding: 36px 28px;
+    border: 1px solid #e8d5c4; transition: transform 0.2s, box-shadow 0.2s;
   }
-  .mission-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(45,106,79,0.1); }
-  .mission-icon {
-    font-size: 36px;
-    margin-bottom: 16px;
-  }
-  .mission-card h3 {
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--green);
-    margin-bottom: 10px;
-  }
-  .mission-card p {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  /* 事業 */
+  .mission-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(92,61,46,0.1); }
+  .mission-icon { font-size: 36px; margin-bottom: 16px; }
+  .mission-card h3 { font-size: 17px; font-weight: 700; color: var(--brown); margin-bottom: 10px; }
+  .mission-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
   .business { background: var(--bg); }
-  .business-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    margin-top: 20px;
-  }
+  .business-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 20px; }
   .business-visual {
     background: linear-gradient(135deg, #e8d5c4, #d4b896);
-    border-radius: 24px;
-    height: 360px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 100px;
+    border-radius: 24px; height: 360px;
+    display: flex; align-items: center; justify-content: center; font-size: 100px;
   }
   .business-list { list-style: none; margin-top: 24px; }
   .business-list li {
-    padding: 14px 0;
-    border-bottom: 1px solid #e0e8e0;
-    font-size: 15px;
-    color: var(--muted);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid #e8d5c4;
+    font-size: 15px; color: var(--muted); display: flex; align-items: center; gap: 12px;
   }
-  .business-list li::before {
-    content: '→';
-    color: var(--light-green);
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  /* 実績 */
-  .stats { background: var(--green); color: #fff; text-align: center; }
+  .business-list li::before { content: '→'; color: var(--light-brown); font-weight: 700; flex-shrink: 0; }
+  .stats { background: var(--brown); color: #fff; text-align: center; }
   .stats .section-title { color: #fff; }
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
-    margin-top: 60px;
-  }
-  .stat-num {
-    font-size: clamp(40px, 5vw, 64px);
-    font-weight: 800;
-    color: var(--light-green);
-    line-height: 1;
-  }
-  .stat-label {
-    font-size: 14px;
-    color: rgba(255,255,255,0.7);
-    margin-top: 8px;
-    letter-spacing: 0.05em;
-  }
-
-  /* メンバー */
+  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+  .stat-num { font-size: clamp(40px, 5vw, 64px); font-weight: 800; color: var(--light-brown); line-height: 1; }
+  .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 8px; letter-spacing: 0.05em; }
   .members { background: #fff; }
-  .members-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
-    margin-top: 60px;
-  }
+  .members-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
   .member-card {
-    background: var(--bg);
-    border-radius: 16px;
-    padding: 36px;
-    border: 1px solid #e0e8e0;
-    display: flex;
-    gap: 24px;
-    align-items: flex-start;
+    background: var(--bg); border-radius: 16px; padding: 36px;
+    border: 1px solid #e8d5c4; display: flex; gap: 24px; align-items: flex-start;
   }
   .member-avatar {
-    width: 64px; height: 64px;
-    border-radius: 50%;
+    width: 64px; height: 64px; border-radius: 50%;
     background: linear-gradient(135deg, #e8d5c4, #c8763a);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0;
   }
-  .member-role {
-    font-size: 11px;
-    color: var(--light-green);
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    margin-bottom: 4px;
+  .member-role { font-size: 11px; color: var(--light-brown); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .member-name { font-size: 18px; font-weight: 800; color: var(--brown); margin-bottom: 8px; }
+  .member-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .sponsorship { background: var(--bg); }
+  .sponsorship-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
+  .sponsorship-card { border-radius: 20px; padding: 48px 40px; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
+  .sponsorship-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(92,61,46,0.12); }
+  .plan-tag { font-size: 11px; letter-spacing: 0.15em; color: var(--light-brown); font-weight: 700; margin-bottom: 12px; }
+  .plan-title { font-size: 26px; font-weight: 800; color: var(--brown); margin-bottom: 8px; }
+  .plan-price { font-size: 40px; font-weight: 800; color: var(--brown); margin: 24px 0 4px; line-height: 1; }
+  .plan-unit { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
+  .plan-divider { border: none; border-top: 1px solid #e8d5c4; margin-bottom: 28px; }
+  .plan-list { list-style: none; font-size: 14px; color: var(--muted); line-height: 2.2; }
+  .plan-btn {
+    display: block; text-align: center; margin-top: 36px; padding: 13px;
+    border-radius: 40px; font-weight: 700; font-size: 14px;
+    text-decoration: none; letter-spacing: 0.05em; transition: background 0.2s, color 0.2s;
   }
-  .member-name {
-    font-size: 18px;
-    font-weight: 800;
-    color: var(--green);
-    margin-bottom: 8px;
+  .plan-btn-outline { border: 2px solid var(--brown); color: var(--brown); }
+  .plan-btn-outline:hover { background: var(--brown); color: #fff; }
+  .plan-btn-fill { background: var(--brown); color: #fff; border: 2px solid var(--brown); }
+  .plan-btn-fill:hover { background: var(--light-brown); border-color: var(--light-brown); }
+  .premium-badge {
+    position: absolute; top: 20px; right: 24px;
+    background: var(--brown); color: #fff;
+    font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.1em;
   }
-  .member-desc {
-    font-size: 13px;
-    color: var(--muted);
-    line-height: 1.8;
-  }
-
-  /* お問い合わせ */
-  .contact {
-    background: linear-gradient(135deg, #f2e8de, #e8d5c4);
-    text-align: center;
-  }
+  .contact { background: linear-gradient(135deg, #f2e8de, #e8d5c4); text-align: center; }
   .contact .section-text { margin: 0 auto 40px; }
   .contact-btn {
-    display: inline-block;
-    background: var(--green);
-    color: #fff;
-    padding: 16px 48px;
-    border-radius: 40px;
-    text-decoration: none;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    transition: background 0.2s, transform 0.2s;
+    display: inline-block; background: var(--brown); color: #fff;
+    padding: 16px 48px; border-radius: 40px; text-decoration: none;
+    font-size: 15px; font-weight: 700; letter-spacing: 0.08em; transition: background 0.2s, transform 0.2s;
   }
-  .contact-btn:hover { background: var(--light-green); transform: translateY(-2px); }
-
-  /* フッター */
-  footer {
-    background: #1b1b1b;
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 32px;
-    font-size: 13px;
-    letter-spacing: 0.05em;
-  }
-
-  /* レスポンシブ */
+  .contact-btn:hover { background: var(--light-brown); transform: translateY(-2px); }
+  footer { background: #1b1b1b; color: rgba(255,255,255,0.5); text-align: center; padding: 32px; font-size: 13px; }
   @media (max-width: 768px) {
     nav { padding: 14px 20px; }
     .nav-links { display: none; }
     section { padding: 70px 6%; }
-    .mission-grid { grid-template-columns: 1fr; }
+    .mission-grid, .stats-grid, .members-grid, .sponsorship-grid { grid-template-columns: 1fr; }
     .business-content { grid-template-columns: 1fr; gap: 40px; }
-    .stats-grid { grid-template-columns: 1fr; gap: 32px; }
-    .members-grid { grid-template-columns: 1fr; }
-    .sponsorship-grid { grid-template-columns: 1fr !important; }
-    .sponsorship-card { padding: 36px 24px !important; }
+    .sponsorship-card { padding: 36px 24px; }
   }
   @media (max-width: 480px) {
     .hero h1 { font-size: 28px; }
@@ -313,167 +154,227 @@
 </head>
 <body>
 
-<!-- ナビ -->
 <nav>
-  <div class="logo">一般社団法人 サーキュラー・ラボ・広島</div>
+  <div class="logo" id="nav_logo"></div>
   <div class="nav-links">
     <a href="#mission">ミッション</a>
     <a href="#business">事業内容</a>
     <a href="#members">メンバー</a>
+    <a href="#sponsorship">協賛</a>
     <a href="#contact">お問い合わせ</a>
   </div>
 </nav>
 
-<!-- ヒーロー -->
 <section class="hero">
-  <div class="hero-tag">Circular Economy Lab Hiroshima</div>
-  <h1>資源を循環させ、<br>広島から未来をつくる。</h1>
-  <p class="hero-sub">私たちは、企業・大学・地域が連携し、廃棄物をなくす新しい資源循環の仕組みを広島から発信します。</p>
-  <a href="#mission" class="hero-btn">詳しく見る</a>
+  <div class="hero-tag" id="hero_tag"></div>
+  <h1 id="hero_heading"></h1>
+  <p class="hero-sub" id="hero_sub"></p>
+  <a href="#mission" class="hero-btn" id="hero_button"></a>
 </section>
 
-<!-- ミッション -->
 <section class="mission" id="mission">
-  <div class="section-tag">Mission</div>
-  <h2 class="section-title">サーキュラーエコノミーで<br>広島を変える</h2>
-  <p class="section-text">「捨てる」から「循環させる」へ。廃棄物を新たな資源として捉え直し、企業・大学・自治体が連携する持続可能なビジネスモデルを構築します。</p>
+  <div class="section-tag" id="mission_tag"></div>
+  <h2 class="section-title" id="mission_title"></h2>
+  <p class="section-text" id="mission_text"></p>
   <div class="mission-grid">
     <div class="mission-card">
       <div class="mission-icon">♻️</div>
-      <h3>資源の循環</h3>
-      <p>廃棄物を資源として再活用する仕組みを設計・実証します。紙コップなど身近なものから始めます。</p>
+      <h3 id="mission_card1_title"></h3>
+      <p id="mission_card1_text"></p>
     </div>
     <div class="mission-card">
       <div class="mission-icon">🤝</div>
-      <h3>産学連携</h3>
-      <p>叡啓大学をはじめとする大学と企業をつなぐプラットフォームとして、知識と実践を橋渡しします。</p>
+      <h3 id="mission_card2_title"></h3>
+      <p id="mission_card2_text"></p>
     </div>
     <div class="mission-card">
       <div class="mission-icon">🌱</div>
-      <h3>地域から発信</h3>
-      <p>広島を拠点に、地域に根ざした循環型社会のモデルをつくり、全国へ展開します。</p>
+      <h3 id="mission_card3_title"></h3>
+      <p id="mission_card3_text"></p>
     </div>
   </div>
 </section>
 
-<!-- 事業内容 -->
 <section class="business" id="business">
-  <div class="section-tag">Business</div>
+  <div class="section-tag" id="business_tag"></div>
   <div class="business-content">
     <div>
-      <h2 class="section-title">事業内容</h2>
-      <p class="section-text">使い捨て容器の回収・リサイクルをモデルケースに、企業の資源循環スキームの設計から実証まで一貫して支援します。</p>
+      <h2 class="section-title" id="business_title"></h2>
+      <p class="section-text" id="business_text"></p>
       <ul class="business-list">
-        <li>紙コップ等の使い捨て容器リサイクル事業</li>
-        <li>企業向け資源循環スキームの設計・構築</li>
-        <li>大学・学生との共同プロジェクト推進</li>
-        <li>カーボンクレジット・PR素材の提供支援</li>
-        <li>循環型ビジネスモデルのコンサルティング</li>
+        <li id="business_item1"></li>
+        <li id="business_item2"></li>
+        <li id="business_item3"></li>
+        <li id="business_item4"></li>
+        <li id="business_item5"></li>
       </ul>
     </div>
     <div class="business-visual">♻️</div>
   </div>
 </section>
 
-<!-- 実績 -->
 <section class="stats" id="stats">
-  <div class="section-tag" style="color:rgba(255,255,255,0.5)">Results</div>
-  <h2 class="section-title">実証実験の実績</h2>
+  <div class="section-tag" style="color:rgba(255,255,255,0.5)" id="stats_tag"></div>
+  <h2 class="section-title" id="stats_title"></h2>
   <div class="stats-grid">
-    <div>
-      <div class="stat-num">10万</div>
-      <div class="stat-label">回収した紙コップ（3ヶ月間）</div>
-    </div>
-    <div>
-      <div class="stat-num">48</div>
-      <div class="stat-label">参加協力事業者数</div>
-    </div>
-    <div>
-      <div class="stat-num">1,000+</div>
-      <div class="stat-label">広島マラソンでの回収協力者数</div>
-    </div>
+    <div><div class="stat-num" id="stat1_num"></div><div class="stat-label" id="stat1_label"></div></div>
+    <div><div class="stat-num" id="stat2_num"></div><div class="stat-label" id="stat2_label"></div></div>
+    <div><div class="stat-num" id="stat3_num"></div><div class="stat-label" id="stat3_label"></div></div>
   </div>
 </section>
 
-<!-- メンバー -->
 <section class="members" id="members">
-  <div class="section-tag">Members</div>
-  <h2 class="section-title">メンバー</h2>
+  <div class="section-tag" id="members_tag"></div>
+  <h2 class="section-title" id="members_title"></h2>
   <div class="members-grid">
     <div class="member-card">
       <div class="member-avatar">👩</div>
       <div>
-        <div class="member-role">代表理事</div>
-        <div class="member-name">河村 伸枝</div>
-        <p class="member-desc">シンギ広報室・CSR推進マネージャー。資源循環の新たなスキーム構築を目指し、県立叡啓大学発の本法人を設立。</p>
+        <div class="member-role" id="member1_role"></div>
+        <div class="member-name" id="member1_name"></div>
+        <p class="member-desc" id="member1_desc"></p>
       </div>
     </div>
     <div class="member-card">
       <div class="member-avatar">👨</div>
       <div>
-        <div class="member-role">理事</div>
-        <div class="member-name">定金 基</div>
-        <p class="member-desc">叡啓大学教授・コパイロツト代表取締役。ソーシャルシステムデザインを専門とし、循環型の新たな価値創造を牽引。</p>
+        <div class="member-role" id="member2_role"></div>
+        <div class="member-name" id="member2_name"></div>
+        <p class="member-desc" id="member2_desc"></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 協賛 -->
-<section class="sponsorship" id="sponsorship" style="background:#fff;">
-  <div class="section-tag">Sponsorship</div>
-  <h2 class="section-title">企業協賛メニュー</h2>
-  <p class="section-text">サーキュラーエコノミーの実現に向けた活動を、ともに推進しませんか。協賛企業として広島の資源循環を牽引する一員になれます。</p>
-  <div class="sponsorship-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:60px;">
-
-    <div class="sponsorship-card" style="border:2px solid #e0e8e0;border-radius:20px;padding:48px 40px;position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(45,106,79,0.1)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-      <div style="font-size:11px;letter-spacing:0.15em;color:#52b788;font-weight:700;margin-bottom:12px;">MEMBER</div>
-      <div style="font-size:26px;font-weight:800;color:#2d6a4f;margin-bottom:8px;">メンバー法人協賛</div>
-      <div style="font-size:40px;font-weight:800;color:#2d6a4f;margin:24px 0 4px;line-height:1;">¥100,000</div>
-      <div style="font-size:13px;color:#555;margin-bottom:32px;">年会費（税別）</div>
-      <hr style="border:none;border-top:1px solid #e0e8e0;margin-bottom:28px;">
-      <ul style="list-style:none;font-size:14px;color:#555;line-height:2.2;">
-        <li>✓ 活動レポートの定期共有</li>
-        <li>✓ イベント・勉強会への優先参加</li>
-        <li>✓ ウェブサイトへの協賛企業掲載</li>
-        <li>✓ ネットワーキングへの参加</li>
+<section class="sponsorship" id="sponsorship">
+  <div class="section-tag" id="sponsorship_tag"></div>
+  <h2 class="section-title" id="sponsorship_title"></h2>
+  <p class="section-text" id="sponsorship_text"></p>
+  <div class="sponsorship-grid">
+    <div class="sponsorship-card" style="border:2px solid #e8d5c4;background:#fff;">
+      <div class="plan-tag" id="plan1_label"></div>
+      <div class="plan-title" id="plan1_title"></div>
+      <div class="plan-price" id="plan1_price"></div>
+      <div class="plan-unit" id="plan1_unit"></div>
+      <hr class="plan-divider">
+      <ul class="plan-list">
+        <li>✓ <span id="plan1_item1"></span></li>
+        <li>✓ <span id="plan1_item2"></span></li>
+        <li>✓ <span id="plan1_item3"></span></li>
+        <li>✓ <span id="plan1_item4"></span></li>
       </ul>
-      <a href="mailto:clh@shingi.co.jp" style="display:block;text-align:center;margin-top:36px;padding:13px;border:2px solid #2d6a4f;border-radius:40px;color:#2d6a4f;font-weight:700;font-size:14px;text-decoration:none;letter-spacing:0.05em;transition:background 0.2s,color 0.2s;" onmouseover="this.style.background='#2d6a4f';this.style.color='#fff'" onmouseout="this.style.background='';this.style.color='#2d6a4f'">お問い合わせ</a>
+      <a class="plan-btn plan-btn-outline" id="contact_btn1"></a>
     </div>
-
-    <div class="sponsorship-card" style="border:2px solid #5c3d2e;border-radius:20px;padding:48px 40px;background:linear-gradient(135deg,#f2e8de,#faf5ef);position:relative;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(92,61,46,0.15)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
-      <div style="position:absolute;top:20px;right:24px;background:#2d6a4f;color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:20px;letter-spacing:0.1em;">PREMIUM</div>
-      <div style="font-size:11px;letter-spacing:0.15em;color:#52b788;font-weight:700;margin-bottom:12px;">PARTNER</div>
-      <div style="font-size:26px;font-weight:800;color:#2d6a4f;margin-bottom:8px;">パートナー法人協賛</div>
-      <div style="font-size:40px;font-weight:800;color:#2d6a4f;margin:24px 0 4px;line-height:1;">¥1,000,000</div>
-      <div style="font-size:13px;color:#555;margin-bottom:32px;">年会費（税別）</div>
-      <hr style="border:none;border-top:1px solid #c8dcc8;margin-bottom:28px;">
-      <ul style="list-style:none;font-size:14px;color:#555;line-height:2.2;">
-        <li>✓ メンバープランの全特典</li>
-        <li>✓ 共同プロジェクトへの参画権</li>
-        <li>✓ 大学・研究機関とのマッチング</li>
-        <li>✓ カーボンクレジット・PR素材の提供</li>
-        <li>✓ 役員会・戦略会議へのご招待</li>
+    <div class="sponsorship-card" style="border:2px solid #5c3d2e;background:linear-gradient(135deg,#f2e8de,#faf5ef);">
+      <div class="premium-badge">PREMIUM</div>
+      <div class="plan-tag" id="plan2_label"></div>
+      <div class="plan-title" id="plan2_title"></div>
+      <div class="plan-price" id="plan2_price"></div>
+      <div class="plan-unit" id="plan2_unit"></div>
+      <hr class="plan-divider">
+      <ul class="plan-list">
+        <li>✓ <span id="plan2_item1"></span></li>
+        <li>✓ <span id="plan2_item2"></span></li>
+        <li>✓ <span id="plan2_item3"></span></li>
+        <li>✓ <span id="plan2_item4"></span></li>
+        <li>✓ <span id="plan2_item5"></span></li>
       </ul>
-      <a href="mailto:clh@shingi.co.jp" style="display:block;text-align:center;margin-top:36px;padding:13px;background:#2d6a4f;border-radius:40px;color:#fff;font-weight:700;font-size:14px;text-decoration:none;letter-spacing:0.05em;transition:background 0.2s;" onmouseover="this.style.background='#52b788'" onmouseout="this.style.background='#2d6a4f'">お問い合わせ</a>
+      <a class="plan-btn plan-btn-fill" id="contact_btn2"></a>
     </div>
-
   </div>
-  <p style="text-align:center;margin-top:40px;font-size:13px;color:#888;">詳細・カスタムプランについてはお気軽にお問い合わせください。</p>
+  <p style="text-align:center;margin-top:40px;font-size:13px;color:#a08878;" id="sponsorship_note"></p>
 </section>
 
-<!-- お問い合わせ -->
 <section class="contact" id="contact">
-  <div class="section-tag">Contact</div>
-  <h2 class="section-title">お問い合わせ</h2>
-  <p class="section-text">事業連携・取材・ご質問など、お気軽にご連絡ください。</p>
-  <a href="mailto:clh@shingi.co.jp" class="contact-btn">メールで問い合わせる</a>
+  <div class="section-tag" id="contact_tag"></div>
+  <h2 class="section-title" id="contact_title"></h2>
+  <p class="section-text" id="contact_text"></p>
+  <a class="contact-btn" id="contact_btn"></a>
 </section>
 
-<!-- フッター -->
 <footer>
-  <p>© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.</p>
+  <p id="footer_text"></p>
 </footer>
+
+<script>
+  // content.jsの内容をHTMLに流し込む
+  function set(id, text) {
+    var el = document.getElementById(id);
+    if (el) el.innerHTML = text ? text.replace(/\n/g, '<br>') : '';
+  }
+
+  set('nav_logo', content.nav_logo);
+  set('hero_tag', content.hero_tag);
+  set('hero_heading', content.hero_heading);
+  set('hero_sub', content.hero_sub);
+  set('hero_button', content.hero_button);
+  set('mission_tag', content.mission_tag);
+  set('mission_title', content.mission_title);
+  set('mission_text', content.mission_text);
+  set('mission_card1_title', content.mission_card1_title);
+  set('mission_card1_text', content.mission_card1_text);
+  set('mission_card2_title', content.mission_card2_title);
+  set('mission_card2_text', content.mission_card2_text);
+  set('mission_card3_title', content.mission_card3_title);
+  set('mission_card3_text', content.mission_card3_text);
+  set('business_tag', content.business_tag);
+  set('business_title', content.business_title);
+  set('business_text', content.business_text);
+  set('business_item1', content.business_item1);
+  set('business_item2', content.business_item2);
+  set('business_item3', content.business_item3);
+  set('business_item4', content.business_item4);
+  set('business_item5', content.business_item5);
+  set('stats_tag', content.stats_tag);
+  set('stats_title', content.stats_title);
+  set('stat1_num', content.stat1_num);
+  set('stat1_label', content.stat1_label);
+  set('stat2_num', content.stat2_num);
+  set('stat2_label', content.stat2_label);
+  set('stat3_num', content.stat3_num);
+  set('stat3_label', content.stat3_label);
+  set('members_tag', content.members_tag);
+  set('members_title', content.members_title);
+  set('member1_role', content.member1_role);
+  set('member1_name', content.member1_name);
+  set('member1_desc', content.member1_desc);
+  set('member2_role', content.member2_role);
+  set('member2_name', content.member2_name);
+  set('member2_desc', content.member2_desc);
+  set('sponsorship_tag', content.sponsorship_tag);
+  set('sponsorship_title', content.sponsorship_title);
+  set('sponsorship_text', content.sponsorship_text);
+  set('plan1_label', content.plan1_label);
+  set('plan1_title', content.plan1_title);
+  set('plan1_price', content.plan1_price);
+  set('plan1_unit', content.plan1_unit);
+  set('plan1_item1', content.plan1_item1);
+  set('plan1_item2', content.plan1_item2);
+  set('plan1_item3', content.plan1_item3);
+  set('plan1_item4', content.plan1_item4);
+  set('plan2_label', content.plan2_label);
+  set('plan2_title', content.plan2_title);
+  set('plan2_price', content.plan2_price);
+  set('plan2_unit', content.plan2_unit);
+  set('plan2_item1', content.plan2_item1);
+  set('plan2_item2', content.plan2_item2);
+  set('plan2_item3', content.plan2_item3);
+  set('plan2_item4', content.plan2_item4);
+  set('plan2_item5', content.plan2_item5);
+  set('sponsorship_note', content.sponsorship_note);
+  set('contact_tag', content.contact_tag);
+  set('contact_title', content.contact_title);
+  set('contact_text', content.contact_text);
+  set('footer_text', content.footer_text);
+
+  // リンク系
+  var contactBtn = document.getElementById('contact_btn');
+  if (contactBtn) { contactBtn.textContent = content.contact_button; contactBtn.href = 'mailto:' + content.contact_email; }
+  var btn1 = document.getElementById('contact_btn1');
+  if (btn1) { btn1.textContent = content.contact_button; btn1.href = 'mailto:' + content.contact_email; }
+  var btn2 = document.getElementById('contact_btn2');
+  if (btn2) { btn2.textContent = content.contact_button; btn2.href = 'mailto:' + content.contact_email; }
+</script>
 
 </body>
 </html>
