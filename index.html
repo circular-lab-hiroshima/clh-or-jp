@@ -6,290 +6,567 @@
 <title>サーキュラー・ラボ・広島</title>
 <script src="content.js"></script>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  :root {
-    --brown: #5c3d2e;
-    --light-brown: #c8763a;
-    --bg: #faf5ef;
-    --text: #2a1f1a;
-    --muted: #7a6358;
-  }
-  body {
-    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.8;
-  }
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    background: rgba(250,245,239,0.95);
-    backdrop-filter: blur(8px);
-    padding: 16px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 100;
-    border-bottom: 1px solid #e8d5c4;
-  }
-  .logo { font-size: 14px; font-weight: 700; color: var(--brown); letter-spacing: 0.05em; }
-  .nav-links a {
-    text-decoration: none; color: var(--muted); font-size: 13px;
-    margin-left: 28px; letter-spacing: 0.05em; transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--brown); }
-  .hero {
-    min-height: 100vh;
-    display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-    padding: 120px 10% 80px;
-    background: linear-gradient(135deg, #f2e8de 0%, #faf5ef 60%, #ecdfd4 100%);
-    position: relative; overflow: hidden;
-  }
-  .hero::before {
-    content: ''; position: absolute; right: -100px; top: -100px;
-    width: 500px; height: 500px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(200,118,58,0.12) 0%, transparent 70%);
-  }
-  .hero-tag { font-size: 12px; letter-spacing: 0.15em; color: var(--light-brown); font-weight: 600; margin-bottom: 20px; }
-  .hero h1 { font-size: clamp(32px, 5vw, 56px); font-weight: 800; line-height: 1.3; color: var(--brown); margin-bottom: 12px; }
-  .hero-sub { font-size: clamp(16px, 2vw, 20px); color: var(--muted); margin-bottom: 40px; max-width: 520px; }
-  .hero-btn {
-    display: inline-block; background: var(--brown); color: #fff;
-    padding: 14px 36px; border-radius: 40px; text-decoration: none;
-    font-size: 14px; font-weight: 600; letter-spacing: 0.08em; transition: background 0.2s, transform 0.2s;
-  }
-  .hero-btn:hover { background: var(--light-brown); transform: translateY(-2px); }
-  section { padding: 100px 10%; }
-  .section-tag { font-size: 11px; letter-spacing: 0.2em; color: var(--light-brown); font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
-  .section-title { font-size: clamp(24px, 3vw, 36px); font-weight: 800; color: var(--brown); margin-bottom: 24px; line-height: 1.4; }
-  .section-text { color: var(--muted); max-width: 640px; font-size: 15px; }
-  .mission { background: #fff; }
-  .mission-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 60px; }
-  .mission-card {
-    background: var(--bg); border-radius: 16px; padding: 36px 28px;
-    border: 1px solid #e8d5c4; transition: transform 0.2s, box-shadow 0.2s;
-  }
-  .mission-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(92,61,46,0.1); }
-  .mission-icon { font-size: 36px; margin-bottom: 16px; }
-  .mission-card h3 { font-size: 17px; font-weight: 700; color: var(--brown); margin-bottom: 10px; }
-  .mission-card p { font-size: 14px; color: var(--muted); line-height: 1.8; }
-  .business { background: var(--bg); }
-  .business-content { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-top: 20px; }
-  .business-visual {
-    background: linear-gradient(135deg, #e8d5c4, #d4b896);
-    border-radius: 24px; height: 360px;
-    display: flex; align-items: center; justify-content: center; font-size: 100px;
-  }
-  .business-list { list-style: none; margin-top: 24px; }
-  .business-list li {
-    padding: 14px 0; border-bottom: 1px solid #e8d5c4;
-    font-size: 15px; color: var(--muted); display: flex; align-items: center; gap: 12px;
-  }
-  .business-list li::before { content: '→'; color: var(--light-brown); font-weight: 700; flex-shrink: 0; }
-  .stats { background: var(--brown); color: #fff; text-align: center; }
-  .stats .section-title { color: #fff; }
-  .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
-  .stat-num { font-size: clamp(40px, 5vw, 64px); font-weight: 800; color: var(--light-brown); line-height: 1; }
-  .stat-label { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 8px; letter-spacing: 0.05em; }
-  .members { background: #fff; }
-  .members-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
-  .member-card {
-    background: var(--bg); border-radius: 16px; padding: 36px;
-    border: 1px solid #e8d5c4; display: flex; gap: 24px; align-items: flex-start;
-  }
-  .member-avatar {
-    width: 64px; height: 64px; border-radius: 50%;
-    background: linear-gradient(135deg, #e8d5c4, #c8763a);
-    display: flex; align-items: center; justify-content: center; font-size: 28px; flex-shrink: 0;
-  }
-  .member-role { font-size: 11px; color: var(--light-brown); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 4px; }
-  .member-name { font-size: 18px; font-weight: 800; color: var(--brown); margin-bottom: 8px; }
-  .member-desc { font-size: 13px; color: var(--muted); line-height: 1.8; }
-  .sponsorship { background: var(--bg); }
-  .sponsorship-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
-  .sponsorship-card { border-radius: 20px; padding: 48px 40px; position: relative; transition: transform 0.2s, box-shadow 0.2s; }
-  .sponsorship-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(92,61,46,0.12); }
-  .plan-tag { font-size: 11px; letter-spacing: 0.15em; color: var(--light-brown); font-weight: 700; margin-bottom: 12px; }
-  .plan-title { font-size: 26px; font-weight: 800; color: var(--brown); margin-bottom: 8px; }
-  .plan-price { font-size: 40px; font-weight: 800; color: var(--brown); margin: 24px 0 4px; line-height: 1; }
-  .plan-unit { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
-  .plan-divider { border: none; border-top: 1px solid #e8d5c4; margin-bottom: 28px; }
-  .plan-list { list-style: none; font-size: 14px; color: var(--muted); line-height: 2.2; }
-  .plan-btn {
-    display: block; text-align: center; margin-top: 36px; padding: 13px;
-    border-radius: 40px; font-weight: 700; font-size: 14px;
-    text-decoration: none; letter-spacing: 0.05em; transition: background 0.2s, color 0.2s;
-  }
-  .plan-btn-outline { border: 2px solid var(--brown); color: var(--brown); }
-  .plan-btn-outline:hover { background: var(--brown); color: #fff; }
-  .plan-btn-fill { background: var(--brown); color: #fff; border: 2px solid var(--brown); }
-  .plan-btn-fill:hover { background: var(--light-brown); border-color: var(--light-brown); }
-  .premium-badge {
-    position: absolute; top: 20px; right: 24px;
-    background: var(--brown); color: #fff;
-    font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: 0.1em;
-  }
-  .contact { background: linear-gradient(135deg, #f2e8de, #e8d5c4); text-align: center; }
-  .contact .section-text { margin: 0 auto 40px; }
-  .contact-btn {
-    display: inline-block; background: var(--brown); color: #fff;
-    padding: 16px 48px; border-radius: 40px; text-decoration: none;
-    font-size: 15px; font-weight: 700; letter-spacing: 0.08em; transition: background 0.2s, transform 0.2s;
-  }
-  .contact-btn:hover { background: var(--light-brown); transform: translateY(-2px); }
-  footer { background: #1b1b1b; color: rgba(255,255,255,0.5); text-align: center; padding: 32px; font-size: 13px; }
-  @media (max-width: 768px) {
-    nav { padding: 14px 20px; }
-    .nav-links { display: none; }
-    section { padding: 70px 6%; }
-    .mission-grid, .stats-grid, .members-grid, .sponsorship-grid { grid-template-columns: 1fr; }
-    .business-content { grid-template-columns: 1fr; gap: 40px; }
-    .sponsorship-card { padding: 36px 24px; }
-  }
-  @media (max-width: 480px) {
-    .hero h1 { font-size: 28px; }
-    .stat-num { font-size: 40px; }
-  }
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --red:       #B42020;
+  --red-dark:  #380C0C;
+  --red-deep:  #1E0606;
+  --red-mid:   #6A2010;
+  --red-light: #FFF8F5;
+  --orange:    #F07820;
+  --orange-dk: #86400A;
+  --border:    #F0D8B8;
+  --white:     #ffffff;
+
+  --fs-xs:  11px;
+  --fs-sm:  13px;
+  --fs-md:  15px;
+  --fs-lg:  18px;
+  --fs-xl:  clamp(22px, 3vw, 34px);
+  --fs-2xl: clamp(24px, 3vw, 44px);
+
+  --radius-sm:   8px;
+  --radius-md:   14px;
+  --radius-lg:   20px;
+  --radius-full: 999px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: var(--red-dark);
+  background: var(--white);
+  line-height: 1.8;
+  font-size: var(--fs-md);
+}
+
+/* タイポグラフィ */
+.tag {
+  display: block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange-dk);
+  margin-bottom: 14px;
+}
+h1 {
+  font-size: var(--fs-2xl);
+  font-weight: 800;
+  line-height: 1.45;
+  color: var(--red-dark);
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+h2 {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  line-height: 1.4;
+  color: var(--red-dark);
+  margin-bottom: 20px;
+}
+h3 {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--red-dark);
+  margin-bottom: 10px;
+}
+p { color: var(--red-mid); line-height: 1.9; }
+.highlight {
+  background: linear-gradient(transparent 54%, rgba(240,120,32,0.45) 54%);
+}
+
+/* レイアウト */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 6%; }
+section { padding: 100px 0; }
+section:nth-child(even) { background: var(--red-light); }
+section:nth-child(odd)  { background: var(--white); }
+
+/* ナビ */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(10px);
+  border-bottom: 3px solid var(--red);
+  z-index: 100;
+}
+.nav-logo {
+  font-size: 13px; font-weight: 700;
+  color: var(--red-dark); letter-spacing: 0.04em;
+  text-decoration: none;
+}
+.nav-links { display: flex; gap: 32px; }
+.nav-links a {
+  font-size: 12px; font-weight: 500;
+  color: var(--red-mid); text-decoration: none;
+  letter-spacing: 0.06em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--red); }
+
+/* ハンバーガー */
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--red-dark); border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none; position: fixed; inset: 0;
+  background: rgba(255,255,255,0.98);
+  flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  z-index: 150;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 22px; font-weight: 700;
+  color: var(--red-dark); text-decoration: none;
+  letter-spacing: 0.06em;
+}
+
+/* ボタン */
+.btn {
+  display: inline-block;
+  padding: 13px 36px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  border: none; cursor: pointer;
+}
+.btn-red   { background: var(--red); color: var(--white); }
+.btn-red:hover { background: #8C1818; transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--orange-dk); border: 2px solid var(--orange); }
+.btn-ghost:hover { background: var(--orange); color: var(--white); }
+.btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
+
+/* ヒーロー */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: clamp(72px, 10vw, 140px) 6% clamp(40px, 6vw, 80px);
+  background: var(--white);
+}
+.hero-inner { max-width: 700px; width: 100%; }
+.hero h1 { margin: 16px 0 24px; }
+.hero-lead {
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 700;
+  color: var(--red-dark);
+  margin-bottom: 8px;
+}
+.hero-body {
+  font-size: clamp(14px, 1.6vw, 16px);
+  color: var(--red-mid);
+  line-height: 2.0;
+}
+
+/* ミッション */
+.mission-inner {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 60px; align-items: center;
+}
+.mission-letter {
+  font-size: 100px; font-weight: 800;
+  color: var(--orange); opacity: 0.15;
+  line-height: 1; user-select: none;
+}
+
+/* サービス */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px; margin-top: 48px;
+}
+.service-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 32px 26px;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--orange);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(180,32,32,0.08); }
+.service-num {
+  font-size: 32px; font-weight: 800;
+  color: var(--orange-dk);
+  margin-bottom: 14px; line-height: 1;
+}
+.service-card h3 { font-size: 15px; }
+.service-card p  { font-size: 13px; margin-top: 8px; }
+
+/* ケーススタディ */
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.case-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.case-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: var(--red);
+}
+.case-card-num {
+  position: absolute; top: 20px; right: 24px;
+  font-size: 52px; font-weight: 800;
+  color: var(--orange); opacity: 0.15; line-height: 1;
+}
+.case-card h3 { font-size: 16px; margin-bottom: 12px; }
+.case-card p  { font-size: 13px; margin-bottom: 28px; }
+.case-stat-num   { font-size: 38px; font-weight: 800; color: var(--red); line-height: 1; }
+.case-stat-label { font-size: 12px; color: var(--red-mid); margin-top: 4px; }
+
+/* メンバー */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; margin-top: 48px;
+}
+.member-card {
+  background: var(--red-light);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid var(--border);
+  display: flex; gap: 22px; align-items: flex-start;
+}
+.member-avatar {
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--red); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 800;
+  flex-shrink: 0;
+}
+.member-role {
+  font-size: 10px; font-weight: 700;
+  color: var(--orange-dk); letter-spacing: 0.1em;
+  margin-bottom: 4px;
+}
+.member-name { font-size: 17px; font-weight: 800; color: var(--red-dark); margin-bottom: 8px; }
+.member-desc { font-size: 13px; line-height: 1.8; }
+
+/* ドネーション */
+.donation { background: var(--red-deep) !important; color: var(--white); }
+.donation .tag { color: rgba(240,120,32,0.9); }
+.donation h2   { color: var(--white); }
+.donation > .container > p { color: rgba(255,215,200,0.85); }
+.donation-plans {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; margin-top: 48px;
+}
+.plan-card {
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+}
+.plan-card.featured { border-color: rgba(240,120,32,0.5); }
+.plan-badge {
+  display: inline-block;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.15em;
+  padding: 3px 10px; border-radius: var(--radius-full);
+  background: rgba(240,120,32,0.25);
+  color: rgba(255,200,140,1);
+  margin-bottom: 12px;
+}
+.plan-name { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.plan-note { font-size: 12px; color: rgba(255,215,200,0.55); margin-bottom: 20px; }
+.plan-label {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+  color: rgba(240,160,80,0.9);
+  margin: 16px 0 8px;
+}
+.plan-items { list-style: none; }
+.plan-items li {
+  font-size: 12px; color: rgba(255,215,200,0.8);
+  padding: 4px 0; display: flex; gap: 8px; line-height: 1.7;
+}
+.plan-items li::before { content: '✓'; color: var(--orange); flex-shrink: 0; }
+.donation-uses {
+  background: rgba(255,255,255,0.05);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  border: 1px solid rgba(255,255,255,0.08);
+  margin-top: 32px;
+}
+.donation-uses h3 { font-size: 14px; font-weight: 700; color: rgba(240,160,80,1); margin-bottom: 16px; }
+.donation-uses li {
+  font-size: 14px; color: rgba(255,215,200,0.85);
+  list-style: none; display: flex; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.06); line-height: 1.7;
+}
+.donation-uses li::before { content: '→'; color: var(--orange); flex-shrink: 0; }
+.donation-note {
+  margin-top: 24px;
+  padding: 24px 28px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--orange);
+  font-size: 14px; color: rgba(255,215,200,0.8); line-height: 1.9;
+}
+.partners { margin-top: 56px; }
+.partners-tag {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+  color: rgba(240,120,32,0.9); margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.partners-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+.partner-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-md);
+  padding: 22px 18px; text-align: center;
+  font-size: 12px; font-weight: 700;
+  color: rgba(255,215,200,0.9); line-height: 1.9;
+}
+
+/* コンタクト */
+.contact { text-align: center; }
+.contact h2 { margin-bottom: 16px; }
+.contact p  { max-width: 480px; margin: 0 auto 12px; }
+.org-info {
+  font-size: 13px; color: var(--red-mid);
+  line-height: 2.0; margin-bottom: 32px;
+}
+.org-info a { color: var(--orange-dk); text-decoration: none; }
+.org-info a:hover { text-decoration: underline; }
+
+/* フッター */
+footer {
+  background: #111;
+  padding: 28px; text-align: center;
+  font-size: 12px; color: rgba(255,255,255,0.35);
+  letter-spacing: 0.04em;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  nav { padding: 0 5%; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  section { padding: 70px 0; }
+  .mission-inner  { grid-template-columns: 1fr; gap: 16px; }
+  .mission-letter { font-size: 60px; }
+  .service-grid   { grid-template-columns: 1fr; }
+  .case-grid      { grid-template-columns: 1fr; }
+  .member-grid    { grid-template-columns: 1fr; }
+  .donation-plans { grid-template-columns: 1fr; }
+  .partners-grid  { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
 <nav>
-  <div class="logo" id="nav_logo"></div>
+  <a href="#top" class="nav-logo" id="nav_logo"></a>
   <div class="nav-links">
-    <a href="#mission">ミッション</a>
-    <a href="#business">事業内容</a>
-    <a href="#members">メンバー</a>
-    <a href="#sponsorship">協賛</a>
-    <a href="#contact">お問い合わせ</a>
+    <a href="#mission">Mission</a>
+    <a href="#service">Service</a>
+    <a href="#casestudy">Case Study</a>
+    <a href="#members">Member</a>
+    <a href="#donation">Donation</a>
+    <a href="#contact">Contact</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="メニュー">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
-<section class="hero">
-  <div class="hero-tag" id="hero_tag"></div>
-  <h1 id="hero_heading"></h1>
-  <p class="hero-sub" id="hero_sub"></p>
-  <a href="#mission" class="hero-btn" id="hero_button"></a>
-</section>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#mission"   class="ml">Mission</a>
+  <a href="#service"   class="ml">Service</a>
+  <a href="#casestudy" class="ml">Case Study</a>
+  <a href="#members"   class="ml">Member</a>
+  <a href="#donation"  class="ml">Donation</a>
+  <a href="#contact"   class="ml">Contact</a>
+</div>
 
-<section class="mission" id="mission">
-  <div class="section-tag" id="mission_tag"></div>
-  <h2 class="section-title" id="mission_title"></h2>
-  <p class="section-text" id="mission_text"></p>
-  <div class="mission-grid">
-    <div class="mission-card">
-      <div class="mission-icon">♻️</div>
-      <h3 id="mission_card1_title"></h3>
-      <p id="mission_card1_text"></p>
-    </div>
-    <div class="mission-card">
-      <div class="mission-icon">🤝</div>
-      <h3 id="mission_card2_title"></h3>
-      <p id="mission_card2_text"></p>
-    </div>
-    <div class="mission-card">
-      <div class="mission-icon">🌱</div>
-      <h3 id="mission_card3_title"></h3>
-      <p id="mission_card3_text"></p>
+<section class="hero" id="top">
+  <div class="hero-inner">
+    <span class="tag" id="hero_tag"></span>
+    <h1 id="hero_h1"></h1>
+    <p class="hero-lead" id="hero_lead"></p>
+    <p class="hero-body" id="hero_body"></p>
+    <div class="btn-group">
+      <a href="#mission" class="btn btn-red" id="hero_btn1"></a>
+      <a href="#contact" class="btn btn-ghost" id="hero_btn2"></a>
     </div>
   </div>
 </section>
 
-<section class="business" id="business">
-  <div class="section-tag" id="business_tag"></div>
-  <div class="business-content">
-    <div>
-      <h2 class="section-title" id="business_title"></h2>
-      <p class="section-text" id="business_text"></p>
-      <ul class="business-list">
-        <li id="business_item1"></li>
-        <li id="business_item2"></li>
-        <li id="business_item3"></li>
-        <li id="business_item4"></li>
-        <li id="business_item5"></li>
-      </ul>
-    </div>
-    <div class="business-visual">♻️</div>
-  </div>
-</section>
-
-<section class="stats" id="stats">
-  <div class="section-tag" style="color:rgba(255,255,255,0.5)" id="stats_tag"></div>
-  <h2 class="section-title" id="stats_title"></h2>
-  <div class="stats-grid">
-    <div><div class="stat-num" id="stat1_num"></div><div class="stat-label" id="stat1_label"></div></div>
-    <div><div class="stat-num" id="stat2_num"></div><div class="stat-label" id="stat2_label"></div></div>
-    <div><div class="stat-num" id="stat3_num"></div><div class="stat-label" id="stat3_label"></div></div>
-  </div>
-</section>
-
-<section class="members" id="members">
-  <div class="section-tag" id="members_tag"></div>
-  <h2 class="section-title" id="members_title"></h2>
-  <div class="members-grid">
-    <div class="member-card">
-      <div class="member-avatar">👩</div>
+<section id="mission">
+  <div class="container">
+    <span class="tag" id="mission_tag"></span>
+    <div class="mission-inner">
+      <div class="mission-letter" aria-hidden="true">M</div>
       <div>
-        <div class="member-role" id="member1_role"></div>
-        <div class="member-name" id="member1_name"></div>
-        <p class="member-desc" id="member1_desc"></p>
-      </div>
-    </div>
-    <div class="member-card">
-      <div class="member-avatar">👨</div>
-      <div>
-        <div class="member-role" id="member2_role"></div>
-        <div class="member-name" id="member2_name"></div>
-        <p class="member-desc" id="member2_desc"></p>
+        <h2 id="mission_title"></h2>
+        <p id="mission_text"></p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="sponsorship" id="sponsorship">
-  <div class="section-tag" id="sponsorship_tag"></div>
-  <h2 class="section-title" id="sponsorship_title"></h2>
-  <p class="section-text" id="sponsorship_text"></p>
-  <div class="sponsorship-grid">
-    <div class="sponsorship-card" style="border:2px solid #e8d5c4;background:#fff;">
-      <div class="plan-tag" id="plan1_label"></div>
-      <div class="plan-title" id="plan1_title"></div>
-      <div class="plan-price" id="plan1_price"></div>
-      <div class="plan-unit" id="plan1_unit"></div>
-      <hr class="plan-divider">
-      <ul class="plan-list">
-        <li>✓ <span id="plan1_item1"></span></li>
-        <li>✓ <span id="plan1_item2"></span></li>
-        <li>✓ <span id="plan1_item3"></span></li>
-        <li>✓ <span id="plan1_item4"></span></li>
-      </ul>
-      <a class="plan-btn plan-btn-outline" id="contact_btn1"></a>
-    </div>
-    <div class="sponsorship-card" style="border:2px solid #5c3d2e;background:linear-gradient(135deg,#f2e8de,#faf5ef);">
-      <div class="premium-badge">PREMIUM</div>
-      <div class="plan-tag" id="plan2_label"></div>
-      <div class="plan-title" id="plan2_title"></div>
-      <div class="plan-price" id="plan2_price"></div>
-      <div class="plan-unit" id="plan2_unit"></div>
-      <hr class="plan-divider">
-      <ul class="plan-list">
-        <li>✓ <span id="plan2_item1"></span></li>
-        <li>✓ <span id="plan2_item2"></span></li>
-        <li>✓ <span id="plan2_item3"></span></li>
-        <li>✓ <span id="plan2_item4"></span></li>
-        <li>✓ <span id="plan2_item5"></span></li>
-      </ul>
-      <a class="plan-btn plan-btn-fill" id="contact_btn2"></a>
+<section id="service">
+  <div class="container">
+    <span class="tag" id="service_tag"></span>
+    <h2 id="service_title"></h2>
+    <div class="service-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3 id="s1_title"></h3>
+        <p  id="s1_text"></p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3 id="s2_title"></h3>
+        <p  id="s2_text"></p>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3 id="s3_title"></h3>
+        <p  id="s3_text"></p>
+      </div>
     </div>
   </div>
-  <p style="text-align:center;margin-top:40px;font-size:13px;color:#a08878;" id="sponsorship_note"></p>
 </section>
 
-<section class="contact" id="contact">
-  <div class="section-tag" id="contact_tag"></div>
-  <h2 class="section-title" id="contact_title"></h2>
-  <p class="section-text" id="contact_text"></p>
-  <a class="contact-btn" id="contact_btn"></a>
+<section id="casestudy">
+  <div class="container">
+    <span class="tag" id="case_tag"></span>
+    <h2 id="case_title"></h2>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-card-num">01</div>
+        <h3 id="c1_title"></h3>
+        <p  id="c1_text"></p>
+        <div class="case-stat-num"   id="c1_stat"></div>
+        <div class="case-stat-label" id="c1_stat_label"></div>
+      </div>
+      <div class="case-card">
+        <div class="case-card-num">02</div>
+        <h3 id="c2_title"></h3>
+        <p  id="c2_text"></p>
+        <div class="case-stat-num"   id="c2_stat"></div>
+        <div class="case-stat-label" id="c2_stat_label"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="members">
+  <div class="container">
+    <span class="tag" id="member_tag"></span>
+    <h2 id="member_title"></h2>
+    <div class="member-grid">
+      <div class="member-card">
+        <div class="member-avatar">河村</div>
+        <div>
+          <div class="member-role" id="m1_role"></div>
+          <div class="member-name" id="m1_name"></div>
+          <p class="member-desc"   id="m1_desc"></p>
+        </div>
+      </div>
+      <div class="member-card">
+        <div class="member-avatar">定金</div>
+        <div>
+          <div class="member-role" id="m2_role"></div>
+          <div class="member-name" id="m2_name"></div>
+          <p class="member-desc"   id="m2_desc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="donation" class="donation">
+  <div class="container">
+    <span class="tag" id="donation_tag"></span>
+    <h2 id="donation_title"></h2>
+    <p  id="donation_text"></p>
+    <div class="donation-plans">
+      <div class="plan-card">
+        <div class="plan-badge" id="p1_badge"></div>
+        <div class="plan-name"  id="p1_name"></div>
+        <div class="plan-note">年会費はお問い合わせください</div>
+        <div class="plan-label">社員啓蒙活動</div>
+        <ul class="plan-items">
+          <li id="p1_i1"></li>
+          <li id="p1_i2"></li>
+        </ul>
+        <div class="plan-label">広報活動</div>
+        <ul class="plan-items">
+          <li id="p1_i3"></li>
+        </ul>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-badge" id="p2_badge" style="background:rgba(240,120,32,0.4);"></div>
+        <div class="plan-name"  id="p2_name"></div>
+        <div class="plan-note">年会費はお問い合わせください</div>
+        <div class="plan-label">社員啓蒙活動</div>
+        <ul class="plan-items">
+          <li id="p2_i1"></li>
+          <li id="p2_i2"></li>
+          <li id="p2_i3"></li>
+          <li id="p2_i4"></li>
+        </ul>
+        <div class="plan-label">広報活動</div>
+        <ul class="plan-items">
+          <li id="p2_i5"></li>
+          <li id="p2_i6"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="donation-uses">
+      <h3 id="uses_title"></h3>
+      <ul>
+        <li id="use1"></li>
+        <li id="use2"></li>
+        <li id="use3"></li>
+      </ul>
+    </div>
+    <div class="donation-note" id="donation_note"></div>
+    <div class="partners">
+      <div class="partners-tag">Supporting Partners</div>
+      <div class="partners-grid">
+        <div class="partner-card">株式会社<br>桐原容器工業所</div>
+        <div class="partner-card">株式会社<br>広島経済研究所</div>
+        <div class="partner-card">株式会社<br>シンギ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="container">
+    <span class="tag" id="contact_tag"></span>
+    <h2 id="contact_title"></h2>
+    <p  id="contact_text"></p>
+    <div class="org-info" id="org_info"></div>
+    <a class="btn btn-red" id="contact_btn"></a>
+  </div>
 </section>
 
 <footer>
@@ -297,84 +574,95 @@
 </footer>
 
 <script>
-  // content.jsの内容をHTMLに流し込む
-  function set(id, text) {
-    var el = document.getElementById(id);
-    if (el) el.innerHTML = text ? text.replace(/\n/g, '<br>') : '';
-  }
+function s(id, val) {
+  var el = document.getElementById(id);
+  if (el && val) el.innerHTML = val.replace(/\n/g,'<br>');
+}
 
-  set('nav_logo', content.nav_logo);
-  set('hero_tag', content.hero_tag);
-  set('hero_heading', content.hero_heading);
-  set('hero_sub', content.hero_sub);
-  set('hero_button', content.hero_button);
-  set('mission_tag', content.mission_tag);
-  set('mission_title', content.mission_title);
-  set('mission_text', content.mission_text);
-  set('mission_card1_title', content.mission_card1_title);
-  set('mission_card1_text', content.mission_card1_text);
-  set('mission_card2_title', content.mission_card2_title);
-  set('mission_card2_text', content.mission_card2_text);
-  set('mission_card3_title', content.mission_card3_title);
-  set('mission_card3_text', content.mission_card3_text);
-  set('business_tag', content.business_tag);
-  set('business_title', content.business_title);
-  set('business_text', content.business_text);
-  set('business_item1', content.business_item1);
-  set('business_item2', content.business_item2);
-  set('business_item3', content.business_item3);
-  set('business_item4', content.business_item4);
-  set('business_item5', content.business_item5);
-  set('stats_tag', content.stats_tag);
-  set('stats_title', content.stats_title);
-  set('stat1_num', content.stat1_num);
-  set('stat1_label', content.stat1_label);
-  set('stat2_num', content.stat2_num);
-  set('stat2_label', content.stat2_label);
-  set('stat3_num', content.stat3_num);
-  set('stat3_label', content.stat3_label);
-  set('members_tag', content.members_tag);
-  set('members_title', content.members_title);
-  set('member1_role', content.member1_role);
-  set('member1_name', content.member1_name);
-  set('member1_desc', content.member1_desc);
-  set('member2_role', content.member2_role);
-  set('member2_name', content.member2_name);
-  set('member2_desc', content.member2_desc);
-  set('sponsorship_tag', content.sponsorship_tag);
-  set('sponsorship_title', content.sponsorship_title);
-  set('sponsorship_text', content.sponsorship_text);
-  set('plan1_label', content.plan1_label);
-  set('plan1_title', content.plan1_title);
-  set('plan1_price', content.plan1_price);
-  set('plan1_unit', content.plan1_unit);
-  set('plan1_item1', content.plan1_item1);
-  set('plan1_item2', content.plan1_item2);
-  set('plan1_item3', content.plan1_item3);
-  set('plan1_item4', content.plan1_item4);
-  set('plan2_label', content.plan2_label);
-  set('plan2_title', content.plan2_title);
-  set('plan2_price', content.plan2_price);
-  set('plan2_unit', content.plan2_unit);
-  set('plan2_item1', content.plan2_item1);
-  set('plan2_item2', content.plan2_item2);
-  set('plan2_item3', content.plan2_item3);
-  set('plan2_item4', content.plan2_item4);
-  set('plan2_item5', content.plan2_item5);
-  set('sponsorship_note', content.sponsorship_note);
-  set('contact_tag', content.contact_tag);
-  set('contact_title', content.contact_title);
-  set('contact_text', content.contact_text);
-  set('footer_text', content.footer_text);
+// ナビ
+s('nav_logo', content.nav_logo);
 
-  // リンク系
-  var contactBtn = document.getElementById('contact_btn');
-  if (contactBtn) { contactBtn.textContent = content.contact_button; contactBtn.href = 'mailto:' + content.contact_email; }
-  var btn1 = document.getElementById('contact_btn1');
-  if (btn1) { btn1.textContent = content.contact_button; btn1.href = 'mailto:' + content.contact_email; }
-  var btn2 = document.getElementById('contact_btn2');
-  if (btn2) { btn2.textContent = content.contact_button; btn2.href = 'mailto:' + content.contact_email; }
+// ヒーロー
+s('hero_tag', content.hero_tag);
+var h1 = document.getElementById('hero_h1');
+if (h1 && content.hero_heading) {
+  var lines = content.hero_heading.split('\n');
+  h1.innerHTML = '<span class="highlight">' + lines[0] + '</span>' + (lines[1] ? '<br>' + lines[1] : '');
+}
+var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
+s('hero_lead', heroSub[0] || '');
+s('hero_body', heroSub.slice(1).join('<br>'));
+var b1 = document.getElementById('hero_btn1'); if (b1) b1.textContent = content.hero_button;
+var b2 = document.getElementById('hero_btn2'); if (b2) b2.textContent = content.hero_contact_button;
+
+// ミッション
+s('mission_tag',   content.mission_tag);
+var mt = document.getElementById('mission_title');
+if (mt) mt.innerHTML = '<span class="highlight">' + content.mission_title + '</span>';
+s('mission_text',  content.mission_text);
+
+// サービス
+s('service_tag',   content.service_tag);
+var stEl = document.getElementById('service_title');
+if (stEl) stEl.innerHTML = content.service_title.replace(/\n/g,'<br>');
+s('s1_title', content.service_item1_title); s('s1_text', content.service_item1_text);
+s('s2_title', content.service_item2_title); s('s2_text', content.service_item2_text);
+s('s3_title', content.service_item3_title); s('s3_text', content.service_item3_text);
+
+// ケーススタディ
+s('case_tag',   content.casestudy_tag);
+var ctEl = document.getElementById('case_title');
+if (ctEl) ctEl.innerHTML = '<span class="highlight">' + content.casestudy_title + '</span>';
+s('c1_title', content.case1_title); s('c1_text', content.case1_text);
+s('c1_stat',  content.case1_stat);  s('c1_stat_label', content.case1_stat_label);
+s('c2_title', content.case2_title); s('c2_text', content.case2_text);
+s('c2_stat',  content.case2_stat);  s('c2_stat_label', content.case2_stat_label);
+
+// メンバー
+s('member_tag',   content.member_tag);
+s('member_title', content.member_title);
+s('m1_role', content.member1_role); s('m1_name', content.member1_name); s('m1_desc', content.member1_desc);
+s('m2_role', content.member2_role); s('m2_name', content.member2_name); s('m2_desc', content.member2_desc);
+
+// ドネーション
+s('donation_tag',   content.donation_tag);
+s('donation_title', content.donation_title);
+s('donation_text',  content.donation_text);
+s('p1_badge', content.plan1_label + ' ／ 1口〜'); s('p1_name', content.plan1_title);
+s('p1_i1', content.plan1_item1); s('p1_i2', content.plan1_item2); s('p1_i3', content.plan1_item3);
+s('p2_badge', content.plan2_label + ' ／ 5口〜'); s('p2_name', content.plan2_title);
+s('p2_i1', content.plan2_item1); s('p2_i2', content.plan2_item2);
+s('p2_i3', content.plan2_item3); s('p2_i4', content.plan2_item4);
+s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6 || 'プレスリリースに共同で名前が出る');
+s('uses_title',    content.donation_use_title);
+s('use1', content.donation_use1); s('use2', content.donation_use2); s('use3', content.donation_use3);
+s('donation_note', content.donation_note);
+
+// コンタクト
+s('contact_tag',   content.contact_tag);
+s('contact_title', content.contact_title);
+s('contact_text',  content.contact_text);
+var oi = document.getElementById('org_info');
+if (oi) oi.innerHTML = content.org_name + '<br>' + content.org_address + '<br><a href="' + content.org_url + '">' + content.org_url + '</a>';
+var cb = document.getElementById('contact_btn');
+if (cb) { cb.textContent = content.contact_button; cb.href = 'mailto:' + content.contact_email; }
+
+// フッター
+s('footer_text', content.footer_text);
+
+// ハンバーガー
+var hamburger = document.getElementById('hamburger');
+var mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', function() {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+mobileMenu.querySelectorAll('a').forEach(function(a) {
+  a.addEventListener('click', function() {
+    hamburger.classList.remove('open');
+    mobileMenu.classList.remove('open');
+  });
+});
 </script>
-
 </body>
 </html>
