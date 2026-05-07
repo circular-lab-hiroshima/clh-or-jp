@@ -7,8 +7,6 @@ var content = {
   hero_tag: "Circular Lab Hiroshima",
   hero_heading: "みんなで資源を循環させることで、\n広島からやさしい未来をつくる",
   hero_sub: "「捨てる」から「資源」へ\n企業・大学・地域が手を取り合い、\n広島から世界へ、新しい資源循環の形を発信します。",
-  hero_button: "詳しく見る",
-  hero_contact_button: "お問い合わせ",
 
   // ミッション
   mission_tag: "Mission",
@@ -90,5 +88,5 @@ var content = {
   footer_text: "© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.",
 
   // バージョン（フッターに極小表示）
-  version: "1.0.1",
+  version: "1.0.2",
 }
