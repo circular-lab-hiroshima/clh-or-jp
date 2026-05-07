@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: motoi/circular-lab-hiroshima
+  repo: circular-lab-hiroshima/clh-or-jp
   branch: main
 
 media_folder: "images"
