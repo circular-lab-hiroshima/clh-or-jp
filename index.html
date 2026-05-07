@@ -410,7 +410,7 @@ footer {
     <p class="hero-lead" id="hero_lead"></p>
     <p class="hero-body" id="hero_body"></p>
     <div class="btn-group">
-      <a href="#mission" class="btn btn-red" id="hero_btn1"></a>
+      <a href="#mission" class="btn btn-red"   id="hero_btn1"></a>
       <a href="#contact" class="btn btn-ghost" id="hero_btn2"></a>
     </div>
   </div>
@@ -423,7 +423,7 @@ footer {
       <div class="mission-letter" aria-hidden="true">M</div>
       <div>
         <h2 id="mission_title"></h2>
-        <p id="mission_text"></p>
+        <p  id="mission_text"></p>
       </div>
     </div>
   </div>
@@ -579,38 +579,35 @@ function s(id, val) {
   if (el && val) el.innerHTML = val.replace(/\n/g,'<br>');
 }
 
-// ナビ
 s('nav_logo', content.nav_logo);
 
-// ヒーロー
-s('hero_tag', content.hero_tag);
 var h1 = document.getElementById('hero_h1');
 if (h1 && content.hero_heading) {
   var lines = content.hero_heading.split('\n');
-  h1.innerHTML = '<span class="highlight">' + lines[0] + '</span>' + (lines[1] ? '<br>' + lines[1] : '');
+  var l0 = lines[0].replace(/[、。，,]$/, '');
+  var punct = lines[0].slice(l0.length);
+  h1.innerHTML = '<span class="highlight">' + l0 + '</span>' + punct + (lines[1] ? '<br>' + lines[1] : '');
 }
+s('hero_tag', content.hero_tag);
 var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
 s('hero_lead', heroSub[0] || '');
 s('hero_body', heroSub.slice(1).join('<br>'));
 var b1 = document.getElementById('hero_btn1'); if (b1) b1.textContent = content.hero_button;
 var b2 = document.getElementById('hero_btn2'); if (b2) b2.textContent = content.hero_contact_button;
 
-// ミッション
-s('mission_tag',   content.mission_tag);
+s('mission_tag', content.mission_tag);
 var mt = document.getElementById('mission_title');
 if (mt) mt.innerHTML = '<span class="highlight">' + content.mission_title + '</span>';
-s('mission_text',  content.mission_text);
+s('mission_text', content.mission_text);
 
-// サービス
-s('service_tag',   content.service_tag);
+s('service_tag', content.service_tag);
 var stEl = document.getElementById('service_title');
 if (stEl) stEl.innerHTML = content.service_title.replace(/\n/g,'<br>');
 s('s1_title', content.service_item1_title); s('s1_text', content.service_item1_text);
 s('s2_title', content.service_item2_title); s('s2_text', content.service_item2_text);
 s('s3_title', content.service_item3_title); s('s3_text', content.service_item3_text);
 
-// ケーススタディ
-s('case_tag',   content.casestudy_tag);
+s('case_tag', content.casestudy_tag);
 var ctEl = document.getElementById('case_title');
 if (ctEl) ctEl.innerHTML = '<span class="highlight">' + content.casestudy_title + '</span>';
 s('c1_title', content.case1_title); s('c1_text', content.case1_text);
@@ -618,13 +615,11 @@ s('c1_stat',  content.case1_stat);  s('c1_stat_label', content.case1_stat_label)
 s('c2_title', content.case2_title); s('c2_text', content.case2_text);
 s('c2_stat',  content.case2_stat);  s('c2_stat_label', content.case2_stat_label);
 
-// メンバー
 s('member_tag',   content.member_tag);
 s('member_title', content.member_title);
 s('m1_role', content.member1_role); s('m1_name', content.member1_name); s('m1_desc', content.member1_desc);
 s('m2_role', content.member2_role); s('m2_name', content.member2_name); s('m2_desc', content.member2_desc);
 
-// ドネーション
 s('donation_tag',   content.donation_tag);
 s('donation_title', content.donation_title);
 s('donation_text',  content.donation_text);
@@ -633,12 +628,11 @@ s('p1_i1', content.plan1_item1); s('p1_i2', content.plan1_item2); s('p1_i3', con
 s('p2_badge', content.plan2_label + ' ／ 5口〜'); s('p2_name', content.plan2_title);
 s('p2_i1', content.plan2_item1); s('p2_i2', content.plan2_item2);
 s('p2_i3', content.plan2_item3); s('p2_i4', content.plan2_item4);
-s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6 || 'プレスリリースに共同で名前が出る');
-s('uses_title',    content.donation_use_title);
+s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6);
+s('uses_title', content.donation_use_title);
 s('use1', content.donation_use1); s('use2', content.donation_use2); s('use3', content.donation_use3);
 s('donation_note', content.donation_note);
 
-// コンタクト
 s('contact_tag',   content.contact_tag);
 s('contact_title', content.contact_title);
 s('contact_text',  content.contact_text);
@@ -647,10 +641,8 @@ if (oi) oi.innerHTML = content.org_name + '<br>' + content.org_address + '<br><a
 var cb = document.getElementById('contact_btn');
 if (cb) { cb.textContent = content.contact_button; cb.href = 'mailto:' + content.contact_email; }
 
-// フッター
 s('footer_text', content.footer_text);
 
-// ハンバーガー
 var hamburger = document.getElementById('hamburger');
 var mobileMenu = document.getElementById('mobileMenu');
 hamburger.addEventListener('click', function() {
