@@ -75,6 +75,8 @@ h3 {
 p { color: var(--red-mid); line-height: 1.9; }
 .highlight {
   background: linear-gradient(transparent 54%, rgba(240,120,32,0.45) 54%);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* レイアウト */
@@ -584,9 +586,7 @@ s('nav_logo', content.nav_logo);
 var h1 = document.getElementById('hero_h1');
 if (h1 && content.hero_heading) {
   var lines = content.hero_heading.split('\n');
-  var l0 = lines[0].replace(/[、。，,]$/, '');
-  var punct = lines[0].slice(l0.length);
-  h1.innerHTML = '<span class="highlight">' + l0 + '</span>' + punct + '<br>' + (lines[1] || '');
+  h1.innerHTML = '<span class="highlight">' + lines[0] + '</span><br>' + (lines[1] || '');
 }
 s('hero_tag', content.hero_tag);
 var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
