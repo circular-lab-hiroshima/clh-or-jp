@@ -72,7 +72,7 @@ h3 {
   color: var(--red-dark);
   margin-bottom: 10px;
 }
-p { color: var(--red-mid); line-height: 1.9; }
+.h1-line2 { display: block; }
 .highlight {
   text-decoration: underline;
   text-decoration-color: rgba(240,120,32,0.7);
@@ -587,7 +587,7 @@ s('nav_logo', content.nav_logo);
 var h1 = document.getElementById('hero_h1');
 if (h1 && content.hero_heading) {
   var lines = content.hero_heading.split('\n');
-  h1.innerHTML = '<span class="highlight">' + lines[0] + '</span><br>' + (lines[1] || '');
+  h1.innerHTML = '<span class="highlight">' + lines[0] + '</span><span class="h1-line2">' + (lines[1] || '') + '</span>';
 }
 s('hero_tag', content.hero_tag);
 var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
