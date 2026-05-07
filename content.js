@@ -83,7 +83,7 @@ var content = {
   contact_button: "メールで問い合わせる",
   contact_email: "info@clh.or.jp",
   org_name: "一般社団法人サーキュラー・ラボ・広島",
-  org_address: "広島県広島市中区幟町1-5",
+  org_address: "広島県広島市中区幟町1-5 叡啓大学内",
   org_url: "https://clh.or.jp/",
 
   // フッター
