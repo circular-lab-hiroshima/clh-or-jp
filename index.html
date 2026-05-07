@@ -88,6 +88,7 @@ nav {
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 5%;
   background: rgba(255,255,255,0.96);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 3px solid var(--red);
   z-index: 100;
@@ -161,7 +162,7 @@ nav {
 .hero-body { font-size: clamp(14px, 1.6vw, 16px); color: var(--red-mid); line-height: 2.0; }
 
 .mission-inner { display: grid; grid-template-columns: 100px 1fr; gap: 60px; align-items: center; }
-.mission-letter { font-size: 100px; font-weight: 800; color: var(--orange); opacity: 0.15; line-height: 1; user-select: none; }
+.mission-letter { font-size: 100px; font-weight: 800; color: var(--orange); opacity: 0.15; line-height: 1; -webkit-user-select: none; user-select: none; }
 
 .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
 .service-card {
@@ -254,7 +255,7 @@ footer { background: #111; padding: 28px; text-align: center; font-size: 12px; c
 </head>
 <body>
 
-<nav>
+<nav aria-label="メインメニュー">
   <a href="#top" class="nav-logo" id="nav_logo"></a>
   <div class="nav-links">
     <a href="#mission">Mission</a>
@@ -264,12 +265,12 @@ footer { background: #111; padding: 28px; text-align: center; font-size: 12px; c
     <a href="#donation">Donation</a>
     <a href="#contact">Contact</a>
   </div>
-  <button class="hamburger" id="hamburger" aria-label="メニュー">
+  <button class="hamburger" id="hamburger" aria-label="メニュー" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
   </button>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
   <a href="#mission"   class="ml">Mission</a>
   <a href="#service"   class="ml">Service</a>
   <a href="#casestudy" class="ml">Case Study</a>
@@ -408,85 +409,115 @@ footer { background: #111; padding: 28px; text-align: center; font-size: 12px; c
 <footer><p id="footer_text"></p></footer>
 
 <script>
-function s(id, val) {
-  var el = document.getElementById(id);
-  if (el && val) el.innerHTML = val.replace(/\n/g,'<br>');
-}
+(function () {
+  function s(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null && val !== '') el.innerHTML = String(val).replace(/\n/g, '<br>');
+  }
+  function setText(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null) el.textContent = val;
+  }
 
-s('nav_logo', content.nav_logo);
+  // Nav
+  s('nav_logo', content.nav_logo);
 
-var h1 = document.getElementById('hero_h1');
-if (h1 && content.hero_heading) {
-  var lines = content.hero_heading.split('\n');
-  h1.innerHTML = '<span class="highlight">みんなで資源を循環させること<span style="white-space:nowrap">で、</span></span><span class="h1-line2">' + (lines[1] || '') + '</span>';
-}
-s('hero_tag', content.hero_tag);
-var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
-s('hero_lead', heroSub[0] || '');
-s('hero_body', heroSub.slice(1).join('<br>'));
-var b1 = document.getElementById('hero_btn1'); if (b1) b1.textContent = content.hero_button;
-var b2 = document.getElementById('hero_btn2'); if (b2) b2.textContent = content.hero_contact_button;
+  // Hero — h1の1行目はオレンジハイライト + 末尾の句読点を直前1文字と nowrap で結合（行頭禁則）
+  var heroH1 = document.getElementById('hero_h1');
+  if (heroH1 && content.hero_heading) {
+    var heroLines = content.hero_heading.split('\n');
+    var line1Html = (heroLines[0] || '').replace(/(.)([、。])$/, '<span style="white-space:nowrap">$1$2</span>');
+    heroH1.innerHTML = '<span class="highlight">' + line1Html + '</span>'
+                     + '<span class="h1-line2">' + (heroLines[1] || '') + '</span>';
+  }
+  s('hero_tag', content.hero_tag);
+  var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
+  s('hero_lead', heroSub[0] || '');
+  s('hero_body', heroSub.slice(1).join('\n'));
+  setText('hero_btn1', content.hero_button);
+  setText('hero_btn2', content.hero_contact_button);
 
-s('mission_tag', content.mission_tag);
-var mt = document.getElementById('mission_title');
-if (mt) mt.innerHTML = '<span class="highlight">' + content.mission_title + '</span>';
-s('mission_text', content.mission_text);
+  // Mission — タイトルにオレンジハイライト
+  var missionTitle = document.getElementById('mission_title');
+  if (missionTitle && content.mission_title) {
+    missionTitle.innerHTML = '<span class="highlight">' + content.mission_title + '</span>';
+  }
+  s('mission_tag', content.mission_tag);
+  s('mission_text', content.mission_text);
 
-s('service_tag', content.service_tag);
-var stEl = document.getElementById('service_title');
-if (stEl) stEl.innerHTML = content.service_title.replace(/\n/g,'<br>');
-s('s1_title', content.service_item1_title); s('s1_text', content.service_item1_text);
-s('s2_title', content.service_item2_title); s('s2_text', content.service_item2_text);
-s('s3_title', content.service_item3_title); s('s3_text', content.service_item3_text);
+  // Service
+  s('service_tag', content.service_tag);
+  s('service_title', content.service_title);
+  s('s1_title', content.service_item1_title); s('s1_text', content.service_item1_text);
+  s('s2_title', content.service_item2_title); s('s2_text', content.service_item2_text);
+  s('s3_title', content.service_item3_title); s('s3_text', content.service_item3_text);
 
-s('case_tag', content.casestudy_tag);
-var ctEl = document.getElementById('case_title');
-if (ctEl) ctEl.innerHTML = '<span class="highlight">' + content.casestudy_title + '</span>';
-s('c1_title', content.case1_title); s('c1_text', content.case1_text);
-s('c1_stat', content.case1_stat); s('c1_stat_label', content.case1_stat_label);
-s('c2_title', content.case2_title); s('c2_text', content.case2_text);
-s('c2_stat', content.case2_stat); s('c2_stat_label', content.case2_stat_label);
+  // Case Study — タイトルにオレンジハイライト
+  s('case_tag', content.casestudy_tag);
+  var caseTitle = document.getElementById('case_title');
+  if (caseTitle && content.casestudy_title) {
+    caseTitle.innerHTML = '<span class="highlight">' + content.casestudy_title + '</span>';
+  }
+  s('c1_title', content.case1_title); s('c1_text', content.case1_text);
+  s('c1_stat', content.case1_stat);   s('c1_stat_label', content.case1_stat_label);
+  s('c2_title', content.case2_title); s('c2_text', content.case2_text);
+  s('c2_stat', content.case2_stat);   s('c2_stat_label', content.case2_stat_label);
 
-s('member_tag', content.member_tag);
-s('member_title', content.member_title);
-s('m1_role', content.member1_role); s('m1_name', content.member1_name); s('m1_desc', content.member1_desc);
-s('m2_role', content.member2_role); s('m2_name', content.member2_name); s('m2_desc', content.member2_desc);
+  // Member
+  s('member_tag', content.member_tag);
+  s('member_title', content.member_title);
+  s('m1_role', content.member1_role); s('m1_name', content.member1_name); s('m1_desc', content.member1_desc);
+  s('m2_role', content.member2_role); s('m2_name', content.member2_name); s('m2_desc', content.member2_desc);
 
-s('donation_tag', content.donation_tag);
-s('donation_title', content.donation_title);
-s('donation_text', content.donation_text);
-s('p1_badge', content.plan1_label + ' ／ 1口〜'); s('p1_name', content.plan1_title);
-s('p1_i1', content.plan1_item1); s('p1_i2', content.plan1_item2); s('p1_i3', content.plan1_item3);
-s('p2_badge', content.plan2_label + ' ／ 5口〜'); s('p2_name', content.plan2_title);
-s('p2_i1', content.plan2_item1); s('p2_i2', content.plan2_item2);
-s('p2_i3', content.plan2_item3); s('p2_i4', content.plan2_item4);
-s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6);
-s('uses_title', content.donation_use_title);
-s('use1', content.donation_use1); s('use2', content.donation_use2); s('use3', content.donation_use3);
-s('donation_note', content.donation_note);
+  // Donation
+  s('donation_tag', content.donation_tag);
+  s('donation_title', content.donation_title);
+  s('donation_text', content.donation_text);
+  s('p1_badge', content.plan1_label + ' ／ 1口〜'); s('p1_name', content.plan1_title);
+  s('p1_i1', content.plan1_item1); s('p1_i2', content.plan1_item2); s('p1_i3', content.plan1_item3);
+  s('p2_badge', content.plan2_label + ' ／ 5口〜'); s('p2_name', content.plan2_title);
+  s('p2_i1', content.plan2_item1); s('p2_i2', content.plan2_item2);
+  s('p2_i3', content.plan2_item3); s('p2_i4', content.plan2_item4);
+  s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6);
+  s('uses_title', content.donation_use_title);
+  s('use1', content.donation_use1); s('use2', content.donation_use2); s('use3', content.donation_use3);
+  s('donation_note', content.donation_note);
 
-s('contact_tag', content.contact_tag);
-s('contact_title', content.contact_title);
-s('contact_text', content.contact_text);
-var oi = document.getElementById('org_info');
-if (oi) oi.innerHTML = content.org_name + '<br>' + content.org_address + '<br><a href="' + content.org_url + '">' + content.org_url + '</a>';
-var cb = document.getElementById('contact_btn');
-if (cb) { cb.textContent = content.contact_button; cb.href = 'mailto:' + content.contact_email; }
+  // Contact
+  s('contact_tag', content.contact_tag);
+  s('contact_title', content.contact_title);
+  s('contact_text', content.contact_text);
+  var orgInfo = document.getElementById('org_info');
+  if (orgInfo) {
+    orgInfo.innerHTML = (content.org_name || '') + '<br>'
+                      + (content.org_address || '') + '<br>'
+                      + '<a href="' + content.org_url + '">' + content.org_url + '</a>';
+  }
+  var contactBtn = document.getElementById('contact_btn');
+  if (contactBtn) {
+    contactBtn.textContent = content.contact_button;
+    contactBtn.href = 'mailto:' + content.contact_email;
+  }
 
-s('footer_text', content.footer_text);
+  // Footer
+  s('footer_text', content.footer_text);
 
-var hamburger = document.getElementById('hamburger');
-var mobileMenu = document.getElementById('mobileMenu');
-hamburger.addEventListener('click', function() {
-  hamburger.classList.toggle('open');
-  mobileMenu.classList.toggle('open');
-});
-mobileMenu.querySelectorAll('a').forEach(function(a) {
-  a.addEventListener('click', function() {
-    hamburger.classList.remove('open');
-    mobileMenu.classList.remove('open');
+  // Mobile menu — open状態を一元管理し aria 属性も同期
+  var hamburger  = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  function setMenuOpen(open) {
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+  }
+  hamburger.addEventListener('click', function () {
+    setMenuOpen(!hamburger.classList.contains('open'));
   });
-});
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenuOpen(false); });
+  });
+})();
 </script>
 </body>
 </html>
