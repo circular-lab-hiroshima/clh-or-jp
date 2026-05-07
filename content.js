@@ -81,7 +81,7 @@ var content = {
   contact_title: "お問い合わせ",
   contact_text: "事業連携・取材・ご質問など、お気軽にご連絡ください。",
   contact_button: "メールで問い合わせる",
-  contact_email: "clh@shingi.co.jp",
+  contact_email: "info@clh.or.jp",
   org_name: "一般社団法人サーキュラー・ラボ・広島",
   org_address: "広島県広島市中区幟町1-5",
   org_url: "https://clh.or.jp/",
