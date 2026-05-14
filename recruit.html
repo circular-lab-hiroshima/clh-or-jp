@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>採用情報 | サーキュラー・ラボ・広島</title>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #B42020;
+  --red-dark: #380C0C;
+  --red-deep: #1E0606;
+  --red-mid: #6A2010;
+  --red-light: #FFF8F5;
+  --orange: #F07820;
+  --orange-dk: #86400A;
+  --border: #F0D8B8;
+  --white: #ffffff;
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-lg: 18px;
+  --fs-xl: clamp(22px, 3vw, 34px);
+  --fs-2xl: clamp(28px, 4vw, 44px);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: var(--red-dark);
+  background: var(--white);
+  line-height: 1.8;
+  font-size: var(--fs-md);
+}
+
+a { color: inherit; }
+p { color: var(--red-mid); }
+h1, h2, h3 { color: var(--red-dark); }
+h1 {
+  font-size: var(--fs-2xl);
+  line-height: 1.35;
+  font-weight: 800;
+}
+h2 {
+  font-size: var(--fs-xl);
+  line-height: 1.4;
+  font-weight: 800;
+}
+h3 {
+  font-size: var(--fs-lg);
+  line-height: 1.5;
+  font-weight: 700;
+}
+
+.container { max-width: 1100px; margin: 0 auto; padding: 0 6%; }
+.tag {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange-dk);
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 64px;
+  padding: 12px 5%;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 3px solid var(--red);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.nav-logo {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--red-dark);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+}
+.nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 18px;
+}
+.nav-links a {
+  font-size: 12px;
+  color: var(--red-mid);
+  text-decoration: none;
+  letter-spacing: 0.06em;
+}
+.nav-links a:hover { color: var(--red); }
+
+.hero {
+  padding: clamp(72px, 9vw, 120px) 0 56px;
+  background: linear-gradient(180deg, rgba(240,120,32,0.1) 0%, rgba(255,248,245,0.8) 44%, var(--white) 100%);
+}
+.hero-inner {
+  max-width: 760px;
+}
+.hero h1 { margin: 14px 0 22px; }
+.hero p {
+  font-size: clamp(15px, 1.9vw, 18px);
+  line-height: 2;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 34px;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 26px;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: transform 0.2s, background 0.2s, color 0.2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover { background: #8C1818; }
+.btn-ghost { border: 2px solid var(--orange); color: var(--orange-dk); }
+.btn-ghost:hover { background: var(--orange); color: var(--white); }
+
+section { padding: 88px 0; }
+.section-soft { background: var(--red-light); }
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.section-head::before {
+  content: '';
+  width: 46px;
+  height: 2px;
+  background: var(--orange);
+}
+
+.about-copy {
+  max-width: 820px;
+  display: grid;
+  gap: 18px;
+}
+.about-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--orange-dk);
+  font-weight: 700;
+  text-decoration: none;
+}
+.about-link:hover { text-decoration: underline; }
+
+.positions {
+  display: grid;
+  gap: 22px;
+}
+.position-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  box-shadow: 0 12px 32px rgba(180,32,32,0.06);
+}
+.position-top {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+.position-num {
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 800;
+  color: rgba(240,120,32,0.45);
+}
+.position-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 24px;
+}
+.list-block p {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange-dk);
+  margin-bottom: 10px;
+}
+.list-block ul { list-style: none; display: grid; gap: 8px; }
+.list-block li {
+  display: flex;
+  gap: 10px;
+  color: var(--red-mid);
+  line-height: 1.8;
+}
+.list-block li::before {
+  content: '•';
+  color: var(--orange);
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.position-footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.position-footer p { max-width: 720px; }
+
+.overview-list {
+  display: grid;
+  gap: 16px;
+}
+.overview-row {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+}
+.overview-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange-dk);
+}
+.overview-value {
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--red-dark);
+}
+.overview-note {
+  display: block;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--red-mid);
+}
+
+.cta {
+  text-align: center;
+}
+.cta-box {
+  background: var(--red-deep);
+  border-radius: 28px;
+  padding: 42px 28px;
+}
+.cta-box h2 { color: var(--white); }
+.cta-box p {
+  max-width: 720px;
+  margin: 16px auto 0;
+  color: rgba(255,215,200,0.84);
+}
+.cta-box .btn-group {
+  justify-content: center;
+  margin-top: 30px;
+}
+.cta-box .btn-ghost {
+  border-color: rgba(240,120,32,0.8);
+  color: rgba(255,215,200,0.95);
+}
+
+footer {
+  background: #111;
+  padding: 32px 24px;
+  text-align: center;
+  font-size: 13px;
+  color: #E8E8E8;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .nav-links {
+    justify-content: flex-start;
+    gap: 12px 16px;
+  }
+  section { padding: 68px 0; }
+  .position-card { padding: 26px 22px; }
+  .position-grid { grid-template-columns: 1fr; gap: 20px; }
+  .position-footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .overview-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .overview-value { font-size: 16px; }
+  .cta-box { padding: 34px 22px; }
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="採用ページナビゲーション">
+  <a href="index.html" class="nav-logo">一般社団法人 サーキュラー・ラボ・広島</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#positions">Positions</a>
+    <a href="#overview">Overview</a>
+    <a href="#apply">Apply</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <span class="tag">Recruit</span>
+      <h1>一緒にCLHをつくる仲間を募集しています</h1>
+      <p>サーキュラー・ラボ・広島では、資源循環の仕組みを広島で実装していくために、Web・デザイン・現場連携の3つの領域で一緒に手を動かしてくれる仲間を募集しています。</p>
+      <div class="btn-group">
+        <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
+        <a class="btn btn-ghost" href="index.html#contact">問い合わせる</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-head"><span class="tag">About CLH</span></div>
+    <h2>CLHについて</h2>
+    <div class="about-copy">
+      <p>サーキュラー・ラボ・広島は、使い捨て食品容器などの廃棄物を「ゴミ」ではなく「資源」として捉え直し、企業・大学・地域と連携しながら持続可能な資源循環の仕組みを実装する法人です。</p>
+      <p>今回募集するポジションでは、Webサイトや広報物の改善、現場での回収導線の設計、関係者との連携調整など、構想だけで終わらない実装と運用のプロセスに関わっていただきます。社会の中で実際に動く仕組みを、一緒につくっていく仕事です。</p>
+      <p><a class="about-link" href="index.html#mission">CLHの活動をもっと知る <span aria-hidden="true">→</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section id="positions" class="section-soft">
+  <div class="container">
+    <div class="section-head"><span class="tag">Positions</span></div>
+    <h2>募集職種</h2>
+    <div class="positions">
+      <article class="position-card">
+        <div class="position-top">
+          <div class="position-num">01</div>
+          <h3>Web／デジタル担当</h3>
+        </div>
+        <p>Webサイトやリンク先ページの更新・改善、デザインに基づいた実装作業を通じて、使いやすいWebページを一緒につくる仕事です。</p>
+        <div class="position-grid">
+          <div class="list-block">
+            <p>仕事内容</p>
+            <ul>
+              <li>Webサイトやリンク先ページの更新・改善</li>
+              <li>デザインに基づいた実装作業</li>
+              <li>軽微な修正や調整を通じた、使いやすいWebページづくり</li>
+            </ul>
+          </div>
+          <div>
+            <div class="list-block">
+              <p>必須条件</p>
+              <ul>
+                <li>プログラミング経験がある方</li>
+                <li>週2回程度のミーティングに参加できる方</li>
+              </ul>
+            </div>
+            <div class="list-block" style="margin-top:20px;">
+              <p>歓迎条件</p>
+              <ul>
+                <li>JavaScript または TypeScript を用いた開発経験</li>
+                <li>HTML／CSSを用いたWeb制作経験</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="position-footer">
+          <p><strong>勤務イメージ：</strong>各自で作業を進めながら、週2回程度のミーティングで進捗確認や相談を行います。</p>
+          <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">この職種に応募</a>
+        </div>
+      </article>
+
+      <article class="position-card">
+        <div class="position-top">
+          <div class="position-num">02</div>
+          <h3>グラフィックデザイン担当</h3>
+        </div>
+        <p>ポスターや掲示物、SNSクリエイティブなどを通じて、プロジェクト全体のトーンや世界観を形づくる仕事です。</p>
+        <div class="position-grid">
+          <div class="list-block">
+            <p>仕事内容</p>
+            <ul>
+              <li>ポスター、掲示物、SNS用クリエイティブの制作</li>
+              <li>回収導線や案内表示のデザイン</li>
+              <li>プロジェクト全体のトーンや世界観の設計</li>
+            </ul>
+          </div>
+          <div class="list-block">
+            <p>歓迎条件</p>
+            <ul>
+              <li>Illustrator、Photoshop、Figma などの使用経験</li>
+              <li>情報デザインに興味がある方</li>
+              <li>「伝わるデザイン」を考えることが好きな方</li>
+            </ul>
+          </div>
+        </div>
+        <div class="position-footer">
+          <p><strong>勤務イメージ：</strong>各自で作業を進めながら、週1回程度のミーティングで進捗確認や相談を行います。</p>
+          <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">この職種に応募</a>
+        </div>
+      </article>
+
+      <article class="position-card">
+        <div class="position-top">
+          <div class="position-num">03</div>
+          <h3>フィールド／社会連携担当</h3>
+        </div>
+        <p>学内外での回収導線の設計・改善や、企業・店舗・自治体などとの連携調整を担う仕事です。</p>
+        <div class="position-grid">
+          <div class="list-block">
+            <p>仕事内容</p>
+            <ul>
+              <li>学内外での回収導線の設計・改善</li>
+              <li>企業、店舗、自治体などとの連携調整</li>
+              <li>現場での課題発見と改善提案</li>
+            </ul>
+          </div>
+          <div class="list-block">
+            <p>歓迎条件</p>
+            <ul>
+              <li>フィールドワークに興味がある方</li>
+              <li>人と関わることに抵抗がない方</li>
+              <li>社会の仕組みや地域連携に関心がある方</li>
+            </ul>
+          </div>
+        </div>
+        <div class="position-footer">
+          <p><strong>勤務イメージ：</strong>各自で作業を進めながら、週1回程度のミーティングで進捗確認や相談を行います。</p>
+          <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">この職種に応募</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="overview">
+  <div class="container">
+    <div class="section-head"><span class="tag">Overview</span></div>
+    <h2>募集要項</h2>
+    <div class="overview-list">
+      <div class="overview-row">
+        <div class="overview-label">給与</div>
+        <div class="overview-value">時給1,200円</div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-label">勤務時間・曜日</div>
+        <div class="overview-value">週8時間程度から応相談（稼働時間は柔軟に調整可能）<span class="overview-note">ミーティング頻度は担当により異なります（Web担当：週2回程度／グラフィックデザイン担当・フィールド／社会連携担当：週1回程度）</span></div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-label">勤務地</div>
+        <div class="overview-value">オンライン＋現地活動（叡啓大学、連携先企業・団体など）</div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-label">雇用形態</div>
+        <div class="overview-value">インターン</div>
+      </div>
+      <div class="overview-row">
+        <div class="overview-label">応募資格</div>
+        <div class="overview-value">学生歓迎／実務経験不問<span class="overview-note">授業・個人制作・自主活動などの経験も歓迎します。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apply" class="cta">
+  <div class="container">
+    <div class="cta-box">
+      <span class="tag">Apply</span>
+      <h2>応募・お問い合わせはこちら</h2>
+      <p>応募は下記の応募フォームから受け付けています。ご質問やカジュアル面談のご希望は、CLHのお問い合わせ窓口からもお気軽にご連絡ください。</p>
+      <div class="btn-group">
+        <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
+        <a class="btn btn-ghost" href="index.html#contact">CLHへ問い合わせる</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
