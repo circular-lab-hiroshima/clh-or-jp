@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>サーキュラー・ラボ・広島</title>
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<link rel="apple-touch-icon" href="assets/logo-mark.png">
 <script src="content.js"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -94,10 +96,12 @@ nav {
   z-index: 100;
 }
 .nav-logo {
+  display: flex; align-items: center; gap: 10px;
   font-size: 13px; font-weight: 700;
   color: var(--red-dark); letter-spacing: 0.04em;
   text-decoration: none;
 }
+.nav-logo-mark { height: 34px; width: auto; display: block; }
 .nav-links { display: flex; gap: 32px; }
 .nav-links a {
   font-size: 12px; font-weight: 500;
@@ -148,11 +152,21 @@ nav {
 .btn-group { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 36px; }
 
 .hero {
-  display: flex; align-items: center;
+  display: flex; align-items: center; justify-content: space-between; gap: clamp(24px, 5vw, 72px);
   padding: clamp(96px, 8vw, 128px) 6% clamp(48px, 5vw, 72px);
   background: var(--white);
 }
 .hero-inner { max-width: 700px; width: 100%; }
+.hero-visual {
+  flex: 0 0 auto; display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.hero-visual::before {
+  content: ''; position: absolute; inset: -12%;
+  background: radial-gradient(circle, rgba(240,120,32,0.12), rgba(240,120,32,0) 70%);
+  border-radius: 50%;
+}
+.hero-visual img { position: relative; width: clamp(190px, 24vw, 340px); height: auto; display: block; }
 .hero h1 { margin: 16px 0 24px; }
 .hero-lead {
   font-size: clamp(16px, 2vw, 20px);
@@ -182,6 +196,8 @@ nav {
   position: relative; overflow: hidden;
 }
 .case-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+.case-photo { width: 220px; max-width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 22px; background: var(--red-light); border: 1px solid var(--border); }
+.case-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .case-card-num { position: absolute; top: 20px; right: 24px; font-size: 52px; font-weight: 800; color: var(--orange); opacity: 0.15; line-height: 1; }
 .case-card h3 { font-size: 16px; margin-bottom: 12px; }
 .case-card p  { font-size: 13px; margin-bottom: 28px; }
@@ -195,11 +211,13 @@ nav {
   display: flex; gap: 22px; align-items: flex-start;
 }
 .member-avatar {
-  width: 56px; height: 56px; border-radius: 50%;
+  width: 64px; height: 64px; border-radius: 50%;
   background: var(--red); color: var(--white);
   display: flex; align-items: center; justify-content: center;
   font-size: 13px; font-weight: 800; flex-shrink: 0;
+  overflow: hidden;
 }
+.member-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .member-role { font-size: 10px; font-weight: 700; color: var(--orange-dk); letter-spacing: 0.1em; margin-bottom: 4px; }
 .member-name { font-size: 17px; font-weight: 800; color: var(--red-dark); margin-bottom: 8px; }
 .member-desc { font-size: 13px; line-height: 1.8; }
@@ -212,7 +230,8 @@ nav {
 .plan-card { border-radius: var(--radius-lg); padding: 32px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.05); }
 .plan-card.featured { border-color: rgba(240,120,32,0.5); }
 .plan-badge { display: inline-block; font-size: 9px; font-weight: 700; letter-spacing: 0.15em; padding: 3px 10px; border-radius: var(--radius-full); background: rgba(240,120,32,0.25); color: rgba(255,200,140,1); margin-bottom: 12px; }
-.plan-name { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 4px; }
+.plan-name { font-size: 17px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.plan-fee  { font-size: 22px; font-weight: 800; color: rgba(255,200,140,1); margin-bottom: 4px; letter-spacing: 0.02em; }
 .plan-note { font-size: 12px; color: rgba(255,215,200,0.55); margin-bottom: 20px; }
 .plan-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; color: rgba(240,160,80,0.9); margin: 16px 0 8px; }
 .plan-items { list-style: none; }
@@ -232,6 +251,7 @@ nav {
 .contact h2 { margin-bottom: 16px; }
 .contact p  { max-width: 480px; margin: 0 auto 12px; }
 .org-info { font-size: 13px; color: var(--red-mid); line-height: 2.0; margin-bottom: 32px; }
+.org-eyebrow { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; color: var(--orange-dk); }
 .org-info a { color: var(--orange-dk); text-decoration: none; }
 .org-info a:hover { text-decoration: underline; }
 
@@ -241,6 +261,9 @@ footer p { color: inherit; }
 
 @media (max-width: 768px) {
   nav { padding: 0 5%; }
+  .nav-logo-mark { height: 28px; }
+  .nav-logo span { font-size: 11px; }
+  .hero-visual { display: none; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
   section { padding: 70px 0; }
@@ -257,7 +280,10 @@ footer p { color: inherit; }
 <body>
 
 <nav aria-label="メインメニュー">
-  <a href="#top" class="nav-logo" id="nav_logo"></a>
+  <a href="#top" class="nav-logo">
+    <img src="assets/logo-mark.png" alt="" class="nav-logo-mark">
+    <span id="nav_logo"></span>
+  </a>
   <div class="nav-links">
     <a href="#mission">Mission</a>
     <a href="#service">Service</a>
@@ -293,6 +319,9 @@ footer p { color: inherit; }
       <a class="btn btn-ghost" href="#contact">問い合わせる</a>
     </div>
   </div>
+  <div class="hero-visual" aria-hidden="true">
+    <img src="assets/logo-mark.png" alt="">
+  </div>
 </section>
 
 <section id="mission">
@@ -326,12 +355,14 @@ footer p { color: inherit; }
     <h2 id="case_title"></h2>
     <div class="case-grid">
       <div class="case-card">
+        <div class="case-photo"><img src="assets/case-marathon.jpg" alt="マラソン大会の給水所での紙コップ回収"></div>
         <div class="case-card-num">01</div>
         <h3 id="c1_title"></h3><p id="c1_text"></p>
         <div class="case-stat-num" id="c1_stat"></div>
         <div class="case-stat-label" id="c1_stat_label"></div>
       </div>
       <div class="case-card">
+        <div class="case-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートの紙コップ回収ボックス"></div>
         <div class="case-card-num">02</div>
         <h3 id="c2_title"></h3><p id="c2_text"></p>
         <div class="case-stat-num" id="c2_stat"></div>
@@ -347,11 +378,11 @@ footer p { color: inherit; }
     <h2 id="member_title"></h2>
     <div class="member-grid">
       <div class="member-card">
-        <div class="member-avatar">河村</div>
+        <div class="member-avatar"><img src="assets/member-kawamura.png" alt="河村 伸枝"></div>
         <div><div class="member-role" id="m1_role"></div><div class="member-name" id="m1_name"></div><p class="member-desc" id="m1_desc"></p></div>
       </div>
       <div class="member-card">
-        <div class="member-avatar">定金</div>
+        <div class="member-avatar"><img src="assets/member-sadakane.png" alt="定金 基"></div>
         <div><div class="member-role" id="m2_role"></div><div class="member-name" id="m2_name"></div><p class="member-desc" id="m2_desc"></p></div>
       </div>
     </div>
@@ -367,8 +398,9 @@ footer p { color: inherit; }
       <div class="plan-card">
         <div class="plan-badge" id="p1_badge"></div>
         <div class="plan-name"  id="p1_name"></div>
-        <div class="plan-note">年会費はお問い合わせください</div>
-        <div class="plan-label">社員啓蒙活動</div>
+        <div class="plan-fee"   id="p1_fee"></div>
+        <div class="plan-note"  id="p1_note"></div>
+        <div class="plan-label">社員啓発活動</div>
         <ul class="plan-items"><li id="p1_i1"></li><li id="p1_i2"></li></ul>
         <div class="plan-label">広報活動</div>
         <ul class="plan-items"><li id="p1_i3"></li></ul>
@@ -376,11 +408,12 @@ footer p { color: inherit; }
       <div class="plan-card featured">
         <div class="plan-badge" id="p2_badge" style="background:rgba(240,120,32,0.4);"></div>
         <div class="plan-name"  id="p2_name"></div>
-        <div class="plan-note">年会費はお問い合わせください</div>
-        <div class="plan-label">社員啓蒙活動</div>
+        <div class="plan-fee"   id="p2_fee"></div>
+        <div class="plan-note"  id="p2_note"></div>
+        <div class="plan-label">社員啓発活動</div>
         <ul class="plan-items"><li id="p2_i1"></li><li id="p2_i2"></li><li id="p2_i3"></li><li id="p2_i4"></li></ul>
         <div class="plan-label">広報活動</div>
-        <ul class="plan-items"><li id="p2_i5"></li><li id="p2_i6"></li></ul>
+        <ul class="plan-items"><li id="p2_i5"></li><li id="p2_i6"></li><li id="p2_i7"></li></ul>
       </div>
     </div>
     <div class="donation-uses">
@@ -477,12 +510,14 @@ footer p { color: inherit; }
   s('donation_tag', content.donation_tag);
   s('donation_title', content.donation_title);
   s('donation_text', content.donation_text);
-  s('p1_badge', content.plan1_label + ' ／ 1口〜'); s('p1_name', content.plan1_title);
+  s('p1_badge', content.plan1_label); s('p1_name', content.plan1_title);
+  s('p1_fee', content.plan1_fee); s('p1_note', content.plan_note);
   s('p1_i1', content.plan1_item1); s('p1_i2', content.plan1_item2); s('p1_i3', content.plan1_item3);
-  s('p2_badge', content.plan2_label + ' ／ 5口〜'); s('p2_name', content.plan2_title);
+  s('p2_badge', content.plan2_label); s('p2_name', content.plan2_title);
+  s('p2_fee', content.plan2_fee); s('p2_note', content.plan_note);
   s('p2_i1', content.plan2_item1); s('p2_i2', content.plan2_item2);
   s('p2_i3', content.plan2_item3); s('p2_i4', content.plan2_item4);
-  s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6);
+  s('p2_i5', content.plan2_item5); s('p2_i6', content.plan2_item6); s('p2_i7', content.plan2_item7);
   s('uses_title', content.donation_use_title);
   s('use1', content.donation_use1); s('use2', content.donation_use2); s('use3', content.donation_use3);
   s('donation_note', content.donation_note);
@@ -493,7 +528,8 @@ footer p { color: inherit; }
   s('contact_text', content.contact_text);
   var orgInfo = document.getElementById('org_info');
   if (orgInfo) {
-    orgInfo.innerHTML = (content.org_name || '') + '<br>'
+    orgInfo.innerHTML = (content.org_eyebrow ? '<span class="org-eyebrow">' + content.org_eyebrow + '</span>' : '')
+                      + (content.org_name || '') + '<br>'
                       + (content.org_address || '') + '<br>'
                       + '<a href="' + content.org_url + '">' + content.org_url + '</a>';
   }
