@@ -358,15 +358,11 @@ footer p { color: inherit; }
         <div class="case-photo"><img src="assets/case-marathon.jpg" alt="マラソン大会の給水所での紙コップ回収"></div>
         <div class="case-card-num">01</div>
         <h3 id="c1_title"></h3><p id="c1_text"></p>
-        <div class="case-stat-num" id="c1_stat"></div>
-        <div class="case-stat-label" id="c1_stat_label"></div>
       </div>
       <div class="case-card">
         <div class="case-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートの紙コップ回収ボックス"></div>
         <div class="case-card-num">02</div>
         <h3 id="c2_title"></h3><p id="c2_text"></p>
-        <div class="case-stat-num" id="c2_stat"></div>
-        <div class="case-stat-label" id="c2_stat_label"></div>
       </div>
     </div>
   </div>
@@ -378,11 +374,11 @@ footer p { color: inherit; }
     <h2 id="member_title"></h2>
     <div class="member-grid">
       <div class="member-card">
-        <div class="member-avatar"><img src="assets/member-kawamura.png" alt="河村 伸枝"></div>
+        <div class="member-avatar"><img src="assets/member-kawamura.jpg" alt="河村 伸枝"></div>
         <div><div class="member-role" id="m1_role"></div><div class="member-name" id="m1_name"></div><p class="member-desc" id="m1_desc"></p></div>
       </div>
       <div class="member-card">
-        <div class="member-avatar"><img src="assets/member-sadakane.png" alt="定金 基"></div>
+        <div class="member-avatar"><img src="assets/member-sadakane.jpg" alt="定金 基"></div>
         <div><div class="member-role" id="m2_role"></div><div class="member-name" id="m2_name"></div><p class="member-desc" id="m2_desc"></p></div>
       </div>
     </div>
@@ -496,9 +492,7 @@ footer p { color: inherit; }
     caseTitle.innerHTML = '<span class="highlight">' + content.casestudy_title + '</span>';
   }
   s('c1_title', content.case1_title); s('c1_text', content.case1_text);
-  s('c1_stat', content.case1_stat);   s('c1_stat_label', content.case1_stat_label);
   s('c2_title', content.case2_title); s('c2_text', content.case2_text);
-  s('c2_stat', content.case2_stat);   s('c2_stat_label', content.case2_stat_label);
 
   // Member
   s('member_tag', content.member_tag);

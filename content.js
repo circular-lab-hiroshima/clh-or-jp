@@ -28,12 +28,8 @@ var content = {
   casestudy_title: "「循環」を証明する、確かな足跡",
   case1_title: "スポーツイベントでの資源回収",
   case1_text: "マラソン大会の給水所で使用された紙コップを全数回収。古紙再生メーカーと連携し、トイレットペーパーへと再生するサイクルを実現しました。",
-  case1_stat: "1,000+",
-  case1_stat_label: "広島マラソン 回収協力者数",
   case2_title: "商業施設での実証実験",
   case2_text: "アウトレットモールのフードコートにて、給水用紙コップを「資源」として分別回収。日常の風景から資源を守る仕組みを運用しています。",
-  case2_stat: "10万枚",
-  case2_stat_label: "3ヶ月間の回収枚数",
 
   // メンバー
   member_tag: "Member",
@@ -95,5 +91,5 @@ var content = {
   footer_text: "© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.",
 
   // バージョン（フッターに極小表示）
-  version: "1.6.0",
+  version: "1.7.0",
 }
