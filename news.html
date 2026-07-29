@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お知らせ | サーキュラー・ラボ・広島</title>
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<link rel="apple-touch-icon" href="assets/logo-mark.png">
+<script src="content.js"></script>
+<script src="news.js"></script>
+<script src="preview-badge.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #B42020;
+  --red-dark: #380C0C;
+  --red-mid: #6A2010;
+  --red-light: #FFF8F5;
+  --orange: #F07820;
+  --orange-dk: #86400A;
+  --border: #F0D8B8;
+  --white: #ffffff;
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-lg: 18px;
+  --fs-xl: clamp(22px, 3vw, 34px);
+  --fs-2xl: clamp(26px, 3.6vw, 40px);
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: var(--red-dark);
+  background: var(--white);
+  line-height: 1.8;
+  font-size: var(--fs-md);
+}
+
+a { color: inherit; }
+p { color: var(--red-mid); }
+h1, h2, h3 { color: var(--red-dark); }
+h1 { font-size: var(--fs-2xl); line-height: 1.4; font-weight: 800; }
+h2 { font-size: var(--fs-xl); line-height: 1.4; font-weight: 800; }
+h3 { font-size: var(--fs-lg); line-height: 1.5; font-weight: 700; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 6%; }
+.tag {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--orange-dk);
+}
+
+nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  min-height: 64px; padding: 12px 5%;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 3px solid var(--red);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700;
+  color: var(--red-dark); text-decoration: none; letter-spacing: 0.04em;
+}
+.nav-logo-mark { height: 30px; width: auto; display: block; }
+.nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 18px; }
+.nav-links a { font-size: 12px; color: var(--red-mid); text-decoration: none; letter-spacing: 0.06em; }
+.nav-links a:hover { color: var(--red); }
+
+.hero {
+  padding: clamp(56px, 7vw, 88px) 0 40px;
+  background: linear-gradient(180deg, rgba(240,120,32,0.1) 0%, rgba(255,248,245,0.8) 44%, var(--white) 100%);
+}
+.hero h1 { margin: 12px 0 16px; }
+.hero p { font-size: clamp(14px, 1.7vw, 16px); }
+
+main { padding: 8px 0 96px; }
+
+.news-list { display: grid; gap: 12px; }
+.news-item {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 20px 26px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-md); text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+a.news-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(180,32,32,0.08); border-color: var(--orange); }
+.news-date { flex: 0 0 auto; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--orange-dk); }
+.news-item-title { font-size: 14px; font-weight: 700; color: var(--red-dark); line-height: 1.7; }
+.news-empty { font-size: 14px; }
+
+.article-head { padding-bottom: 24px; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
+.article-head .news-date { display: block; margin-bottom: 10px; }
+.article-body > * + * { margin-top: 20px; }
+.article-body h2 { font-size: var(--fs-lg); margin-top: 36px; }
+.article-body h3 { font-size: var(--fs-md); margin-top: 32px; }
+.article-body p { font-size: 15px; line-height: 1.95; }
+.article-body img {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--radius-lg); border: 1px solid var(--border);
+}
+.article-body a { color: var(--orange-dk); }
+
+.back-link { display: inline-block; margin-top: 48px; }
+.btn {
+  display: inline-block; padding: 13px 36px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.06em;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-ghost { background: transparent; color: var(--orange-dk); border: 2px solid var(--orange); }
+.btn-ghost:hover { background: var(--orange); color: var(--white); }
+
+footer {
+  background: #111; padding: 32px 24px; text-align: center;
+  font-size: 13px; color: #E8E8E8; letter-spacing: 0.04em; line-height: 1.7;
+}
+footer p { color: inherit; }
+.footer-version { display: block; margin-top: 6px; font-size: 10px; color: rgba(232,232,232,0.4); letter-spacing: 0.1em; }
+
+@media (max-width: 768px) {
+  nav { align-items: flex-start; flex-direction: column; }
+  .nav-links { justify-content: flex-start; gap: 12px 16px; }
+  .news-item { flex-direction: column; gap: 4px; padding: 18px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="お知らせページナビゲーション">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo-mark.png" alt="" class="nav-logo-mark">
+    <span id="nav_logo"></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="news.html">News</a>
+    <a href="recruit.html">Recruit</a>
+    <a href="index.html#donation">Donation</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <span class="tag" id="news_tag"></span>
+    <h1 id="page_title"></h1>
+    <p id="page_lead"></p>
+  </div>
+</section>
+
+<main>
+  <div class="container" id="news_body"></div>
+</main>
+
+<footer>
+  <p id="footer_text"></p>
+  <small class="footer-version" id="footer_version"></small>
+</footer>
+
+<script>
+(function () {
+  var esc = window.CLHNews.escapeHtml;
+
+  function setText(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null) el.textContent = val;
+  }
+
+  setText('nav_logo', content.nav_logo);
+  setText('news_tag', content.news_tag);
+  setText('footer_text', content.footer_text);
+  setText('footer_version', content.version ? 'v' + content.version : '');
+
+  var body = document.getElementById('news_body');
+  var wantedId = new URLSearchParams(location.search).get('id');
+
+  // 一覧表示
+  function renderList(items) {
+    setText('page_title', content.news_title);
+    setText('page_lead', content.news_lead);
+    if (!items.length) {
+      body.innerHTML = '<p class="news-empty">' + esc(content.news_empty || '') + '</p>';
+      return;
+    }
+    body.innerHTML = '<div class="news-list">' + items.map(function (item) {
+      var inner = '<time class="news-date" datetime="' + esc(item.date) + '">'
+                + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+                + '<span class="news-item-title">' + esc(item.title) + '</span>';
+      return item.id
+        ? '<a class="news-item" href="news.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
+        : '<div class="news-item">' + inner + '</div>';
+    }).join('') + '</div>';
+  }
+
+  // 個別記事表示
+  function renderArticle(item) {
+    document.title = item.title + ' | お知らせ | サーキュラー・ラボ・広島';
+    setText('page_title', item.title);
+    setText('page_lead', '');
+    body.innerHTML = '<div class="article-head">'
+        + '<time class="news-date" datetime="' + esc(item.date) + '">'
+        + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+      + '</div>'
+      + '<div class="article-body">' + window.CLHNews.renderMarkdown(item.body) + '</div>'
+      + '<a class="btn btn-ghost back-link" href="news.html">' + esc(content.news_back || '') + '</a>';
+  }
+
+  fetch('news.md', { cache: 'no-cache' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('news.md: ' + res.status);
+      return res.text();
+    })
+    .then(function (text) {
+      var items = window.CLHNews.parseNews(text);
+      var target = wantedId && items.filter(function (n) { return n.id === wantedId; })[0];
+      if (target) renderArticle(target);
+      else renderList(items); // id 指定が見つからないときは一覧にフォールバック
+    })
+    .catch(function () {
+      setText('page_title', content.news_title);
+      setText('page_lead', content.news_lead);
+      body.innerHTML = '<p class="news-empty">お知らせを読み込めませんでした。'
+        + '時間をおいて再度お試しください。</p>';
+    });
+})();
+</script>
+</body>
+</html>

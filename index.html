@@ -7,6 +7,8 @@
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
 <script src="content.js"></script>
+<script src="news.js"></script>
+<script src="preview-badge.js"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -174,6 +176,22 @@ nav {
 }
 .hero-body { font-size: clamp(14px, 1.6vw, 16px); color: var(--red-mid); line-height: 2.0; }
 
+[hidden] { display: none !important; }
+
+.news-list { display: grid; gap: 12px; margin-top: 40px; }
+.news-item {
+  display: flex; align-items: baseline; gap: 22px;
+  padding: 18px 24px;
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-md); text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+a.news-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(180,32,32,0.08); border-color: var(--orange); }
+.news-date { flex: 0 0 auto; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--orange-dk); }
+.news-item-title { font-size: 14px; font-weight: 700; color: var(--red-dark); line-height: 1.7; }
+.news-empty { margin-top: 36px; font-size: 14px; }
+.news-more { margin-top: 32px; }
+
 .mission-inner { display: grid; grid-template-columns: 100px 1fr; gap: 60px; align-items: center; }
 .mission-letter { font-size: 100px; font-weight: 800; color: var(--orange); opacity: 0.15; line-height: 1; -webkit-user-select: none; user-select: none; }
 
@@ -272,6 +290,7 @@ footer p { color: inherit; }
   .service-grid   { grid-template-columns: 1fr; }
   .case-grid      { grid-template-columns: 1fr; }
   .member-grid    { grid-template-columns: 1fr; }
+  .news-item      { flex-direction: column; gap: 4px; padding: 18px 20px; }
   .donation-plans { grid-template-columns: 1fr; }
   .partners-grid  { grid-template-columns: 1fr; }
 }
@@ -285,6 +304,7 @@ footer p { color: inherit; }
     <span id="nav_logo"></span>
   </a>
   <div class="nav-links">
+    <a href="#news">News</a>
     <a href="#mission">Mission</a>
     <a href="#service">Service</a>
     <a href="#casestudy">Case Study</a>
@@ -299,6 +319,7 @@ footer p { color: inherit; }
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="#news"      class="ml">News</a>
   <a href="#mission"   class="ml">Mission</a>
   <a href="#service"   class="ml">Service</a>
   <a href="#casestudy" class="ml">Case Study</a>
@@ -321,6 +342,15 @@ footer p { color: inherit; }
   </div>
   <div class="hero-visual" aria-hidden="true">
     <img src="assets/logo-mark.png" alt="">
+  </div>
+</section>
+
+<section id="news" hidden>
+  <div class="container">
+    <span class="tag" id="news_tag"></span>
+    <h2 id="news_title"></h2>
+    <div class="news-list" id="news_list"></div>
+    <div class="news-more"><a class="btn btn-ghost" href="news.html" id="news_more"></a></div>
   </div>
 </section>
 
@@ -469,6 +499,35 @@ footer p { color: inherit; }
   var heroSub = content.hero_sub ? content.hero_sub.split('\n') : [];
   s('hero_lead', heroSub[0] || '');
   s('hero_body', heroSub.slice(1).join('\n'));
+
+  // News — news.md を読み込んで最新3件だけ表示（読めなければセクションごと非表示）
+  s('news_tag', content.news_tag);
+  s('news_title', content.news_title);
+  setText('news_more', content.news_more);
+  fetch('news.md', { cache: 'no-cache' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('news.md: ' + res.status);
+      return res.text();
+    })
+    .then(function (text) {
+      var items = window.CLHNews.parseNews(text).slice(0, 3);
+      var list = document.getElementById('news_list');
+      list.innerHTML = items.length
+        ? items.map(newsItemHtml).join('')
+        : '<p class="news-empty">' + window.CLHNews.escapeHtml(content.news_empty || '') + '</p>';
+      document.getElementById('news').hidden = false;
+    })
+    .catch(function () { /* ローカルのfile://など、読めない場合はセクションを出さない */ });
+
+  function newsItemHtml(item) {
+    var esc = window.CLHNews.escapeHtml;
+    var inner = '<time class="news-date" datetime="' + esc(item.date) + '">'
+              + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+              + '<span class="news-item-title">' + esc(item.title) + '</span>';
+    return item.id
+      ? '<a class="news-item" href="news.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
+      : '<div class="news-item">' + inner + '</div>';
+  }
 
   // Mission — タイトルにオレンジハイライト
   var missionTitle = document.getElementById('mission_title');
