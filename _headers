@@ -1,0 +1,4 @@
+# テスト環境（preview.clh.or.jp）は検索エンジンに載せない。
+# ランダムなプレビューURL（*.pages.dev）には Cloudflare Pages が自動で noindex を付与する。
+https://preview.clh.or.jp/*
+  X-Robots-Tag: noindex, nofollow
