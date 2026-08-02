@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>ページが見つかりません | サーキュラー・ラボ・広島</title>
+<link rel="icon" type="image/png" href="/assets/logo-mark.png">
+<link rel="apple-touch-icon" href="/assets/logo-mark.png">
+<!-- 404 は任意の深さのURLで表示されるため、参照はすべてルート絶対パスにする -->
+<script src="/content.js"></script>
+<script src="/preview-badge.js"></script>
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --red: #B42020;
+  --red-dark: #380C0C;
+  --red-mid: #6A2010;
+  --orange: #F07820;
+  --orange-dk: #86400A;
+  --white: #ffffff;
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 15px;
+  --fs-2xl: clamp(26px, 3.6vw, 40px);
+  --radius-full: 999px;
+}
+
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: var(--red-dark);
+  background: var(--white);
+  line-height: 1.8;
+  font-size: var(--fs-md);
+  display: flex; flex-direction: column; min-height: 100vh;
+}
+
+a { color: inherit; }
+p { color: var(--red-mid); }
+h1 { font-size: var(--fs-2xl); line-height: 1.4; font-weight: 800; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 6%; }
+.tag {
+  display: inline-block;
+  font-size: var(--fs-xs); font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--orange-dk);
+}
+
+nav {
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  min-height: 64px; padding: 12px 5%;
+  background: rgba(255,255,255,0.96);
+  border-bottom: 3px solid var(--red);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 700;
+  color: var(--red-dark); text-decoration: none; letter-spacing: 0.04em;
+}
+.nav-logo-mark { height: 30px; width: auto; display: block; }
+.nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 18px; }
+.nav-links a { font-size: 12px; color: var(--red-mid); text-decoration: none; letter-spacing: 0.06em; }
+.nav-links a:hover { color: var(--red); }
+
+main {
+  flex: 1 0 auto;
+  display: flex; align-items: center;
+  padding: clamp(56px, 9vw, 112px) 0;
+  background: linear-gradient(180deg, rgba(240,120,32,0.1) 0%, rgba(255,248,245,0.8) 44%, var(--white) 100%);
+}
+main h1 { margin: 12px 0 16px; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
+
+.btn {
+  display: inline-block; padding: 13px 36px;
+  border-radius: var(--radius-full);
+  font-size: var(--fs-sm); font-weight: 700; letter-spacing: 0.06em;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-solid { background: var(--red); color: var(--white); }
+.btn-solid:hover { transform: translateY(-2px); }
+.btn-ghost { background: transparent; color: var(--orange-dk); border: 2px solid var(--orange); }
+.btn-ghost:hover { background: var(--orange); color: var(--white); }
+
+footer {
+  flex: 0 0 auto;
+  background: #111; padding: 32px 24px; text-align: center;
+  font-size: 13px; color: #E8E8E8; letter-spacing: 0.04em; line-height: 1.7;
+}
+footer p { color: inherit; }
+.footer-version { display: block; margin-top: 6px; font-size: 10px; color: rgba(232,232,232,0.4); letter-spacing: 0.1em; }
+
+@media (max-width: 768px) {
+  nav { align-items: flex-start; flex-direction: column; }
+  .nav-links { justify-content: flex-start; gap: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<nav aria-label="ナビゲーション">
+  <a href="/" class="nav-logo">
+    <img src="/assets/logo-mark.png" alt="" class="nav-logo-mark">
+    <span id="nav_logo">一般社団法人 サーキュラー・ラボ・広島</span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/news.html">News</a>
+    <a href="/recruit.html">Recruit</a>
+    <a href="/#donation">Donation</a>
+    <a href="/#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+    <span class="tag">404 Not Found</span>
+    <h1>ページが見つかりません</h1>
+    <p>
+      お探しのページは移動または削除されたか、URLが正しくない可能性があります。
+    </p>
+    <div class="actions">
+      <a class="btn btn-solid" href="/">トップページへ戻る</a>
+      <a class="btn btn-ghost" href="/news.html">お知らせ一覧を見る</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <p id="footer_text"></p>
+  <small class="footer-version" id="footer_version"></small>
+</footer>
+
+<script>
+(function () {
+  // content.js が読めなくてもページ自体は成立するよう、上書きは値がある場合のみ
+  if (typeof content === 'undefined') return;
+  function setText(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null && val !== '') el.textContent = val;
+  }
+  setText('nav_logo', content.nav_logo);
+  setText('footer_text', content.footer_text);
+  setText('footer_version', content.version ? 'v' + content.version : '');
+})();
+</script>
+</body>
+</html>

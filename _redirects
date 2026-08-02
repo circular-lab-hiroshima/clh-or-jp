@@ -1,2 +1,0 @@
-# テスト環境ではクロール拒否の robots.txt を返す（末尾の 200 は書き換え）。
-https://preview.clh.or.jp/robots.txt /robots-preview.txt 200
