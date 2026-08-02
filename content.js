@@ -107,5 +107,5 @@ var content = {
   footer_text: "© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.",
 
   // バージョン（フッターに極小表示）
-  version: "1.10.0",
+  version: "1.10.1",
 }

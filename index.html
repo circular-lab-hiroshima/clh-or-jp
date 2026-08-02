@@ -565,10 +565,12 @@ footer p { color: inherit; }
 
   function upcomingHtml(item) {
     var esc = window.CLHNews.escapeHtml;
+    // 枠に出すのは告知日ではなく開催日（until）。読み手が知りたいのは「いつやるか」
+    var shown = item.until || item.date;
     var inner = '<div class="upcoming-meta">'
               + window.CLHNews.badgesHtml(item, content)
-              + '<time class="news-date" datetime="' + esc(item.date) + '">'
-              + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+              + '<time class="news-date" datetime="' + esc(shown) + '">'
+              + esc(window.CLHNews.formatDate(shown)) + '</time>'
               + '</div>'
               + '<div class="upcoming-title">' + esc(item.title) + '</div>';
     return item.id
