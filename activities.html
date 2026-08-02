@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>お知らせ | サーキュラー・ラボ・広島</title>
+<title>活動レポート・お知らせ | サーキュラー・ラボ・広島</title>
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
 <script src="content.js"></script>
@@ -145,7 +145,7 @@ footer p { color: inherit; }
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="news.html">News</a>
+    <a href="activities.html">Activities</a>
     <a href="recruit.html">Recruit</a>
     <a href="index.html#join">Join Us</a>
     <a href="index.html#contact">Contact</a>
@@ -199,14 +199,14 @@ footer p { color: inherit; }
                 + esc(window.CLHNews.formatDate(item.date)) + '</time>'
                 + '<span class="news-item-title">' + esc(item.title) + '</span>';
       return item.id
-        ? '<a class="news-item" href="news.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
+        ? '<a class="news-item" href="activities.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
         : '<div class="news-item">' + inner + '</div>';
     }).join('') + '</div>';
   }
 
   // 個別記事表示
   function renderArticle(item) {
-    document.title = item.title + ' | お知らせ | サーキュラー・ラボ・広島';
+    document.title = item.title + ' | 活動レポート・お知らせ | サーキュラー・ラボ・広島';
     setText('page_title', item.title);
     setText('page_lead', '');
     body.innerHTML = '<div class="article-head">'
@@ -214,7 +214,7 @@ footer p { color: inherit; }
         + esc(window.CLHNews.formatDate(item.date)) + '</time>'
       + '</div>'
       + '<div class="article-body">' + window.CLHNews.renderMarkdown(item.body) + '</div>'
-      + '<a class="btn btn-ghost back-link" href="news.html">' + esc(content.news_back || '') + '</a>';
+      + '<a class="btn btn-ghost back-link" href="activities.html">' + esc(content.news_back || '') + '</a>';
   }
 
   fetch('news.md', { cache: 'no-cache' })

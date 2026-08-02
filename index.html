@@ -304,7 +304,7 @@ footer p { color: inherit; }
     <span id="nav_logo"></span>
   </a>
   <div class="nav-links">
-    <a href="#news">News</a>
+    <a href="#activities">Activities</a>
     <a href="#mission">Mission</a>
     <a href="#service">Service</a>
     <a href="#casestudy">Case Study</a>
@@ -319,7 +319,7 @@ footer p { color: inherit; }
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
-  <a href="#news"      class="ml">News</a>
+  <a href="#activities"      class="ml">Activities</a>
   <a href="#mission"   class="ml">Mission</a>
   <a href="#service"   class="ml">Service</a>
   <a href="#casestudy" class="ml">Case Study</a>
@@ -345,12 +345,12 @@ footer p { color: inherit; }
   </div>
 </section>
 
-<section id="news" hidden>
+<section id="activities" hidden>
   <div class="container">
     <span class="tag" id="news_tag"></span>
     <h2 id="news_title"></h2>
     <div class="news-list" id="news_list"></div>
-    <div class="news-more"><a class="btn btn-ghost" href="news.html" id="news_more"></a></div>
+    <div class="news-more"><a class="btn btn-ghost" href="activities.html" id="news_more"></a></div>
   </div>
 </section>
 
@@ -525,7 +525,7 @@ footer p { color: inherit; }
               + esc(window.CLHNews.formatDate(item.date)) + '</time>'
               + '<span class="news-item-title">' + esc(item.title) + '</span>';
     return item.id
-      ? '<a class="news-item" href="news.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
+      ? '<a class="news-item" href="activities.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
       : '<div class="news-item">' + inner + '</div>';
   }
 

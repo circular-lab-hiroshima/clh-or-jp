@@ -8,13 +8,13 @@ var content = {
   hero_heading: "みんなで資源を循環させることで、\n広島からやさしい未来をつくる",
   hero_sub: "「捨てる」から「資源」へ\n企業・大学・地域が手を取り合い、\n広島から世界へ、新しい資源循環の形を発信します。",
 
-  // お知らせ（各記事の中身は news.md を編集してください）
-  news_tag: "News",
-  news_title: "お知らせ",
-  news_more: "お知らせ一覧を見る",
-  news_empty: "現在お知らせはありません。",
-  news_back: "お知らせ一覧へ戻る",
-  news_lead: "サーキュラー・ラボ・広島の活動に関する最新情報をお届けします。",
+  // 活動レポート・お知らせ（各記事の中身は news.md を編集してください）
+  news_tag: "Activities",
+  news_title: "活動レポート・お知らせ",
+  news_more: "すべての記事を見る",
+  news_empty: "現在、公開中の記事はありません。",
+  news_back: "一覧へ戻る",
+  news_lead: "サーキュラー・ラボ・広島の活動レポートと最新のお知らせをお届けします。",
 
   // ミッション
   mission_tag: "Mission",
@@ -99,5 +99,5 @@ var content = {
   footer_text: "© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.",
 
   // バージョン（フッターに極小表示）
-  version: "1.9.0",
+  version: "1.9.1",
 }
