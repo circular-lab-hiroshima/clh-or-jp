@@ -9,9 +9,9 @@
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること。
      Cloudflare Pages は .js に max-age=14400 を付けるうえ _headers で上書きできないため、
      これが無いと HTML だけ新しくなって古い JS と噛み合わず表示が壊れる。 -->
-<script src="content.js?v=1.12.1"></script>
-<script src="news.js?v=1.12.1"></script>
-<script src="preview-badge.js?v=1.12.1"></script>
+<script src="content.js?v=1.13.0"></script>
+<script src="news.js?v=1.13.0"></script>
+<script src="preview-badge.js?v=1.13.0"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -252,6 +252,23 @@ a.upcoming-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgb
 .service-card h3 { font-size: 15px; }
 .service-card p  { font-size: 13px; margin-top: 8px; }
 
+/* Service の補足として置く取り組み例。サービス3つより一段弱い扱いにする */
+.service-cases { margin-top: 64px; padding-top: 48px; border-top: 1px solid var(--border); }
+.service-cases h3 { font-size: var(--fs-lg); margin-bottom: 8px; }
+.service-cases-lead { font-size: var(--fs-sm); margin-bottom: 8px; }
+.case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 28px; }
+.case-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px; overflow: hidden;
+}
+.case-photo {
+  aspect-ratio: 4 / 3; border-radius: var(--radius-md); overflow: hidden;
+  margin-bottom: 20px; background: var(--red-light); border: 1px solid var(--border);
+}
+.case-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.case-card h4 { font-size: 15px; font-weight: 700; color: var(--red-dark); margin-bottom: 10px; line-height: 1.6; }
+.case-card p { font-size: 13px; }
+
 /* Projects — 自分たちが動かしているプロジェクト（1件でも成立する横並びカード） */
 .project-grid { display: grid; gap: 24px; margin-top: 48px; }
 .project-card {
@@ -346,6 +363,7 @@ footer p { color: inherit; }
   .mission-letter { font-size: 60px; }
   .service-grid   { grid-template-columns: 1fr; }
   .project-card   { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
+  .case-grid      { grid-template-columns: 1fr; }
   .member-grid    { grid-template-columns: 1fr; }
   .news-item      { flex-direction: column; gap: 4px; padding: 18px 20px; }
   .join-plans { grid-template-columns: 1fr; }
@@ -369,7 +387,7 @@ footer p { color: inherit; }
     <a href="#service">Service</a>
     <a href="#projects">Projects</a>
     <a href="recruit.html">Recruit</a>
-    <a class="nav-cta nav-cta-primary" href="#join">Join Us</a>
+    <a class="nav-cta nav-cta-primary" href="#join">会員になる</a>
     <a class="nav-cta nav-cta-ghost" href="#contact">お問い合わせ</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="メニュー" aria-expanded="false" aria-controls="mobileMenu">
@@ -383,7 +401,7 @@ footer p { color: inherit; }
   <a href="#service"    class="ml">Service</a>
   <a href="#projects"   class="ml">Projects</a>
   <a href="recruit.html" class="ml">Recruit</a>
-  <a href="#join"       class="ml ml-cta">Join Us</a>
+  <a href="#join"       class="ml ml-cta">会員になる</a>
   <a href="#contact"    class="ml">お問い合わせ</a>
 </div>
 
@@ -449,6 +467,25 @@ footer p { color: inherit; }
       <div class="service-card"><div class="service-num">02</div><h3 id="s2_title"></h3><p id="s2_text"></p></div>
       <div class="service-card"><div class="service-num">03</div><h3 id="s3_title"></h3><p id="s3_text"></p></div>
     </div>
+
+    <!-- サービスの補足。実際にどう進めるかを写真で見せる。
+         Projects（PCCP）とは写真も文章も重ならないようにしている -->
+    <div class="service-cases">
+      <h3 id="cases_title"></h3>
+      <p class="service-cases-lead" id="cases_lead"></p>
+      <div class="case-grid">
+        <div class="case-card">
+          <div class="case-photo"><img src="assets/case-marathon.jpg" alt="イベント会場での使用済み容器の分別作業" loading="lazy"></div>
+          <h4 id="c1_title"></h4>
+          <p id="c1_text"></p>
+        </div>
+        <div class="case-card">
+          <div class="case-photo"><img src="pccp/assets/story-kickoff.jpg" alt="大学と企業による共創プロジェクトの成果報告会" loading="lazy"></div>
+          <h4 id="c2_title"></h4>
+          <p id="c2_text"></p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -458,7 +495,8 @@ footer p { color: inherit; }
     <h2 id="project_title"></h2>
     <div class="project-grid">
       <a class="project-card" href="pccp/">
-        <div class="project-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートに設置した紙コップ回収ボックス"></div>
+        <!-- 何のプロジェクトか一目で伝えるため、回収BOXではなく紙コップそのものを出す -->
+        <div class="project-photo"><img src="pccp/assets/paper-cup.jpeg" alt="「ゴミじゃない箱に入れよう」と書かれた使用済みの紙コップ" loading="lazy"></div>
         <div>
           <!-- id は proj1_ 始まり。会員プラン側が p1_/p2_ を使っているため衝突させない -->
           <span class="project-label" id="proj1_label"></span>
@@ -630,6 +668,10 @@ footer p { color: inherit; }
   s('s1_title', content.service_item1_title); s('s1_text', content.service_item1_text);
   s('s2_title', content.service_item2_title); s('s2_text', content.service_item2_text);
   s('s3_title', content.service_item3_title); s('s3_text', content.service_item3_text);
+  // Service の補足（取り組み例）
+  s('cases_title', content.cases_title); s('cases_lead', content.cases_lead);
+  s('c1_title', content.case1_title); s('c1_text', content.case1_text);
+  s('c2_title', content.case2_title); s('c2_text', content.case2_text);
 
   // Projects — タイトルにオレンジハイライト
   s('project_tag', content.projects_tag);
