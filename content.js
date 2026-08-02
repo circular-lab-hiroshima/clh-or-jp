@@ -22,8 +22,8 @@ var content = {
   // プロジェクト名バッジ（news.md の project: に対応）
   project_labels: { pccp: "PCCP" },
 
-  // ミッション
-  mission_tag: "Mission",
+  // About（使命 ＋ メンバー紹介を1セクションに統合）
+  mission_tag: "About",
   mission_title: "私たちの使命",
   mission_text: "私たちは、使い捨て食品容器などの廃棄物を「ゴミ」ではなく「貴重な資源」と捉え直します。単なるリサイクルにとどまらず、持続可能なビジネスモデルとして成立させる仕組みを構築することが、私たちの使命です。",
 
@@ -47,8 +47,7 @@ var content = {
   proj1_note: "これまでにマラソン大会の給水所で紙コップ48kgを回収してトイレットペーパーへ再生、THE OUTLETS HIROSHIMAのフードコートでは専用回収BOXの実証実験を実施しました。",
   proj1_link: "くわしく見る",
 
-  // メンバー
-  member_tag: "Member",
+  // メンバー（About セクションの後半に表示）
   member_title: "メンバー",
   member1_role: "代表理事",
   member1_name: "河村 伸枝",
@@ -109,5 +108,5 @@ var content = {
   // バージョン（フッターに極小表示）
   // ★ここを変えたら、index.html / activities.html / recruit.html / 404.html の
   //   <script src="...?v=..."> も同じ値に更新すること（キャッシュ対策）
-  version: "1.11.5",
+  version: "1.12.0",
 }
