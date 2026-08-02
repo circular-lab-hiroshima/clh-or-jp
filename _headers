@@ -2,3 +2,16 @@
 # ランダムなプレビューURL（*.pages.dev）には Cloudflare Pages が自動で noindex を付与する。
 https://preview.clh.or.jp/*
   X-Robots-Tag: noindex, nofollow
+
+# サイトの文言・記事・描画ロジックはこの4ファイルに入っていて、デプロイのたびに変わる。
+# Cloudflare Pages は .js に既定で max-age=14400（4時間）を付けるため、
+# HTML だけ先に新しくなって表示が崩れる。毎回サーバーに確認させる。
+# （中身が変わっていなければ 304 が返るだけなので、転送量はほぼ増えない）
+/content.js
+  Cache-Control: no-cache
+/news.js
+  Cache-Control: no-cache
+/preview-badge.js
+  Cache-Control: no-cache
+/news.md
+  Cache-Control: no-cache
