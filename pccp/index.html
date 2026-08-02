@@ -9,8 +9,8 @@
 <link rel="icon" type="image/png" href="/assets/logo-mark.png">
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は /index.html 参照） -->
-<script src="/content.js?v=1.15.1"></script>
-<script src="/preview-badge.js?v=1.15.1"></script>
+<script src="/content.js?v=1.15.2"></script>
+<script src="/preview-badge.js?v=1.15.2"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -124,8 +124,27 @@ nav {
   background-size: 14px 14px;
 }
 .hero > .wrap { position: relative; z-index: 1; }
-.hero .kicker { font-size: 14px; font-weight: 600; color: var(--muted); margin-top: 18px; }
-.hero h1 { margin-top: 12px; }
+
+/* 「CLHのプロジェクトである」ことを示すチップ */
+.hero-badge {
+  display: inline-block; padding: 6px 16px; border-radius: var(--radius-full);
+  background: rgba(22,163,74,0.1); border: 1px solid rgba(22,163,74,0.3);
+  font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent-dk);
+}
+/* プロジェクト名を最も大きく出す。略称 PCCP → 正式名 の順で読ませる */
+.hero-title { margin-top: 22px; }
+.hero-abbr {
+  display: block;
+  font-size: clamp(48px, 10vw, 104px); font-weight: 800;
+  letter-spacing: 0.02em; line-height: 1; color: var(--ink);
+}
+.hero-fullname {
+  display: block; margin-top: 14px;
+  font-size: clamp(15px, 2.2vw, 22px); font-weight: 700;
+  letter-spacing: 0.1em; line-height: 1.5; color: var(--accent);
+}
+.hero-kicker { margin-top: 20px; font-size: clamp(14px, 1.8vw, 17px); font-weight: 700; color: var(--ink); }
+.hero-tagline { margin-top: 6px; font-size: clamp(14px, 1.8vw, 17px); font-weight: 700; color: var(--ink); }
 .hero .lead { max-width: 640px; margin-left: auto; margin-right: auto; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
 
@@ -206,8 +225,8 @@ footer p { color: inherit; }
 }
 @media (max-width: 640px) {
   section { padding: 56px 0; }
-  /* 狭い画面では改行位置を固定せず、自然に折り返させる */
-  .hero h1 br { display: none; }
+  /* 正式名称は狭い画面だと字間が詰まって読みにくいので緩める */
+  .hero-fullname { letter-spacing: 0.04em; }
 }
 @media (max-width: 768px) {
   nav { align-items: flex-start; flex-direction: column; }
@@ -234,17 +253,18 @@ footer p { color: inherit; }
   </div>
 </nav>
 
-<!-- ヒーロー：写真を入れる場合は .hero に background-image を指定してください -->
+<!-- ヒーロー：開いた瞬間に「CLHのプロジェクトである」「名前は PCCP である」が
+     伝わることを最優先にした構成。写真を入れる場合は .hero に background-image を指定 -->
 <section class="hero">
   <div class="wrap">
-    <div class="eyebrow eyebrow-center"><span>Paper Cup Circulation Partnership</span></div>
-    <p class="kicker">広島で進める紙コップ資源循環プロジェクト</p>
-    <h1>紙コップを、捨てるものから<br>循環する資源へ。</h1>
+    <p class="hero-badge">サーキュラー・ラボ・広島のプロジェクト</p>
+    <h1 class="hero-title">
+      <span class="hero-abbr">PCCP</span>
+      <span class="hero-fullname">Paper Cup Circulation Partnership</span>
+    </h1>
+    <p class="hero-kicker">広島で進める紙コップ資源循環プロジェクト</p>
+    <p class="hero-tagline">紙コップを、捨てるものから循環する資源へ。</p>
     <p class="lead">商業施設・大学・地域企業・回収事業者の連携で、紙コップの回収と資源循環の仕組みを広島で実装しています。</p>
-    <div class="hero-actions">
-      <a class="btn btn-solid" href="#about">PCCPについて</a>
-      <a class="btn btn-outline" href="/#contact">お問い合わせ</a>
-    </div>
   </div>
 </section>
 
