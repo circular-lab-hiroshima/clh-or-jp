@@ -4,8 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>採用情報 | サーキュラー・ラボ・広島</title>
+<link rel="icon" type="image/png" href="assets/logo-mark.png">
+<link rel="apple-touch-icon" href="assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="preview-badge.js?v=1.13.0"></script>
+<script src="content.js?v=1.14.0"></script>
+<script src="preview-badge.js?v=1.14.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -306,8 +309,11 @@ footer {
   text-align: center;
   font-size: 13px;
   color: #E8E8E8;
+  letter-spacing: 0.04em;
   line-height: 1.7;
 }
+footer p { color: inherit; }
+.footer-version { display: block; margin-top: 6px; font-size: 10px; color: rgba(232,232,232,0.4); letter-spacing: 0.1em; }
 
 @media (max-width: 768px) {
   nav {
@@ -340,12 +346,13 @@ footer {
 <nav aria-label="メインメニュー">
   <a href="index.html" class="nav-logo">
     <img src="assets/logo-mark.png" alt="" class="nav-logo-mark">
-    <span>一般社団法人 サーキュラー・ラボ・広島</span>
+    <span id="nav_logo">一般社団法人 サーキュラー・ラボ・広島</span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="index.html#about">About</a>
     <a href="activities.html">Activities</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#service">Service</a>
+    <a href="index.html#projects">Projects</a>
     <a href="recruit.html">Recruit</a>
     <a class="nav-cta nav-cta-primary" href="index.html#join">会員になる</a>
     <a class="nav-cta nav-cta-ghost" href="index.html#contact">お問い合わせ</a>
@@ -356,7 +363,7 @@ footer {
   <div class="container">
     <div class="hero-inner">
       <span class="tag">Recruit</span>
-      <h1>一緒にCLHをつくる仲間を募集しています</h1>
+      <h1>構想する人より、動かす人を。</h1>
       <p>サーキュラー・ラボ・広島では、資源循環の仕組みを広島で実装していくために、Web・デザイン・現場連携の3つの領域で一緒に手を動かしてくれる仲間を募集しています。</p>
       <div class="btn-group">
         <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
@@ -517,7 +524,7 @@ footer {
   <div class="container">
     <div class="cta-box">
       <span class="tag">Apply</span>
-      <h2>応募・お問い合わせはこちら</h2>
+      <h2>まずは、話を聞くところから。</h2>
       <p>応募は下記の応募フォームから受け付けています。ご質問やカジュアル面談のご希望は、CLHのお問い合わせ窓口からもお気軽にご連絡ください。</p>
       <div class="btn-group">
         <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
@@ -528,8 +535,21 @@ footer {
 </section>
 
 <footer>
-  <p>© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.</p>
+  <p id="footer_text"></p>
+  <small class="footer-version" id="footer_version"></small>
 </footer>
 
+<script>
+(function () {
+  if (typeof content === 'undefined') return;
+  function setText(id, val) {
+    var el = document.getElementById(id);
+    if (el && val != null && val !== '') el.textContent = val;
+  }
+  setText('nav_logo', content.nav_logo);
+  setText('footer_text', content.footer_text);
+  setText('footer_version', content.version ? 'v' + content.version : '');
+})();
+</script>
 </body>
 </html>
