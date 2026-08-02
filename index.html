@@ -6,9 +6,12 @@
 <title>サーキュラー・ラボ・広島</title>
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
-<script src="content.js"></script>
-<script src="news.js"></script>
-<script src="preview-badge.js"></script>
+<!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること。
+     Cloudflare Pages は .js に max-age=14400 を付けるうえ _headers で上書きできないため、
+     これが無いと HTML だけ新しくなって古い JS と噛み合わず表示が壊れる。 -->
+<script src="content.js?v=1.11.2"></script>
+<script src="news.js?v=1.11.2"></script>
+<script src="preview-badge.js?v=1.11.2"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 

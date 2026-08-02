@@ -3,15 +3,8 @@
 https://preview.clh.or.jp/*
   X-Robots-Tag: noindex, nofollow
 
-# サイトの文言・記事・描画ロジックはこの4ファイルに入っていて、デプロイのたびに変わる。
-# Cloudflare Pages は .js に既定で max-age=14400（4時間）を付けるため、
-# HTML だけ先に新しくなって表示が崩れる。毎回サーバーに確認させる。
-# （中身が変わっていなければ 304 が返るだけなので、転送量はほぼ増えない）
-/content.js
-  Cache-Control: no-cache
-/news.js
-  Cache-Control: no-cache
-/preview-badge.js
-  Cache-Control: no-cache
-/news.md
-  Cache-Control: no-cache
+# 【メモ】Cloudflare Pages は _headers での Cache-Control 上書きを受け付けない。
+# .js には既定で max-age=14400（4時間）が付くため、HTML だけ先に新しくなって
+# 古い JS と噛み合わない状態が起きる。対策は各HTMLの <script src="...?v=バージョン">
+# 側で行っている（content.js の version と揃える）。ここに書いても効かない。
+# news.md は Pages が max-age=0 を付けるので対処不要。
