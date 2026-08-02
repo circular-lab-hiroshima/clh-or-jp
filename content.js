@@ -37,15 +37,15 @@ var content = {
   service_item3_title: "循環型ビジネスモデルの創出",
   service_item3_text: "環境負荷の低減と経済性を両立させる、継続性のあるビジネスモデルを一緒に創出します。",
 
-  // プロジェクト（自分たちが動かしている活動。増えたら p2_ 以降を足してください）
+  // プロジェクト（自分たちが動かしている活動。増えたら proj2_ 以降を足してください）
   projects_tag: "Projects",
-  projects_title: "私たちが動かしているプロジェクト",
-  p1_label: "PCCP — Paper Cup Circulation Partnership",
-  p1_title: "紙コップ資源循環プロジェクト",
-  p1_text: "商業施設・大学・地域企業・回収事業者が連携し、焼却されがちだった紙コップを「捨てるもの」から「循環する資源」へ変える仕組みを、広島で実装しています。",
-  p1_result1: "マラソン大会の給水所で紙コップ48kgを回収し、トイレットペーパーへ再生",
-  p1_result2: "THE OUTLETS HIROSHIMAのフードコートで専用回収BOXの実証実験を実施",
-  p1_link: "PCCPのページを見る",
+  projects_title: "構想で終わらせない。",
+  proj1_label: "PCCP — Paper Cup Circulation Partnership",
+  proj1_title: "紙コップ資源循環プロジェクト",
+  proj1_text: "商業施設・大学・地域企業・回収事業者が連携し、焼却されがちだった紙コップを「捨てるもの」から「循環する資源」へ変える仕組みを、広島で実装しています。",
+  // 実績。矢印付きの箇条書きにすると個別記事へのリンクに見えるため、地の文で置く
+  proj1_note: "これまでにマラソン大会の給水所で紙コップ48kgを回収してトイレットペーパーへ再生、THE OUTLETS HIROSHIMAのフードコートでは専用回収BOXの実証実験を実施しました。",
+  proj1_link: "くわしく見る",
 
   // メンバー
   member_tag: "Member",
@@ -109,5 +109,5 @@ var content = {
   // バージョン（フッターに極小表示）
   // ★ここを変えたら、index.html / activities.html / recruit.html / 404.html の
   //   <script src="...?v=..."> も同じ値に更新すること（キャッシュ対策）
-  version: "1.11.2",
+  version: "1.11.4",
 }

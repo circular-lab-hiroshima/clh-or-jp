@@ -9,9 +9,9 @@
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること。
      Cloudflare Pages は .js に max-age=14400 を付けるうえ _headers で上書きできないため、
      これが無いと HTML だけ新しくなって古い JS と噛み合わず表示が壊れる。 -->
-<script src="content.js?v=1.11.2"></script>
-<script src="news.js?v=1.11.2"></script>
-<script src="preview-badge.js?v=1.11.2"></script>
+<script src="content.js?v=1.11.4"></script>
+<script src="news.js?v=1.11.4"></script>
+<script src="preview-badge.js?v=1.11.4"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -250,9 +250,11 @@ a.project-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba
 .project-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--orange-dk); }
 .project-card h3 { font-size: 20px; margin: 8px 0 12px; }
 .project-card p { font-size: 14px; }
-.project-results { list-style: none; margin-top: 18px; display: grid; gap: 8px; }
-.project-results li { font-size: 13px; color: var(--red-mid); display: flex; gap: 10px; line-height: 1.7; }
-.project-results li::before { content: '→'; color: var(--orange); flex-shrink: 0; }
+/* 実績は地の文として置く。矢印付きの箇条書きにすると個別記事へのリンクに見えてしまう */
+.project-note {
+  margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
+  font-size: 13px; line-height: 1.8; color: var(--red-mid);
+}
 .project-link { display: inline-block; margin-top: 20px; font-size: 13px; font-weight: 700; color: var(--orange-dk); }
 
 
@@ -422,14 +424,12 @@ footer p { color: inherit; }
       <a class="project-card" href="pccp/">
         <div class="project-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートに設置した紙コップ回収ボックス"></div>
         <div>
-          <span class="project-label" id="p1_label"></span>
-          <h3 id="p1_title"></h3>
-          <p id="p1_text"></p>
-          <ul class="project-results">
-            <li id="p1_result1"></li>
-            <li id="p1_result2"></li>
-          </ul>
-          <span class="project-link" id="p1_link"></span>
+          <!-- id は proj1_ 始まり。会員プラン側が p1_/p2_ を使っているため衝突させない -->
+          <span class="project-label" id="proj1_label"></span>
+          <h3 id="proj1_title"></h3>
+          <p id="proj1_text"></p>
+          <p class="project-note" id="proj1_note"></p>
+          <span class="project-link" id="proj1_link"></span>
         </div>
       </a>
     </div>
@@ -549,11 +549,14 @@ footer p { color: inherit; }
       return res.text();
     })
     .then(function (text) {
+      // トップに出すのは合計3件まで。開催予定は上の枠に出し、その分だけ下の一覧を減らす
+      // （同じ記事を枠と一覧の両方に出さない）
+      var MAX = 3;
       var all = window.CLHNews.parseNews(text);
-      var upcoming = all.filter(function (n) { return window.CLHNews.isUpcoming(n.until); });
-      var rest = all.filter(function (n) { return !window.CLHNews.isUpcoming(n.until); }).slice(0, 3);
+      var upcoming = all.filter(function (n) { return window.CLHNews.isUpcoming(n.until); }).slice(0, MAX);
+      var rest = all.filter(function (n) { return !window.CLHNews.isUpcoming(n.until); })
+                    .slice(0, Math.max(0, MAX - upcoming.length));
 
-      // 開催予定は上の枠に出すので、下の一覧では重複させない
       var box = document.getElementById('upcoming');
       box.innerHTML = upcoming.map(upcomingHtml).join('');
       box.hidden = upcoming.length === 0;
@@ -615,9 +618,9 @@ footer p { color: inherit; }
   if (projectTitle && content.projects_title) {
     projectTitle.innerHTML = '<span class="highlight">' + content.projects_title + '</span>';
   }
-  s('p1_label', content.p1_label); s('p1_title', content.p1_title); s('p1_text', content.p1_text);
-  s('p1_result1', content.p1_result1); s('p1_result2', content.p1_result2);
-  setText('p1_link', (content.p1_link || '') + ' →');
+  s('proj1_label', content.proj1_label); s('proj1_title', content.proj1_title);
+  s('proj1_text', content.proj1_text); s('proj1_note', content.proj1_note);
+  setText('proj1_link', (content.proj1_link || '') + ' →');
 
   // Member
   s('member_tag', content.member_tag);
