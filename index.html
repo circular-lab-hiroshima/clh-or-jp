@@ -9,9 +9,9 @@
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること。
      Cloudflare Pages は .js に max-age=14400 を付けるうえ _headers で上書きできないため、
      これが無いと HTML だけ新しくなって古い JS と噛み合わず表示が壊れる。 -->
-<script src="content.js?v=1.14.0"></script>
-<script src="news.js?v=1.14.0"></script>
-<script src="preview-badge.js?v=1.14.0"></script>
+<script src="content.js?v=1.14.1"></script>
+<script src="news.js?v=1.14.1"></script>
+<script src="preview-badge.js?v=1.14.1"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -623,6 +623,14 @@ footer p { color: inherit; }
         ? rest.map(newsItemHtml).join('')
         : '<p class="news-empty">' + window.CLHNews.escapeHtml(content.news_empty || '') + '</p>';
       document.getElementById('activities').hidden = false;
+
+      // 他ページから #join などに直接来た場合、ブラウザは Activities が hidden の
+      // 状態で着地位置を決めている。ここで高さが増えて目的のセクションが下へ
+      // ずれるため、表示後にもう一度合わせ直す。
+      if (location.hash.length > 1) {
+        var target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target) target.scrollIntoView({ behavior: 'instant', block: 'start' });
+      }
     })
     .catch(function () { /* ローカルのfile://など、読めない場合はセクションを出さない */ });
 

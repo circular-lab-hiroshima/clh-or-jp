@@ -242,7 +242,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 0 40px; }
     <nav class="nav" aria-label="メインナビゲーション">
       <a href="#about">About</a>
       <a href="#story">Story</a>
-      <a href="/activities">Activities</a>
+      <a href="/activities.html">Activities</a>
       <a href="/recruit.html">Recruit</a>
       <a href="/#contact">Contact</a>
     </nav>
@@ -415,7 +415,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 0 40px; }
         <div class="eyebrow"><span>Activities</span></div>
         <h2>最新の活動</h2>
       </div>
-      <a class="textlink" href="/activities">すべて見る →</a>
+      <a class="textlink" href="/activities.html">すべて見る →</a>
     </div>
     <div class="activity-list" id="activity_list"></div>
   </div>
@@ -441,7 +441,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 0 40px; }
       </div>
       <nav class="footer-nav" aria-label="フッターナビゲーション">
         <a href="/pccp/">PCCP トップ</a>
-        <a href="/activities">Activities</a>
+        <a href="/activities.html">Activities</a>
         <a href="/recruit.html">Recruit</a>
         <a href="/#contact">Contact</a>
         <a href="/">Circular Lab Hiroshima</a>
@@ -518,7 +518,7 @@ footer { border-top: 1px solid var(--line); padding: 48px 0 40px; }
                   + (isUpcoming(item.until) ? '<span class="activity-badge">開催予定</span>' : '')
                   + '<span class="activity-title">' + esc(item.title) + '</span>';
         return item.id
-          ? '<a class="activity-item" href="/activities?id='
+          ? '<a class="activity-item" href="/activities.html?id='
             + encodeURIComponent(item.id) + '">' + inner + '</a>'
           : '<div class="activity-item">' + inner + '</div>';
       }).join('');
