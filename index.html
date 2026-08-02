@@ -9,9 +9,9 @@
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること。
      Cloudflare Pages は .js に max-age=14400 を付けるうえ _headers で上書きできないため、
      これが無いと HTML だけ新しくなって古い JS と噛み合わず表示が壊れる。 -->
-<script src="content.js?v=1.12.0"></script>
-<script src="news.js?v=1.12.0"></script>
-<script src="preview-badge.js?v=1.12.0"></script>
+<script src="content.js?v=1.12.1"></script>
+<script src="news.js?v=1.12.1"></script>
+<script src="preview-badge.js?v=1.12.1"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -109,20 +109,25 @@ nav {
   text-decoration: none;
 }
 .nav-logo-mark { height: 34px; width: auto; display: block; }
-.nav-links { display: flex; gap: 32px; }
+/* align-items を指定しないと、テキストリンクがCTAボタンの高さまで引き伸ばされ、
+   文字がその上端に張り付いて縦位置がずれる */
+.nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a {
   font-size: 12px; font-weight: 500;
   color: var(--red-mid); text-decoration: none;
   letter-spacing: 0.06em; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--red); }
-/* Contact はメニューの1つではなく行動を促すボタンとして置く */
+/* Join Us と お問い合わせ は一覧に混ぜずボタンとして置く */
 .nav-cta {
-  padding: 8px 20px; border-radius: var(--radius-full);
-  background: var(--red); color: var(--white) !important;
-  font-weight: 700; transition: background 0.2s, transform 0.2s;
+  padding: 8px 18px; border-radius: var(--radius-full);
+  font-weight: 700; white-space: nowrap;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
-.nav-cta:hover { background: #8C1818; transform: translateY(-1px); }
+.nav-cta-primary { background: var(--red); color: var(--white) !important; }
+.nav-cta-primary:hover { background: #8C1818; transform: translateY(-1px); }
+.nav-cta-ghost { border: 1.5px solid var(--orange); color: var(--orange-dk) !important; }
+.nav-cta-ghost:hover { background: var(--orange); color: var(--white) !important; }
 
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
@@ -355,15 +360,17 @@ footer p { color: inherit; }
     <img src="assets/logo-mark.png" alt="" class="nav-logo-mark">
     <span id="nav_logo"></span>
   </a>
-  <!-- 並び順はページ内のセクション順に合わせる。Contact は一覧に混ぜずCTAボタンに。
-       Join Us はナビから外し、本文セクションとフッターから導線を取る。 -->
+  <!-- 並び順はページ内のセクション順に合わせる。
+       法人会員の獲得が最優先課題のため Join Us を塗りボタンで最も強く見せ、
+       お問い合わせは線ボタンで受け皿として置く。 -->
   <div class="nav-links">
     <a href="#activities">Activities</a>
     <a href="#about">About</a>
     <a href="#service">Service</a>
     <a href="#projects">Projects</a>
     <a href="recruit.html">Recruit</a>
-    <a class="nav-cta" href="#contact">お問い合わせ</a>
+    <a class="nav-cta nav-cta-primary" href="#join">Join Us</a>
+    <a class="nav-cta nav-cta-ghost" href="#contact">お問い合わせ</a>
   </div>
   <button class="hamburger" id="hamburger" aria-label="メニュー" aria-expanded="false" aria-controls="mobileMenu">
     <span></span><span></span><span></span>
@@ -376,7 +383,8 @@ footer p { color: inherit; }
   <a href="#service"    class="ml">Service</a>
   <a href="#projects"   class="ml">Projects</a>
   <a href="recruit.html" class="ml">Recruit</a>
-  <a href="#contact"    class="ml ml-cta">お問い合わせ</a>
+  <a href="#join"       class="ml ml-cta">Join Us</a>
+  <a href="#contact"    class="ml">お問い合わせ</a>
 </div>
 
 <section class="hero" id="top">
@@ -387,7 +395,7 @@ footer p { color: inherit; }
     <p class="hero-body" id="hero_body"></p>
     <div class="btn-group">
       <a class="btn btn-red" href="recruit.html">採用情報を見る</a>
-      <a class="btn btn-ghost" href="#contact">問い合わせる</a>
+      <a class="btn btn-ghost" href="#contact">お問い合わせ</a>
     </div>
   </div>
   <div class="hero-visual" aria-hidden="true">

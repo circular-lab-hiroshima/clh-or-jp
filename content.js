@@ -95,7 +95,8 @@ var content = {
   contact_tag: "Contact",
   contact_title: "お問い合わせ",
   contact_text: "事業連携・取材・ご質問など、お気軽にご連絡ください。",
-  contact_button: "メールで問い合わせる",
+  // 問い合わせ導線のラベルはサイト全体で「お問い合わせ」に統一している
+  contact_button: "お問い合わせ",
   contact_email: "info@clh.or.jp",
   org_eyebrow: "叡啓大学発ベンチャー",
   org_name: "一般社団法人サーキュラー・ラボ・広島",
@@ -108,5 +109,5 @@ var content = {
   // バージョン（フッターに極小表示）
   // ★ここを変えたら、index.html / activities.html / recruit.html / 404.html の
   //   <script src="...?v=..."> も同じ値に更新すること（キャッシュ対策）
-  version: "1.12.0",
+  version: "1.12.1",
 }

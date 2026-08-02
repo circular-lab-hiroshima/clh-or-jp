@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>採用情報 | サーキュラー・ラボ・広島</title>
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="preview-badge.js?v=1.12.0"></script>
+<script src="preview-badge.js?v=1.12.1"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -85,17 +85,20 @@ nav {
   backdrop-filter: blur(10px);
 }
 .nav-logo {
+  display: flex; align-items: center; gap: 10px;
   font-size: 13px;
   font-weight: 700;
   color: var(--red-dark);
   text-decoration: none;
   letter-spacing: 0.04em;
 }
+.nav-logo-mark { height: 30px; width: auto; display: block; }
 .nav-links {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   justify-content: flex-end;
-  gap: 18px;
+  gap: 10px 18px;
 }
 .nav-links a {
   font-size: 12px;
@@ -104,6 +107,15 @@ nav {
   letter-spacing: 0.06em;
 }
 .nav-links a:hover { color: var(--red); }
+.nav-cta {
+  padding: 8px 18px; border-radius: var(--radius-full);
+  font-weight: 700; white-space: nowrap;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.nav-cta-primary { background: var(--red); color: var(--white) !important; }
+.nav-cta-primary:hover { background: #8C1818; transform: translateY(-1px); }
+.nav-cta-ghost { border: 1.5px solid var(--orange); color: var(--orange-dk) !important; }
+.nav-cta-ghost:hover { background: var(--orange); color: var(--white) !important; }
 
 .hero {
   padding: clamp(72px, 9vw, 120px) 0 56px;
@@ -324,15 +336,19 @@ footer {
 </head>
 <body>
 
-<nav aria-label="採用ページナビゲーション">
-  <a href="index.html" class="nav-logo">一般社団法人 サーキュラー・ラボ・広島</a>
+<!-- ヘッダーはサイト共通。採用ページ独自のページ内メニューは持たせない -->
+<nav aria-label="メインメニュー">
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo-mark.png" alt="" class="nav-logo-mark">
+    <span>一般社団法人 サーキュラー・ラボ・広島</span>
+  </a>
   <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#about">About</a>
     <a href="activities.html">Activities</a>
-    <a href="#about">About</a>
-    <a href="#positions">Positions</a>
-    <a href="#overview">Overview</a>
-    <a href="#apply">Apply</a>
-    <a href="index.html#contact">Contact</a>
+    <a href="recruit.html">Recruit</a>
+    <a class="nav-cta nav-cta-primary" href="index.html#join">Join Us</a>
+    <a class="nav-cta nav-cta-ghost" href="index.html#contact">お問い合わせ</a>
   </div>
 </nav>
 
@@ -344,7 +360,7 @@ footer {
       <p>サーキュラー・ラボ・広島では、資源循環の仕組みを広島で実装していくために、Web・デザイン・現場連携の3つの領域で一緒に手を動かしてくれる仲間を募集しています。</p>
       <div class="btn-group">
         <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
-        <a class="btn btn-ghost" href="index.html#contact">問い合わせる</a>
+        <a class="btn btn-ghost" href="index.html#contact">お問い合わせ</a>
       </div>
     </div>
   </div>
@@ -505,7 +521,7 @@ footer {
       <p>応募は下記の応募フォームから受け付けています。ご質問やカジュアル面談のご希望は、CLHのお問い合わせ窓口からもお気軽にご連絡ください。</p>
       <div class="btn-group">
         <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
-        <a class="btn btn-ghost" href="index.html#contact">CLHへ問い合わせる</a>
+        <a class="btn btn-ghost" href="index.html#contact">お問い合わせ</a>
       </div>
     </div>
   </div>

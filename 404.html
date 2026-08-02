@@ -9,8 +9,8 @@
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- 404 は任意の深さのURLで表示されるため、参照はすべてルート絶対パスにする -->
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="/content.js?v=1.12.0"></script>
-<script src="/preview-badge.js?v=1.12.0"></script>
+<script src="/content.js?v=1.12.1"></script>
+<script src="/preview-badge.js?v=1.12.1"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -61,15 +61,18 @@ nav {
   color: var(--red-dark); text-decoration: none; letter-spacing: 0.04em;
 }
 .nav-logo-mark { height: 30px; width: auto; display: block; }
-.nav-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 18px; }
+.nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 18px; }
 .nav-links a { font-size: 12px; color: var(--red-mid); text-decoration: none; letter-spacing: 0.06em; }
 .nav-links a:hover { color: var(--red); }
 .nav-cta {
-  padding: 8px 20px; border-radius: var(--radius-full);
-  background: var(--red); color: var(--white) !important;
-  font-weight: 700; transition: background 0.2s, transform 0.2s;
+  padding: 8px 18px; border-radius: var(--radius-full);
+  font-weight: 700; white-space: nowrap;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
 }
-.nav-cta:hover { background: #8C1818; transform: translateY(-1px); }
+.nav-cta-primary { background: var(--red); color: var(--white) !important; }
+.nav-cta-primary:hover { background: #8C1818; transform: translateY(-1px); }
+.nav-cta-ghost { border: 1.5px solid var(--orange); color: var(--orange-dk) !important; }
+.nav-cta-ghost:hover { background: var(--orange); color: var(--white) !important; }
 
 main {
   flex: 1 0 auto;
@@ -118,7 +121,8 @@ footer p { color: inherit; }
     <a href="/#about">About</a>
     <a href="/activities.html">Activities</a>
     <a href="/recruit.html">Recruit</a>
-    <a class="nav-cta" href="/#contact">お問い合わせ</a>
+    <a class="nav-cta nav-cta-primary" href="/#join">Join Us</a>
+    <a class="nav-cta nav-cta-ghost" href="/#contact">お問い合わせ</a>
   </div>
 </nav>
 
