@@ -45,7 +45,7 @@ var content = {
   p1_text: "商業施設・大学・地域企業・回収事業者が連携し、焼却されがちだった紙コップを「捨てるもの」から「循環する資源」へ変える仕組みを、広島で実装しています。",
   p1_result1: "マラソン大会の給水所で紙コップ48kgを回収し、トイレットペーパーへ再生",
   p1_result2: "THE OUTLETS HIROSHIMAのフードコートで専用回収BOXの実証実験を実施",
-  p1_link: "PCCPのサイトを見る",
+  p1_link: "PCCPのページを見る",
 
   // メンバー
   member_tag: "Member",
@@ -107,5 +107,5 @@ var content = {
   footer_text: "© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.",
 
   // バージョン（フッターに極小表示）
-  version: "1.10.1",
+  version: "1.11.0",
 }

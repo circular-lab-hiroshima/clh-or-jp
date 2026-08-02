@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>PCCP — Paper Cup Circulation Partnership | 広島で進める紙コップ資源循環プロジェクト</title>
+<meta name="description" content="紙コップを、捨てるものから循環する資源へ。商業施設・大学・地域企業・回収事業者の連携で、紙コップの回収と資源循環の仕組みを広島で実装しています。一般社団法人サーキュラー・ラボ・広島が運営するプロジェクトです。">
+<link rel="canonical" href="https://clh.or.jp/pccp/">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --ink:        #0b0b0b;
+  --muted:      #5b5b5b;
+  --accent:     #16a34a;
+  --accent-dk:  #15803d;
+  --cream-50:   #fbf8f1;
+  --cream-100:  #f7f3eb;
+  --cream-200:  #ebe3d4;
+  --sand-50:    #faf9f7;
+  --sand-100:   #f4f2ee;
+  --sand-200:   #e8e4dc;
+  --white:      #ffffff;
+  --line:       rgba(0,0,0,0.10);
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-xl:  24px;
+  --radius-full: 999px;
+}
+
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--accent); color: var(--ink); }
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+.wrap-wide { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+section { padding: 72px 0; }
+.bg-soft { background: var(--sand-50); }
+.grain {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.08) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+
+/* --- 見出しまわり --- */
+.eyebrow { display: flex; align-items: center; gap: 12px; }
+.eyebrow::before { content: ''; height: 1px; width: 48px; background: var(--accent); flex: 0 0 auto; }
+.eyebrow span {
+  font-size: 12px; font-weight: 700; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--accent);
+}
+.eyebrow-center { justify-content: center; }
+.eyebrow-center::after { content: ''; height: 1px; width: 48px; background: var(--accent); flex: 0 0 auto; }
+
+h1 {
+  font-size: clamp(24px, 4.4vw, 40px); font-weight: 700; line-height: 1.35;
+  word-break: keep-all; line-break: strict; overflow-wrap: break-word;
+}
+h2 { font-size: clamp(21px, 2.8vw, 30px); font-weight: 700; line-height: 1.4; margin-top: 16px; }
+h3 { font-size: 18px; font-weight: 700; line-height: 1.5; }
+p  { color: #333; }
+.lead { color: var(--muted); margin-top: 18px; }
+.section-body > * + * { margin-top: 20px; }
+
+/* --- ヘッダー --- */
+header {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(255,255,255,0.94);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  min-height: 68px; padding: 12px 24px; max-width: 1200px; margin: 0 auto;
+}
+.brand { font-size: 17px; font-weight: 800; letter-spacing: 0.01em; }
+.brand .full { display: none; }
+@media (min-width: 900px) { .brand .short { display: none; } .brand .full { display: inline; } }
+.nav { display: flex; flex-wrap: wrap; gap: 8px 22px; justify-content: flex-end; }
+.nav a { font-size: 14px; font-weight: 500; color: var(--ink); transition: color 0.2s; }
+.nav a:hover { color: var(--accent); }
+.nav a[target="_blank"]::after { content: '↗'; font-size: 10px; margin-left: 3px; color: var(--muted); }
+
+/* --- ヒーロー --- */
+/* 写真が用意できたら .hero に background-image を足すか、この中に <img> を置いてください */
+.hero {
+  position: relative; overflow: hidden;
+  padding: clamp(64px, 10vw, 120px) 0;
+  background: linear-gradient(160deg, var(--cream-100) 0%, var(--sand-50) 45%, var(--white) 100%);
+  text-align: center;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, rgba(0,0,0,0.06) 1px, transparent 0);
+  background-size: 14px 14px;
+}
+.hero > .wrap { position: relative; z-index: 1; }
+.hero .kicker { font-size: 14px; font-weight: 600; color: var(--muted); margin-top: 18px; }
+.hero h1 { margin-top: 12px; }
+.hero .lead { max-width: 640px; margin-left: auto; margin-right: auto; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+
+/* --- ボタン --- */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 30px; border-radius: var(--radius-full);
+  font-size: 14px; font-weight: 700; transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-solid { background: var(--accent); color: var(--white); }
+.btn-solid:hover { background: var(--accent-dk); transform: translateY(-1px); }
+.btn-outline { border: 1px solid var(--accent); color: var(--accent); }
+.btn-outline:hover { background: rgba(22,163,74,0.08); }
+.btn-white { background: var(--white); color: var(--accent); }
+.btn-white:hover { background: rgba(255,255,255,0.9); transform: translateY(-1px); }
+.textlink { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; color: var(--accent); }
+.textlink:hover { opacity: 0.7; }
+
+/* --- 運営元の明示 --- */
+.operator {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 12px;
+  padding: 18px 24px; background: var(--cream-50); border-bottom: 1px solid var(--cream-200);
+  font-size: 13px; color: var(--muted); text-align: center;
+}
+.operator a { font-weight: 700; color: var(--accent); }
+.operator a:hover { text-decoration: underline; }
+
+/* --- 概要カード --- */
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.card {
+  border: 1px solid var(--sand-200); border-radius: var(--radius-lg);
+  background: var(--white); overflow: hidden;
+}
+.card-media { aspect-ratio: 16 / 10; background: var(--cream-100); overflow: hidden; }
+.card-media img { width: 100%; height: 100%; object-fit: cover; }
+.card-media-blank { background: linear-gradient(135deg, var(--cream-100), var(--sand-100)); }
+.card-body { padding: 24px; }
+.card-label { font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+.card h3 { margin-top: 10px; }
+.card p { margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+/* --- 課題リスト --- */
+.issues { border-left: 4px solid var(--accent); padding-left: 28px; list-style: none; display: grid; gap: 12px; }
+.issues li { display: flex; gap: 12px; }
+.issues li::before { content: '•'; color: var(--accent); font-weight: 700; }
+
+/* --- 進め方 01-04 --- */
+.steps { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 8px; }
+.step { border: 1px solid var(--sand-200); border-radius: var(--radius-md); padding: 24px; background: var(--white); }
+.step-num { font-size: 26px; font-weight: 800; color: rgba(22,163,74,0.3); line-height: 1; }
+.step h3 { margin-top: 8px; }
+.step p { margin-top: 8px; font-size: 14px; color: var(--muted); }
+
+/* --- ストーリーの写真 --- */
+.story-figure { margin-top: 28px; }
+.story-figure img { width: 100%; border-radius: var(--radius-lg); border: 1px solid var(--sand-200); }
+.story-figure figcaption { margin-top: 10px; font-size: 12px; color: var(--muted); }
+
+/* --- 参加組織 --- */
+.credits { display: grid; gap: 4px; margin-top: 8px; }
+.credit-group { border-top: 1px solid var(--line); padding-top: 18px; margin-top: 14px; }
+.credit-role { font-size: 11px; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); }
+.credit-group ul { list-style: none; margin-top: 10px; display: grid; gap: 6px; }
+.credit-group li { font-size: 16px; }
+
+/* --- 最新の活動（CLHから取得） --- */
+.activity-head { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; justify-content: space-between; }
+.activity-list { display: grid; gap: 12px; margin-top: 32px; }
+.activity-item {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 8px 20px;
+  padding: 20px 24px; background: var(--white);
+  border: 1px solid var(--sand-200); border-radius: var(--radius-md);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+a.activity-item:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.06); border-color: var(--accent); }
+.activity-date { flex: 0 0 auto; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--accent); }
+.activity-title { font-size: 15px; font-weight: 700; line-height: 1.7; }
+.activity-badge {
+  flex: 0 0 auto; padding: 3px 10px; border-radius: var(--radius-full);
+  background: var(--accent); color: var(--white);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em; white-space: nowrap;
+}
+
+/* --- CTA --- */
+.cta { background: var(--accent); color: var(--white); text-align: center; }
+.cta h2 { color: var(--white); margin-top: 0; }
+.cta p { color: rgba(255,255,255,0.9); margin-top: 18px; }
+.cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-top: 32px; }
+.cta .btn-outline { border-color: rgba(255,255,255,0.7); color: var(--white); }
+.cta .btn-outline:hover { background: rgba(255,255,255,0.15); }
+
+/* --- フッター --- */
+footer { border-top: 1px solid var(--line); padding: 48px 0 40px; }
+.footer-top { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+.footer-brand-label { font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--accent); }
+.footer-brand-name { font-weight: 700; margin-top: 2px; }
+.footer-nav { display: flex; flex-wrap: wrap; gap: 12px 28px; }
+.footer-nav a { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.footer-nav a:hover { color: var(--accent); }
+.footer-bottom {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+  margin-top: 40px; font-size: 11px; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--muted);
+}
+.pill {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: var(--radius-full);
+  background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.12);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.2em; color: var(--ink);
+}
+
+[hidden] { display: none !important; }
+
+@media (max-width: 860px) {
+  .cards { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  section { padding: 56px 0; }
+  /* 狭い画面では改行位置を固定せず、自然に折り返させる */
+  .hero h1 br { display: none; }
+  .header-inner { flex-direction: column; align-items: flex-start; }
+  .nav { justify-content: flex-start; }
+  .activity-item { flex-direction: column; gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/pccp/" class="brand">
+      <span class="short">PCCP</span>
+      <span class="full">Paper Cup Circulation Partnership</span>
+    </a>
+    <nav class="nav" aria-label="メインナビゲーション">
+      <a href="#about">About</a>
+      <a href="#story">Story</a>
+      <a href="/activities">Activities</a>
+      <a href="/recruit.html">Recruit</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ヒーロー：写真を入れる場合は .hero に background-image を指定してください -->
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow eyebrow-center"><span>Paper Cup Circulation Partnership</span></div>
+    <p class="kicker">広島で進める紙コップ資源循環プロジェクト</p>
+    <h1>紙コップを、捨てるものから<br>循環する資源へ。</h1>
+    <p class="lead">商業施設・大学・地域企業・回収事業者の連携で、紙コップの回収と資源循環の仕組みを広島で実装しています。</p>
+    <div class="hero-actions">
+      <a class="btn btn-solid" href="#about">PCCPについて</a>
+      <a class="btn btn-outline" href="/#contact">お問い合わせ</a>
+    </div>
+  </div>
+</section>
+
+<div class="operator">
+  <span>PCCPは</span>
+  <a href="/">一般社団法人サーキュラー・ラボ・広島</a>
+  <span>が運営するプロジェクトです。</span>
+</div>
+
+<section id="about">
+  <div class="wrap">
+    <div class="eyebrow eyebrow-center"><span>Overview</span></div>
+    <h2 style="text-align:center">ひと目でわかるPCCP</h2>
+    <div class="cards">
+      <div class="card">
+        <div class="card-media"><img src="assets/paper-cup.jpeg" alt="使用済みの紙コップ" loading="lazy"></div>
+        <div class="card-body">
+          <p class="card-label">対象</p>
+          <h3>使用済み紙コップ</h3>
+          <p>日常的に使われ、焼却されがちな紙コップを対象にしています。</p>
+        </div>
+      </div>
+      <div class="card">
+        <!-- 写真が用意できたら card-media-blank を外して <img> を入れてください -->
+        <div class="card-media card-media-blank"></div>
+        <div class="card-body">
+          <p class="card-label">目的</p>
+          <h3>資源循環につなげる</h3>
+          <p>焼却ではなく、回収と再資源化につながる仕組みづくりを目指します。</p>
+        </div>
+      </div>
+      <div class="card">
+        <!-- 写真が用意できたら card-media-blank を外して <img> を入れてください -->
+        <div class="card-media card-media-blank"></div>
+        <div class="card-body">
+          <p class="card-label">方法</p>
+          <h3>地域で連携して進める</h3>
+          <p>商業施設・大学・地域企業・回収事業者が役割を分担して進めます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-soft">
+  <div class="wrap">
+    <div class="eyebrow"><span>Why PCCP</span></div>
+    <h2>なぜPCCPが必要なのか</h2>
+    <div class="section-body" style="margin-top:28px">
+      <p>日本では多くの紙コップが使われていますが、その多くはリサイクルされることなく焼却されています。紙コップは本来、循環可能な紙資源である一方で、現場では次のような課題があります。</p>
+      <ul class="issues">
+        <li>分別が難しい</li>
+        <li>回収コストが高い</li>
+        <li>提供者側に作業負担が集中する</li>
+      </ul>
+      <p>これまでの環境施策は、意識啓発や善意に依存しやすく、現場で無理なく続く運用まで設計されていないことが少なくありませんでした。</p>
+      <p>PCCPは、企業や施設だけに負担を寄せるのではなく、複数の関係者が連携して紙コップの回収と資源循環を続けられる仕組みをつくるための取り組みです。</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="eyebrow"><span>What We Do</span></div>
+    <h2>PCCPの進め方</h2>
+    <div class="section-body" style="margin-top:28px">
+      <p>PCCPは、紙コップのリサイクルを個人の努力に委ねるのではなく、現場で運営できる仕組みとして設計し、実証しながら改善していきます。</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>回収しやすい運用をつくる</h3>
+          <p>商業施設などの現場で、無理なく回収できる流れを設計します。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>分別と回収の流れを整える</h3>
+          <p>提供者や回収事業者の負担が偏りすぎないよう、役割分担を整理します。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>資源循環につなげる</h3>
+          <p>回収した紙コップを焼却ではなく、再資源化につながる流れへ乗せていきます。</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>実証しながら改善する</h3>
+          <p>現場で得られた知見を記録し、次の改善や展開につなげます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="story" class="bg-soft">
+  <div class="wrap">
+    <div class="eyebrow"><span>Our Story</span></div>
+    <h2>Paper Cup Circulation Partnership はどのように始まったか？</h2>
+    <div class="section-body" style="margin-top:28px">
+      <p>PCCPは、大学と株式会社シンギによる共創プロジェクトを起点として誕生しました。プロジェクトの出発点は、株式会社シンギから提示された「広島県内で資源循環を実現したい」というテーマでした。</p>
+      <p>食品容器や包装資材を扱う企業として、シンギは環境配慮型素材の普及に取り組む一方で、製品が使用された後の回収や再資源化が十分に進んでいない現状にも課題意識を持っていました。特に、紙コップは環境に配慮した素材として認知されているものの、分別の難しさや回収体制の未整備により、実際には循環されにくいという課題があります。</p>
+      <p>この課題意識を受け、大学の学生が中心となり、「広島県内で完結する資源循環の仕組みを構築できないか」と検討を開始しました。</p>
+      <p>こうして、企業の課題提起と学生の主体的な行動が結びつく形で、紙コップの新たな循環を広島から生み出すプロジェクトとして Paper Cup Circulation Partnership は始動しました。大学と企業が共に考え、共に動くことで、地域に根ざした持続可能な資源循環の実現を目指しています。</p>
+      <figure class="story-figure">
+        <img src="assets/story-kickoff.jpg" alt="共創プロジェクト成果報告会に参加したメンバー" loading="lazy">
+        <figcaption>2025年9月24日 共創プロジェクト成果報告会</figcaption>
+      </figure>
+      <p>2025年9月24日には、株式会社シンギとの協働の成果を発表する報告会を開催しました。紙コップリサイクルが進まない背景にある提供企業の「見えないコスト」に着目し、大学生がハブとなって企業・地域・消費者をつなぐ持続可能な循環モデルを構想したものです。環境施策を社会実装するには、企業との協働や経済性を踏まえた仕組みづくりが不可欠であることを、あらためて確認する機会となりました。</p>
+    </div>
+  </div>
+</section>
+
+<section id="credits">
+  <div class="wrap">
+    <div class="eyebrow"><span>Project Credits</span></div>
+    <h2>参加組織</h2>
+    <div class="section-body" style="margin-top:28px">
+      <p>本実証実験は、商業施設、大学、地域企業、回収・資源循環に関わる事業者が、それぞれの役割を担いながら連携して進めています。</p>
+      <div class="credits">
+        <div class="credit-group">
+          <p class="credit-role">Organizer</p>
+          <ul><li>一般社団法人サーキュラー・ラボ・広島</li></ul>
+        </div>
+        <div class="credit-group">
+          <p class="credit-role">Venue Partner</p>
+          <ul><li>THE OUTLETS HIROSHIMA</li></ul>
+        </div>
+        <div class="credit-group">
+          <p class="credit-role">Supporting Partners</p>
+          <ul>
+            <li>株式会社桐原容器工業所</li>
+            <li>株式会社広島経済研究所</li>
+            <li>株式会社シンギ</li>
+          </ul>
+        </div>
+        <div class="credit-group">
+          <p class="credit-role">Collection &amp; Resource Circulation Partners</p>
+          <ul>
+            <li>株式会社不二ビルサービス</li>
+            <li>広島きれい株式会社</li>
+            <li>有限会社丸久商店</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 最新の活動：CLH の news.md から project: pccp の記事だけを表示。読めなければ非表示 -->
+<section id="activities" class="bg-soft" hidden>
+  <div class="wrap">
+    <div class="activity-head">
+      <div>
+        <div class="eyebrow"><span>Activities</span></div>
+        <h2>最新の活動</h2>
+      </div>
+      <a class="textlink" href="/activities">すべて見る →</a>
+    </div>
+    <div class="activity-list" id="activity_list"></div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>一緒に紙コップの循環をつくりませんか？</h2>
+    <p>実証への参加、協賛、コラボレーションのご相談を受け付けています。<br>企業・団体・個人問わず、お気軽にお問い合わせください。</p>
+    <div class="cta-actions">
+      <a class="btn btn-white" href="/#contact">お問い合わせへ</a>
+      <a class="btn btn-outline" href="/recruit.html">チームに加わりたい方へ</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap-wide">
+    <div class="footer-top">
+      <div>
+        <p class="footer-brand-label">PCCP</p>
+        <p class="footer-brand-name">Paper Cup Circulation Partnership</p>
+      </div>
+      <nav class="footer-nav" aria-label="フッターナビゲーション">
+        <a href="/pccp/">PCCP トップ</a>
+        <a href="/activities">Activities</a>
+        <a href="/recruit.html">Recruit</a>
+        <a href="/#contact">Contact</a>
+        <a href="/">Circular Lab Hiroshima</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span class="pill">Est. 2026</span>
+      <span>&copy; Paper Cup Circulation Partnership</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+
+  // 記事の原本はサイト直下の news.md にあり、ここでは project: pccp のものだけを
+  // 絞り込んで表示する。同一オリジンなので相対パスで読める。
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+
+  function formatDate(d) {
+    var m = String(d).match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (!m) return String(d);
+    return m[1] + '.' + ('0' + m[2]).slice(-2) + '.' + ('0' + m[3]).slice(-2);
+  }
+
+  function isUpcoming(until) {
+    var m = String(until || '').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (!m) return false;
+    var end = new Date(+m[1], +m[2] - 1, +m[3]);
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return end >= today;
+  }
+
+  // news.md のパース（CLH 側 news.js と同じ形式）
+  function parseNews(text) {
+    text = String(text).replace(/<!--[\s\S]*?-->/g, '');
+    var items = [];
+    text.split(/^\s*===\s*$/m).forEach(function (block) {
+      var lines = block.split('\n');
+      var meta = { id: '', date: '', title: '', until: '', project: '' };
+      var i = 0;
+      while (i < lines.length && lines[i].trim() === '') i++;
+      for (; i < lines.length; i++) {
+        if (lines[i].trim() === '') { i++; break; }
+        var m = lines[i].match(/^\s*([A-Za-z_]+)\s*:\s*(.*)$/);
+        if (m && m[1].toLowerCase() in meta) meta[m[1].toLowerCase()] = m[2].trim();
+        else break;
+      }
+      if (meta.title) items.push(meta);
+    });
+    return items;
+  }
+
+  fetch('/news.md', { cache: 'no-cache' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('news.md: ' + res.status);
+      return res.text();
+    })
+    .then(function (text) {
+      var items = parseNews(text)
+        .filter(function (n) { return n.project.toLowerCase() === 'pccp'; })
+        .slice(0, 4);
+      if (!items.length) return;
+
+      document.getElementById('activity_list').innerHTML = items.map(function (item) {
+        var shown = isUpcoming(item.until) ? item.until : item.date;
+        var inner = '<time class="activity-date" datetime="' + esc(shown) + '">'
+                  + esc(formatDate(shown)) + '</time>'
+                  + (isUpcoming(item.until) ? '<span class="activity-badge">開催予定</span>' : '')
+                  + '<span class="activity-title">' + esc(item.title) + '</span>';
+        return item.id
+          ? '<a class="activity-item" href="/activities?id='
+            + encodeURIComponent(item.id) + '">' + inner + '</a>'
+          : '<div class="activity-item">' + inner + '</div>';
+      }).join('');
+      document.getElementById('activities').hidden = false;
+    })
+    .catch(function () { /* 取得できないときはセクションごと出さない */ });
+})();
+</script>
+</body>
+</html>
