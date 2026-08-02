@@ -192,6 +192,30 @@ a.news-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(18
 .news-empty { margin-top: 36px; font-size: 14px; }
 .news-more { margin-top: 32px; }
 
+/* バッジ（開催予定・プロジェクト名） */
+.badge {
+  display: inline-block; flex: 0 0 auto;
+  padding: 3px 10px; border-radius: var(--radius-full);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  line-height: 1.6; white-space: nowrap;
+}
+.badge-upcoming { background: var(--orange); color: var(--white); }
+.badge-project  { background: rgba(180,32,32,0.08); color: var(--red); }
+.news-badges { display: flex; gap: 6px; flex: 0 0 auto; }
+
+/* 開催予定（until が未来の記事があるときだけ表示） */
+.upcoming { margin-top: 40px; display: grid; gap: 12px; }
+.upcoming-item {
+  display: block; padding: 24px 28px; text-decoration: none;
+  background: linear-gradient(135deg, rgba(240,120,32,0.08), rgba(255,248,245,0.6));
+  border: 2px solid var(--orange); border-radius: var(--radius-lg);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+a.upcoming-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(240,120,32,0.18); }
+.upcoming-meta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.upcoming-title { margin-top: 10px; font-size: 17px; font-weight: 800; color: var(--red-dark); line-height: 1.6; }
+.upcoming-more { margin-top: 12px; font-size: 12px; font-weight: 700; color: var(--orange-dk); }
+
 .mission-inner { display: grid; grid-template-columns: 100px 1fr; gap: 60px; align-items: center; }
 .mission-letter { font-size: 100px; font-weight: 800; color: var(--orange); opacity: 0.15; line-height: 1; -webkit-user-select: none; user-select: none; }
 
@@ -207,20 +231,27 @@ a.news-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(18
 .service-card h3 { font-size: 15px; }
 .service-card p  { font-size: 13px; margin-top: 8px; }
 
-.case-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 48px; }
-.case-card {
-  background: var(--white); border-radius: var(--radius-lg);
-  padding: 40px 36px; border: 1px solid var(--border);
+/* Projects — 自分たちが動かしているプロジェクト（1件でも成立する横並びカード） */
+.project-grid { display: grid; gap: 24px; margin-top: 48px; }
+.project-card {
+  display: grid; grid-template-columns: 280px 1fr; gap: 32px; align-items: center;
   position: relative; overflow: hidden;
+  padding: 32px; background: var(--white); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
 }
-.case-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
-.case-photo { width: 220px; max-width: 100%; aspect-ratio: 4 / 3; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 22px; background: var(--red-light); border: 1px solid var(--border); }
-.case-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.case-card-num { position: absolute; top: 20px; right: 24px; font-size: 52px; font-weight: 800; color: var(--orange); opacity: 0.15; line-height: 1; }
-.case-card h3 { font-size: 16px; margin-bottom: 12px; }
-.case-card p  { font-size: 13px; margin-bottom: 28px; }
-.case-stat-num   { font-size: 38px; font-weight: 800; color: var(--red); line-height: 1; }
-.case-stat-label { font-size: 12px; color: var(--red-mid); margin-top: 4px; }
+.project-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--red); }
+a.project-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(180,32,32,0.08); border-color: var(--orange); }
+.project-photo { aspect-ratio: 4 / 3; border-radius: var(--radius-md); overflow: hidden; background: var(--red-light); border: 1px solid var(--border); }
+.project-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.project-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--orange-dk); }
+.project-card h3 { font-size: 20px; margin: 8px 0 12px; }
+.project-card p { font-size: 14px; }
+.project-results { list-style: none; margin-top: 18px; display: grid; gap: 8px; }
+.project-results li { font-size: 13px; color: var(--red-mid); display: flex; gap: 10px; line-height: 1.7; }
+.project-results li::before { content: '→'; color: var(--orange); flex-shrink: 0; }
+.project-link { display: inline-block; margin-top: 20px; font-size: 13px; font-weight: 700; color: var(--orange-dk); }
+
 
 .member-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
 .member-card {
@@ -288,7 +319,7 @@ footer p { color: inherit; }
   .mission-inner  { grid-template-columns: 1fr; gap: 16px; }
   .mission-letter { font-size: 60px; }
   .service-grid   { grid-template-columns: 1fr; }
-  .case-grid      { grid-template-columns: 1fr; }
+  .project-card   { grid-template-columns: 1fr; padding: 24px; gap: 20px; }
   .member-grid    { grid-template-columns: 1fr; }
   .news-item      { flex-direction: column; gap: 4px; padding: 18px 20px; }
   .join-plans { grid-template-columns: 1fr; }
@@ -307,7 +338,7 @@ footer p { color: inherit; }
     <a href="#activities">Activities</a>
     <a href="#mission">Mission</a>
     <a href="#service">Service</a>
-    <a href="#casestudy">Case Study</a>
+    <a href="#projects">Projects</a>
     <a href="#members">Member</a>
     <a href="#join">Join Us</a>
     <a href="recruit.html">Recruit</a>
@@ -322,7 +353,7 @@ footer p { color: inherit; }
   <a href="#activities"      class="ml">Activities</a>
   <a href="#mission"   class="ml">Mission</a>
   <a href="#service"   class="ml">Service</a>
-  <a href="#casestudy" class="ml">Case Study</a>
+  <a href="#projects" class="ml">Projects</a>
   <a href="#members"   class="ml">Member</a>
   <a href="#join"  class="ml">Join Us</a>
   <a href="recruit.html" class="ml">Recruit</a>
@@ -349,6 +380,7 @@ footer p { color: inherit; }
   <div class="container">
     <span class="tag" id="news_tag"></span>
     <h2 id="news_title"></h2>
+    <div class="upcoming" id="upcoming" hidden></div>
     <div class="news-list" id="news_list"></div>
     <div class="news-more"><a class="btn btn-ghost" href="activities.html" id="news_more"></a></div>
   </div>
@@ -379,21 +411,24 @@ footer p { color: inherit; }
   </div>
 </section>
 
-<section id="casestudy">
+<section id="projects">
   <div class="container">
-    <span class="tag" id="case_tag"></span>
-    <h2 id="case_title"></h2>
-    <div class="case-grid">
-      <div class="case-card">
-        <div class="case-photo"><img src="assets/case-marathon.jpg" alt="マラソン大会の給水所での紙コップ回収"></div>
-        <div class="case-card-num">01</div>
-        <h3 id="c1_title"></h3><p id="c1_text"></p>
-      </div>
-      <div class="case-card">
-        <div class="case-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートの紙コップ回収ボックス"></div>
-        <div class="case-card-num">02</div>
-        <h3 id="c2_title"></h3><p id="c2_text"></p>
-      </div>
+    <span class="tag" id="project_tag"></span>
+    <h2 id="project_title"></h2>
+    <div class="project-grid">
+      <a class="project-card" href="https://pccp.clh.or.jp/" target="_blank" rel="noopener noreferrer">
+        <div class="project-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートに設置した紙コップ回収ボックス"></div>
+        <div>
+          <span class="project-label" id="p1_label"></span>
+          <h3 id="p1_title"></h3>
+          <p id="p1_text"></p>
+          <ul class="project-results">
+            <li id="p1_result1"></li>
+            <li id="p1_result2"></li>
+          </ul>
+          <span class="project-link" id="p1_link"></span>
+        </div>
+      </a>
     </div>
   </div>
 </section>
@@ -500,7 +535,8 @@ footer p { color: inherit; }
   s('hero_lead', heroSub[0] || '');
   s('hero_body', heroSub.slice(1).join('\n'));
 
-  // News — news.md を読み込んで最新3件だけ表示（読めなければセクションごと非表示）
+  // Activities — news.md を読み込み、開催予定を上に、それ以外の最新3件を下に表示
+  // （読めなければセクションごと非表示）
   s('news_tag', content.news_tag);
   s('news_title', content.news_title);
   setText('news_more', content.news_more);
@@ -510,19 +546,43 @@ footer p { color: inherit; }
       return res.text();
     })
     .then(function (text) {
-      var items = window.CLHNews.parseNews(text).slice(0, 3);
+      var all = window.CLHNews.parseNews(text);
+      var upcoming = all.filter(function (n) { return window.CLHNews.isUpcoming(n.until); });
+      var rest = all.filter(function (n) { return !window.CLHNews.isUpcoming(n.until); }).slice(0, 3);
+
+      // 開催予定は上の枠に出すので、下の一覧では重複させない
+      var box = document.getElementById('upcoming');
+      box.innerHTML = upcoming.map(upcomingHtml).join('');
+      box.hidden = upcoming.length === 0;
+
       var list = document.getElementById('news_list');
-      list.innerHTML = items.length
-        ? items.map(newsItemHtml).join('')
+      list.innerHTML = rest.length
+        ? rest.map(newsItemHtml).join('')
         : '<p class="news-empty">' + window.CLHNews.escapeHtml(content.news_empty || '') + '</p>';
-      document.getElementById('news').hidden = false;
+      document.getElementById('activities').hidden = false;
     })
     .catch(function () { /* ローカルのfile://など、読めない場合はセクションを出さない */ });
 
+  function upcomingHtml(item) {
+    var esc = window.CLHNews.escapeHtml;
+    var inner = '<div class="upcoming-meta">'
+              + window.CLHNews.badgesHtml(item, content)
+              + '<time class="news-date" datetime="' + esc(item.date) + '">'
+              + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+              + '</div>'
+              + '<div class="upcoming-title">' + esc(item.title) + '</div>';
+    return item.id
+      ? '<a class="upcoming-item" href="activities.html?id=' + encodeURIComponent(item.id) + '">'
+        + inner + '<div class="upcoming-more">' + esc(content.upcoming_more || '') + ' →</div></a>'
+      : '<div class="upcoming-item">' + inner + '</div>';
+  }
+
   function newsItemHtml(item) {
     var esc = window.CLHNews.escapeHtml;
+    var badges = window.CLHNews.badgesHtml(item, content);
     var inner = '<time class="news-date" datetime="' + esc(item.date) + '">'
               + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+              + (badges ? '<span class="news-badges">' + badges + '</span>' : '')
               + '<span class="news-item-title">' + esc(item.title) + '</span>';
     return item.id
       ? '<a class="news-item" href="activities.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
@@ -544,14 +604,15 @@ footer p { color: inherit; }
   s('s2_title', content.service_item2_title); s('s2_text', content.service_item2_text);
   s('s3_title', content.service_item3_title); s('s3_text', content.service_item3_text);
 
-  // Case Study — タイトルにオレンジハイライト
-  s('case_tag', content.casestudy_tag);
-  var caseTitle = document.getElementById('case_title');
-  if (caseTitle && content.casestudy_title) {
-    caseTitle.innerHTML = '<span class="highlight">' + content.casestudy_title + '</span>';
+  // Projects — タイトルにオレンジハイライト
+  s('project_tag', content.projects_tag);
+  var projectTitle = document.getElementById('project_title');
+  if (projectTitle && content.projects_title) {
+    projectTitle.innerHTML = '<span class="highlight">' + content.projects_title + '</span>';
   }
-  s('c1_title', content.case1_title); s('c1_text', content.case1_text);
-  s('c2_title', content.case2_title); s('c2_text', content.case2_text);
+  s('p1_label', content.p1_label); s('p1_title', content.p1_title); s('p1_text', content.p1_text);
+  s('p1_result1', content.p1_result1); s('p1_result2', content.p1_result2);
+  setText('p1_link', (content.p1_link || '') + ' →');
 
   // Member
   s('member_tag', content.member_tag);

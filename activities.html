@@ -99,6 +99,18 @@ a.news-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(18
 .news-item-title { font-size: 14px; font-weight: 700; color: var(--red-dark); line-height: 1.7; }
 .news-empty { font-size: 14px; }
 
+/* バッジ（開催予定・プロジェクト名） */
+.badge {
+  display: inline-block; flex: 0 0 auto;
+  padding: 3px 10px; border-radius: var(--radius-full);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  line-height: 1.6; white-space: nowrap;
+}
+.badge-upcoming { background: var(--orange); color: var(--white); }
+.badge-project  { background: rgba(180,32,32,0.08); color: var(--red); }
+.news-badges { display: flex; gap: 6px; flex: 0 0 auto; }
+.article-head .badge { margin-right: 6px; }
+
 .article-head { padding-bottom: 24px; margin-bottom: 32px; border-bottom: 1px solid var(--border); }
 .article-head .news-date { display: block; margin-bottom: 10px; }
 .article-body > * + * { margin-top: 20px; }
@@ -195,8 +207,10 @@ footer p { color: inherit; }
       return;
     }
     body.innerHTML = '<div class="news-list">' + items.map(function (item) {
+      var badges = window.CLHNews.badgesHtml(item, content);
       var inner = '<time class="news-date" datetime="' + esc(item.date) + '">'
                 + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+                + (badges ? '<span class="news-badges">' + badges + '</span>' : '')
                 + '<span class="news-item-title">' + esc(item.title) + '</span>';
       return item.id
         ? '<a class="news-item" href="activities.html?id=' + encodeURIComponent(item.id) + '">' + inner + '</a>'
@@ -212,6 +226,7 @@ footer p { color: inherit; }
     body.innerHTML = '<div class="article-head">'
         + '<time class="news-date" datetime="' + esc(item.date) + '">'
         + esc(window.CLHNews.formatDate(item.date)) + '</time>'
+        + window.CLHNews.badgesHtml(item, content)
       + '</div>'
       + '<div class="article-body">' + window.CLHNews.renderMarkdown(item.body) + '</div>'
       + '<a class="btn btn-ghost back-link" href="activities.html">' + esc(content.news_back || '') + '</a>';

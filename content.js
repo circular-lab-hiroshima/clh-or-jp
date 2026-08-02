@@ -15,6 +15,12 @@ var content = {
   news_empty: "現在、公開中の記事はありません。",
   news_back: "一覧へ戻る",
   news_lead: "サーキュラー・ラボ・広島の活動レポートと最新のお知らせをお届けします。",
+  // 開催予定（news.md の until が未来の記事があるときだけ表示されます）
+  upcoming_title: "開催予定",
+  upcoming_more: "詳しく見る",
+  badge_upcoming: "開催予定",
+  // プロジェクト名バッジ（news.md の project: に対応）
+  project_labels: { pccp: "PCCP" },
 
   // ミッション
   mission_tag: "Mission",
@@ -31,13 +37,15 @@ var content = {
   service_item3_title: "循環型ビジネスモデルの創出",
   service_item3_text: "環境負荷の低減と経済性を両立させる、継続性のあるビジネスモデルを一緒に創出します。",
 
-  // ケーススタディ
-  casestudy_tag: "Case Study",
-  casestudy_title: "「循環」を証明する、確かな足跡",
-  case1_title: "スポーツイベントでの資源回収",
-  case1_text: "マラソン大会の給水所で使用された紙コップを全数回収。古紙再生メーカーと連携し、トイレットペーパーへと再生するサイクルを実現しました。",
-  case2_title: "商業施設での実証実験",
-  case2_text: "アウトレットモールのフードコートにて、給水用紙コップを「資源」として分別回収。日常の風景から資源を守る仕組みを運用しています。",
+  // プロジェクト（自分たちが動かしている活動。増えたら p2_ 以降を足してください）
+  projects_tag: "Projects",
+  projects_title: "私たちが動かしているプロジェクト",
+  p1_label: "PCCP — Paper Cup Circulation Partnership",
+  p1_title: "紙コップ資源循環プロジェクト",
+  p1_text: "商業施設・大学・地域企業・回収事業者が連携し、焼却されがちだった紙コップを「捨てるもの」から「循環する資源」へ変える仕組みを、広島で実装しています。",
+  p1_result1: "マラソン大会の給水所で紙コップ48kgを回収し、トイレットペーパーへ再生",
+  p1_result2: "THE OUTLETS HIROSHIMAのフードコートで専用回収BOXの実証実験を実施",
+  p1_link: "PCCPのサイトを見る",
 
   // メンバー
   member_tag: "Member",
@@ -99,5 +107,5 @@ var content = {
   footer_text: "© 2026 一般社団法人 サーキュラー・ラボ・広島 All Rights Reserved.",
 
   // バージョン（フッターに極小表示）
-  version: "1.9.1",
+  version: "1.10.0",
 }

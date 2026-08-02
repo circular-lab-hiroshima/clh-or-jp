@@ -10,14 +10,14 @@
   }
 
   // news.md を1件ずつのオブジェクト配列に変換
-  // 形式: 「===」区切り → 先頭に key: value（id / date / title）→ 空行 → 本文markdown
+  // 形式: 「===」区切り → 先頭に key: value（id / date / title / until / project）→ 空行 → 本文markdown
   function parseNews(text) {
     text = String(text).replace(/<!--[\s\S]*?-->/g, ''); // コメント除去
     var blocks = text.split(/^\s*===\s*$/m);
     var items = [];
     blocks.forEach(function (block) {
       var lines = block.split('\n');
-      var meta = { id: '', date: '', title: '' };
+      var meta = { id: '', date: '', title: '', until: '', project: '' };
       var i = 0;
       while (i < lines.length && lines[i].trim() === '') i++; // 先頭の空行を飛ばす
       for (; i < lines.length; i++) {
@@ -31,7 +31,14 @@
       }
       var body = lines.slice(i).join('\n').trim();
       if (meta.title) {
-        items.push({ id: meta.id, date: meta.date, title: meta.title, body: body });
+        items.push({
+          id: meta.id,
+          date: meta.date,
+          title: meta.title,
+          until: meta.until,
+          project: meta.project.toLowerCase(),
+          body: body
+        });
       }
     });
     return items;
@@ -76,10 +83,36 @@
     return m[1] + '.' + ('0' + m[2]).slice(-2) + '.' + ('0' + m[3]).slice(-2);
   }
 
+  // until が今日以降なら「これから開催されるもの」とみなす（当日はまだ開催予定）
+  function isUpcoming(until) {
+    var m = String(until || '').match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+    if (!m) return false;
+    var end = new Date(+m[1], +m[2] - 1, +m[3]);
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return end >= today;
+  }
+
+  // 記事に付けるバッジ（開催予定 → プロジェクト名 の順）
+  function badgesHtml(item, content) {
+    var html = '';
+    if (isUpcoming(item.until)) {
+      html += '<span class="badge badge-upcoming">'
+        + esc((content && content.badge_upcoming) || '開催予定') + '</span>';
+    }
+    var labels = (content && content.project_labels) || {};
+    if (item.project && labels[item.project]) {
+      html += '<span class="badge badge-project">' + esc(labels[item.project]) + '</span>';
+    }
+    return html;
+  }
+
   global.CLHNews = {
     parseNews: parseNews,
     renderMarkdown: renderMarkdown,
     formatDate: formatDate,
-    escapeHtml: esc
+    escapeHtml: esc,
+    isUpcoming: isUpcoming,
+    badgesHtml: badgesHtml
   };
 })(window);
