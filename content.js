@@ -100,6 +100,10 @@ var content = {
   join_use3: "循環型社会を実現するための実証実験費用",
   join_note: "皆様のご参加が、広島の未来をつくる力になります。会費やお手続きの詳細については、下記のお問い合わせ先までお気軽にご連絡ください。",
 
+  // 会員企業の見出し（社名の増減は index.html の会員企業ブロックを編集）
+  partner_members_title: "パートナー法人会員",
+  regular_members_title: "メンバー法人会員",
+
   // コンタクト・法人情報
   contact_tag: "Contact",
   contact_title: "お問い合わせ",
@@ -118,5 +122,5 @@ var content = {
   // バージョン（フッターに極小表示）
   // ★ここを変えたら、index.html / activities.html / recruit.html / 404.html の
   //   <script src="...?v=..."> も同じ値に更新すること（キャッシュ対策）
-  version: "1.16.1",
+  version: "1.17.0",
 }
