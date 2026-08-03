@@ -22,9 +22,9 @@ if (location.hash.length > 1) {
   }, 1200);
 }
 </script>
-<script src="content.js?v=1.17.1"></script>
-<script src="news.js?v=1.17.1"></script>
-<script src="preview-badge.js?v=1.17.1"></script>
+<script src="content.js?v=1.18.1"></script>
+<script src="news.js?v=1.18.1"></script>
+<script src="preview-badge.js?v=1.18.1"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -107,16 +107,20 @@ section { padding: 100px 0; }
 section:nth-child(even) { background: var(--red-light); }
 section:nth-child(odd)  { background: var(--white); }
 
+/* ============================================================
+   ヘッダー（全ページ共通）
+   index.html / activities.html / recruit.html / 404.html / pccp/index.html
+   の5ファイルに同じものが入っています。直すときは5か所すべてに反映すること。
+   ============================================================ */
 nav {
-  position: fixed; top: 0; left: 0; right: 0;
+  position: sticky; top: 0; z-index: 100;
   height: 64px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
   padding: 0 5%;
   background: rgba(255,255,255,0.96);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 3px solid var(--red);
-  z-index: 100;
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
@@ -129,19 +133,19 @@ nav {
    文字がその上端に張り付いて縦位置がずれる */
 .nav-links { display: flex; align-items: center; gap: 26px; }
 .nav-links a {
+  position: relative;
   font-size: 12px; font-weight: 500;
   color: var(--red-mid); text-decoration: none;
   letter-spacing: 0.06em; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--red); }
 /* 現在地表示。CTAボタン（会員になる／お問い合わせ）には付けない */
-.nav-links a { position: relative; }
-.nav-links a.is-current { color: var(--red); font-weight: 700; }
+.nav-links a.is-current { color: var(--red); }
 .nav-links a.is-current::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
   height: 2px; background: var(--orange); border-radius: 2px;
 }
-/* Join Us と お問い合わせ は一覧に混ぜずボタンとして置く */
+/* 会員になる と お問い合わせ は一覧に混ぜずボタンとして置く */
 .nav-cta {
   padding: 8px 18px; border-radius: var(--radius-full);
   font-weight: 700; white-space: nowrap;
@@ -199,7 +203,8 @@ nav {
 
 .hero {
   display: flex; align-items: center; justify-content: space-between; gap: clamp(24px, 5vw, 72px);
-  padding: clamp(96px, 8vw, 128px) 6% clamp(48px, 5vw, 72px);
+  /* ナビが sticky（=高さ64pxを占有する）ため、その分を引いた余白にしている */
+  padding: clamp(32px, 4vw, 64px) 6% clamp(48px, 5vw, 72px);
   background: var(--white);
 }
 .hero-inner { max-width: 700px; width: 100%; }

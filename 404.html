@@ -9,8 +9,8 @@
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- 404 は任意の深さのURLで表示されるため、参照はすべてルート絶対パスにする -->
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="/content.js?v=1.17.1"></script>
-<script src="/preview-badge.js?v=1.17.1"></script>
+<script src="/content.js?v=1.18.1"></script>
+<script src="/preview-badge.js?v=1.18.1"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -49,28 +49,45 @@ h1 { font-size: var(--fs-2xl); line-height: 1.4; font-weight: 800; }
   color: var(--orange-dk);
 }
 
+/* ============================================================
+   ヘッダー（全ページ共通）
+   index.html / activities.html / recruit.html / 404.html / pccp/index.html
+   の5ファイルに同じものが入っています。直すときは5か所すべてに反映すること。
+   ============================================================ */
 nav {
+  position: sticky; top: 0; z-index: 100;
+  height: 64px;
   display: flex; align-items: center; justify-content: space-between; gap: 24px;
-  min-height: 64px; padding: 12px 5%;
+  padding: 0 5%;
   background: rgba(255,255,255,0.96);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border-bottom: 3px solid var(--red);
 }
 .nav-logo {
   display: flex; align-items: center; gap: 10px;
   font-size: 13px; font-weight: 700;
-  color: var(--red-dark); text-decoration: none; letter-spacing: 0.04em;
+  color: var(--red-dark); letter-spacing: 0.04em;
+  text-decoration: none;
 }
-.nav-logo-mark { height: 30px; width: auto; display: block; }
-.nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 18px; }
-.nav-links a { font-size: 12px; color: var(--red-mid); text-decoration: none; letter-spacing: 0.06em; }
+.nav-logo-mark { height: 34px; width: auto; display: block; }
+/* align-items を指定しないと、テキストリンクがCTAボタンの高さまで引き伸ばされ、
+   文字がその上端に張り付いて縦位置がずれる */
+.nav-links { display: flex; align-items: center; gap: 26px; }
+.nav-links a {
+  position: relative;
+  font-size: 12px; font-weight: 500;
+  color: var(--red-mid); text-decoration: none;
+  letter-spacing: 0.06em; transition: color 0.2s;
+}
 .nav-links a:hover { color: var(--red); }
 /* 現在地表示。CTAボタン（会員になる／お問い合わせ）には付けない */
-.nav-links a { position: relative; }
-.nav-links a.is-current { color: var(--red); font-weight: 700; }
+.nav-links a.is-current { color: var(--red); }
 .nav-links a.is-current::after {
   content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
   height: 2px; background: var(--orange); border-radius: 2px;
 }
+/* 会員になる と お問い合わせ は一覧に混ぜずボタンとして置く */
 .nav-cta {
   padding: 8px 18px; border-radius: var(--radius-full);
   font-weight: 700; white-space: nowrap;
@@ -80,6 +97,33 @@ nav {
 .nav-cta-primary:hover { background: #8C1818; transform: translateY(-1px); }
 .nav-cta-ghost { border: 1.5px solid var(--orange); color: var(--orange-dk) !important; }
 .nav-cta-ghost:hover { background: var(--orange); color: var(--white) !important; }
+.hamburger {
+  display: none; flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--red-dark); border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu {
+  display: none; position: fixed; inset: 0;
+  background: rgba(255,255,255,0.98);
+  flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  z-index: 150;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 22px; font-weight: 700;
+  color: var(--red-dark); text-decoration: none; letter-spacing: 0.06em;
+}
+.mobile-menu .ml-cta {
+  padding: 12px 32px; border-radius: var(--radius-full);
+  background: var(--red); color: var(--white); font-size: 18px;
+}
 
 main {
   flex: 1 0 auto;
@@ -111,8 +155,10 @@ footer p { color: inherit; }
 .footer-version { display: block; margin-top: 6px; font-size: 10px; color: rgba(232,232,232,0.4); letter-spacing: 0.1em; }
 
 @media (max-width: 768px) {
-  nav { align-items: flex-start; flex-direction: column; }
-  .nav-links { justify-content: flex-start; gap: 12px 16px; }
+  .nav-logo-mark { height: 28px; }
+  .nav-logo span { font-size: 11px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
 }
 </style>
 </head>
@@ -132,7 +178,20 @@ footer p { color: inherit; }
     <a class="nav-cta nav-cta-primary" href="/#join">会員になる</a>
     <a class="nav-cta nav-cta-ghost" href="/#contact">お問い合わせ</a>
   </div>
+  <button class="hamburger" id="hamburger" aria-label="メニュー" aria-expanded="false" aria-controls="mobileMenu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+  <a href="/activities.html" class="ml">Activities</a>
+  <a href="/#about"          class="ml">About</a>
+  <a href="/#service"        class="ml">Service</a>
+  <a href="/#projects"       class="ml">Projects</a>
+  <a href="/recruit.html"    class="ml">Recruit</a>
+  <a href="/#join"           class="ml ml-cta">会員になる</a>
+  <a href="/#contact"        class="ml">お問い合わせ</a>
+</div>
 
 <main>
   <div class="container">
@@ -155,15 +214,32 @@ footer p { color: inherit; }
 
 <script>
 (function () {
-  // content.js が読めなくてもページ自体は成立するよう、上書きは値がある場合のみ
-  if (typeof content === 'undefined') return;
   function setText(id, val) {
     var el = document.getElementById(id);
     if (el && val != null && val !== '') el.textContent = val;
   }
-  setText('nav_logo', content.nav_logo);
-  setText('footer_text', content.footer_text);
-  setText('footer_version', content.version ? 'v' + content.version : '');
+  // content.js が読めなくてもメニューは動くよう、文言の差し込みだけを条件付きにする
+  if (typeof content !== 'undefined') {
+    setText('nav_logo', content.nav_logo);
+    setText('footer_text', content.footer_text);
+    setText('footer_version', content.version ? 'v' + content.version : '');
+  }
+
+  // モバイルメニュー（全ページ共通）
+  var hamburger  = document.getElementById('hamburger');
+  var mobileMenu = document.getElementById('mobileMenu');
+  function setMenuOpen(open) {
+    hamburger.classList.toggle('open', open);
+    mobileMenu.classList.toggle('open', open);
+    hamburger.setAttribute('aria-expanded', String(open));
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+  }
+  hamburger.addEventListener('click', function () {
+    setMenuOpen(!hamburger.classList.contains('open'));
+  });
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () { setMenuOpen(false); });
+  });
 })();
 </script>
 </body>
