@@ -4,12 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>活動レポート・お知らせ | サーキュラー・ラボ・広島</title>
+<meta name="description" content="一般社団法人サーキュラー・ラボ・広島の活動レポートとお知らせ。実証実験や資源回収の記録、セミナーの開催情報をお届けします。">
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="content.js?v=1.18.1"></script>
-<script src="news.js?v=1.18.1"></script>
-<script src="preview-badge.js?v=1.18.1"></script>
+<script src="content.js?v=1.19.0"></script>
+<script src="news.js?v=1.19.0"></script>
+<script src="preview-badge.js?v=1.19.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -33,7 +34,8 @@
   --radius-full: 999px;
 }
 
-html { scroll-behavior: smooth; }
+/* ナビが sticky で 64px あるため、アンカーの着地位置をその分下げる */
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
   color: var(--red-dark);

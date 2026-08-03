@@ -9,8 +9,8 @@
 <link rel="icon" type="image/png" href="/assets/logo-mark.png">
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は /index.html 参照） -->
-<script src="/content.js?v=1.18.1"></script>
-<script src="/preview-badge.js?v=1.18.1"></script>
+<script src="/content.js?v=1.19.0"></script>
+<script src="/preview-badge.js?v=1.19.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -40,7 +40,8 @@
   --orange-dk:  #86400A;
 }
 
-html { font-size: 16px; scroll-behavior: smooth; }
+/* ナビが sticky で 64px あるため、アンカーの着地位置をその分下げる */
+html { font-size: 16px; scroll-behavior: smooth; scroll-padding-top: 72px; }
 body {
   font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
   color: var(--ink);

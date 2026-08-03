@@ -9,10 +9,13 @@
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- 404 は任意の深さのURLで表示されるため、参照はすべてルート絶対パスにする -->
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="/content.js?v=1.18.1"></script>
-<script src="/preview-badge.js?v=1.18.1"></script>
+<script src="/content.js?v=1.19.0"></script>
+<script src="/preview-badge.js?v=1.19.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ナビが sticky で 64px あるため、アンカーの着地位置をその分下げる */
+html { scroll-behavior: smooth; scroll-padding-top: 72px; }
 
 :root {
   --red: #B42020;
@@ -141,8 +144,8 @@ main h1 { margin: 12px 0 16px; }
   text-decoration: none; border: none; cursor: pointer;
   transition: background 0.2s, color 0.2s, transform 0.2s;
 }
-.btn-solid { background: var(--red); color: var(--white); }
-.btn-solid:hover { transform: translateY(-2px); }
+.btn-red { background: var(--red); color: var(--white); }
+.btn-red:hover { background: #8C1818; transform: translateY(-2px); }
 .btn-ghost { background: transparent; color: var(--orange-dk); border: 2px solid var(--orange); }
 .btn-ghost:hover { background: var(--orange); color: var(--white); }
 
@@ -201,7 +204,7 @@ footer p { color: inherit; }
       お探しのページは移動または削除されたか、URLが正しくない可能性があります。
     </p>
     <div class="actions">
-      <a class="btn btn-solid" href="/">トップページへ戻る</a>
+      <a class="btn btn-red" href="/">トップページへ戻る</a>
       <a class="btn btn-ghost" href="/activities.html">活動レポート・お知らせを見る</a>
     </div>
   </div>
