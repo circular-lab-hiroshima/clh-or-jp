@@ -7,8 +7,8 @@
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="content.js?v=1.15.2"></script>
-<script src="preview-badge.js?v=1.15.2"></script>
+<script src="content.js?v=1.16.0"></script>
+<script src="preview-badge.js?v=1.16.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -110,6 +110,13 @@ nav {
   letter-spacing: 0.06em;
 }
 .nav-links a:hover { color: var(--red); }
+/* 現在地表示。CTAボタン（会員になる／お問い合わせ）には付けない */
+.nav-links a { position: relative; }
+.nav-links a.is-current { color: var(--red); font-weight: 700; }
+.nav-links a.is-current::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
+  height: 2px; background: var(--orange); border-radius: 2px;
+}
 .nav-cta {
   padding: 8px 18px; border-radius: var(--radius-full);
   font-weight: 700; white-space: nowrap;
@@ -353,7 +360,7 @@ footer p { color: inherit; }
     <a href="index.html#about">About</a>
     <a href="index.html#service">Service</a>
     <a href="index.html#projects">Projects</a>
-    <a href="recruit.html">Recruit</a>
+    <a class="is-current" aria-current="page" href="recruit.html">Recruit</a>
     <a class="nav-cta nav-cta-primary" href="index.html#join">会員になる</a>
     <a class="nav-cta nav-cta-ghost" href="index.html#contact">お問い合わせ</a>
   </div>
@@ -375,12 +382,12 @@ footer p { color: inherit; }
 
 <section id="about">
   <div class="container">
-    <div class="section-head"><span class="tag">About CLH</span></div>
-    <h2>CLHについて</h2>
+    <div class="section-head"><span class="tag">About Us</span></div>
+    <h2>サーキュラー・ラボ・広島について</h2>
     <div class="about-copy">
       <p>サーキュラー・ラボ・広島は、使い捨て食品容器などの廃棄物を「ゴミ」ではなく「資源」として捉え直し、企業・大学・地域と連携しながら持続可能な資源循環の仕組みを実装する法人です。</p>
       <p>今回募集するポジションでは、Webサイトや広報物の改善、現場での回収導線の設計、関係者との連携調整など、構想だけで終わらない実装と運用のプロセスに関わっていただきます。社会の中で実際に動く仕組みを、一緒につくっていく仕事です。</p>
-      <p><a class="about-link" href="index.html#about">CLHの活動をもっと知る <span aria-hidden="true">→</span></a></p>
+      <p><a class="about-link" href="index.html#about">私たちの活動をもっと知る <span aria-hidden="true">→</span></a></p>
     </div>
   </div>
 </section>
@@ -525,7 +532,7 @@ footer p { color: inherit; }
     <div class="cta-box">
       <span class="tag">Apply</span>
       <h2>まずは、話を聞くところから。</h2>
-      <p>応募は下記の応募フォームから受け付けています。ご質問やカジュアル面談のご希望は、CLHのお問い合わせ窓口からもお気軽にご連絡ください。</p>
+      <p>応募は下記の応募フォームから受け付けています。ご質問やカジュアル面談のご希望は、一般社団法人サーキュラー・ラボ・広島のお問い合わせ窓口からもお気軽にご連絡ください。</p>
       <div class="btn-group">
         <a class="btn btn-red" href="https://docs.google.com/forms/d/e/1FAIpQLSftZFlsayByFs21HJJSeQkC07lD9JI0Js3UhvOI7lTcTv71FQ/viewform?usp=header" target="_blank" rel="noopener noreferrer">応募フォームへ</a>
         <a class="btn btn-ghost" href="index.html#contact">お問い合わせ</a>

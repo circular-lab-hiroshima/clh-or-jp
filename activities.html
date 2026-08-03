@@ -7,9 +7,9 @@
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="content.js?v=1.15.2"></script>
-<script src="news.js?v=1.15.2"></script>
-<script src="preview-badge.js?v=1.15.2"></script>
+<script src="content.js?v=1.16.0"></script>
+<script src="news.js?v=1.16.0"></script>
+<script src="preview-badge.js?v=1.16.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -77,6 +77,13 @@ nav {
 .nav-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 10px 18px; }
 .nav-links a { font-size: 12px; color: var(--red-mid); text-decoration: none; letter-spacing: 0.06em; }
 .nav-links a:hover { color: var(--red); }
+/* 現在地表示。CTAボタン（会員になる／お問い合わせ）には付けない */
+.nav-links a { position: relative; }
+.nav-links a.is-current { color: var(--red); font-weight: 700; }
+.nav-links a.is-current::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: -7px;
+  height: 2px; background: var(--orange); border-radius: 2px;
+}
 .nav-cta {
   padding: 8px 18px; border-radius: var(--radius-full);
   font-weight: 700; white-space: nowrap;
@@ -166,7 +173,7 @@ footer p { color: inherit; }
     <span id="nav_logo"></span>
   </a>
   <div class="nav-links">
-    <a href="activities.html">Activities</a>
+    <a class="is-current" aria-current="page" href="activities.html">Activities</a>
     <a href="index.html#about">About</a>
     <a href="index.html#service">Service</a>
     <a href="index.html#projects">Projects</a>
