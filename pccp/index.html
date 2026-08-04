@@ -9,8 +9,8 @@
 <link rel="icon" type="image/png" href="/assets/logo-mark.png">
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は /index.html 参照） -->
-<script src="/content.js?v=1.20.0"></script>
-<script src="/preview-badge.js?v=1.20.0"></script>
+<script src="/content.js?v=1.20.1"></script>
+<script src="/preview-badge.js?v=1.20.1"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -104,6 +104,11 @@ nav {
   text-decoration: none;
 }
 .nav-logo-mark { height: 34px; width: auto; display: block; }
+/* 団体名は折り返さない（折り返すと1文字ずつ縦に割れて崩れる）。
+   入りきらない幅では末尾を「…」で省略する。min-width:0 が無いと
+   flex アイテムが縮まず、はみ出して横スクロールが出る。 */
+.nav-logo { min-width: 0; }
+.nav-logo span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* align-items を指定しないと、テキストリンクがCTAボタンの高さまで引き伸ばされ、
    文字がその上端に張り付いて縦位置がずれる */
 .nav-links { display: flex; align-items: center; gap: 26px; }
@@ -276,11 +281,16 @@ footer p { color: inherit; }
   /* 正式名称は狭い画面だと字間が詰まって読みにくいので緩める */
   .hero-fullname { letter-spacing: 0.04em; }
 }
+/* ナビをハンバーガーに切り替える幅。1040px から団体名が折り返し始めるため、
+   余裕をみて 1080px で切り替える（全ページ共通） */
+@media (max-width: 1080px) {
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+}
+
 @media (max-width: 768px) {
   .nav-logo-mark { height: 28px; }
   .nav-logo span { font-size: 11px; }
-  .nav-links { display: none; }
-  .hamburger { display: flex; }
 }
 </style>
 </head>
