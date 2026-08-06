@@ -49,8 +49,9 @@ var content = {
   // プロジェクト（自分たちが動かしている活動。増えたら proj2_ 以降を足してください）
   projects_tag: "Projects",
   projects_title: "構想で終わらせない。",
-  proj1_label: "PCCP — Paper Cup Circulation Partnership",
-  proj1_title: "使用済みの紙コップを、燃やさずに回す",
+  proj1_abbr: "PCCP",
+  proj1_name: "Paper Cup Circulation Partnership",
+  proj1_tagline: "使用済みの紙コップを、燃やさずに回す",
   proj1_text: "フードコートやイベント会場で使われた紙コップは、そのほとんどが焼却されています。PCCPは対象を紙コップ1点に絞り、集める・分ける・再生するまでを広島の中でつなぎ直すプロジェクトです。",
   // 補足。矢印付きの箇条書きにすると個別記事へのリンクに見えるため、地の文で置く
   proj1_note: "紙コップは本来リサイクルできる紙資源ですが、分別の難しさと回収コストが循環を止めています。商業施設・大学・地域企業・回収事業者が役割を分け合い、現場で無理なく続く運用を実証しながら組み立てています。",
@@ -122,5 +123,5 @@ var content = {
   // バージョン（フッターに極小表示）
   // ★ここを変えたら、index.html / activities.html / recruit.html / 404.html の
   //   <script src="...?v=..."> も同じ値に更新すること（キャッシュ対策）
-  version: "1.20.1",
+  version: "1.21.0",
 }

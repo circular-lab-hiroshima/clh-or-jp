@@ -23,9 +23,9 @@ if (location.hash.length > 1) {
   }, 1200);
 }
 </script>
-<script src="content.js?v=1.20.1"></script>
-<script src="news.js?v=1.20.1"></script>
-<script src="preview-badge.js?v=1.20.1"></script>
+<script src="content.js?v=1.21.0"></script>
+<script src="news.js?v=1.21.0"></script>
+<script src="preview-badge.js?v=1.21.0"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -316,9 +316,16 @@ a.upcoming-item:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgb
 a.project-card:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(180,32,32,0.08); border-color: var(--orange); }
 .project-photo { aspect-ratio: 4 / 3; border-radius: var(--radius-md); overflow: hidden; background: var(--red-light); border: 1px solid var(--border); }
 .project-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.project-label { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.18em; color: var(--orange-dk); }
-.project-card h3 { font-size: 20px; margin: 8px 0 12px; }
+/* プロジェクト名を主役にする。略称→正式名称→キャッチの順に読ませる */
+.project-abbr { display: block; font-size: 13px; font-weight: 800; letter-spacing: 0.24em; color: var(--orange-dk); }
+.project-name {
+  margin: 10px 0 0; font-size: clamp(22px, 2.6vw, 34px); font-weight: 800;
+  line-height: 1.25; letter-spacing: 0.01em; color: var(--red-dark);
+}
 .project-card p { font-size: 14px; }
+/* .project-card p より後ろかつ同等以上の詳細度でないと上書きされる */
+.project-card .project-tagline { margin-top: 12px; font-size: 16px; font-weight: 700; color: var(--red-dark); }
+.project-card .project-tagline + p { margin-top: 12px; }
 /* 実績は地の文として置く。矢印付きの箇条書きにすると個別記事へのリンクに見えてしまう */
 .project-note {
   margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border);
@@ -573,9 +580,11 @@ footer p { color: inherit; }
         <!-- 何のプロジェクトか一目で伝えるため、回収BOXではなく紙コップそのものを出す -->
         <div class="project-photo"><img src="pccp/assets/paper-cup.jpeg" alt="「ゴミじゃない箱に入れよう」と書かれた使用済みの紙コップ" loading="lazy"></div>
         <div>
-          <!-- id は proj1_ 始まり。会員プラン側が p1_/p2_ を使っているため衝突させない -->
-          <span class="project-label" id="proj1_label"></span>
-          <h3 id="proj1_title"></h3>
+          <!-- id は proj1_ 始まり。会員プラン側が p1_/p2_ を使っているため衝突させない。
+               並びは /pccp/ のヒーローと揃えて「略称は小さく、正式名称を主役に」 -->
+          <span class="project-abbr" id="proj1_abbr"></span>
+          <h3 class="project-name" id="proj1_name"></h3>
+          <p class="project-tagline" id="proj1_tagline"></p>
           <p id="proj1_text"></p>
           <p class="project-note" id="proj1_note"></p>
           <span class="project-link" id="proj1_link"></span>
@@ -790,7 +799,8 @@ footer p { color: inherit; }
   // Projects（見出しのハイライトは Hero と Mission だけに絞っている）
   s('project_tag', content.projects_tag);
   s('project_title', content.projects_title);
-  s('proj1_label', content.proj1_label); s('proj1_title', content.proj1_title);
+  s('proj1_abbr', content.proj1_abbr); s('proj1_name', content.proj1_name);
+  s('proj1_tagline', content.proj1_tagline);
   s('proj1_text', content.proj1_text); s('proj1_note', content.proj1_note);
   setText('proj1_link', (content.proj1_link || '') + ' →');
 
