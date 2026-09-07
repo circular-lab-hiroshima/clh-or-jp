@@ -71,6 +71,10 @@ var content = {
   join_title: "共に、次の当たり前をつくりませんか？",
   join_text: "私たちは、広島から「捨てる」をなくす挑戦を続けています。この活動をより広げ、持続可能なものにするために、私たちの理念に共感し、共に活動してくださる法人会員を募集しています。",
 
+  // 会費・入会案内ブロックの見出し（会員企業一覧の下、料金プランの上に入る）
+  plans_tag: "Membership",
+  plans_title: "会費とご入会について",
+
   // メンバープラン
   plan1_label: "Member",
   plan1_title: "メンバー法人会員",
@@ -123,5 +127,5 @@ var content = {
   // バージョン（フッターに極小表示）
   // ★ここを変えたら、index.html / activities.html / recruit.html / 404.html の
   //   <script src="...?v=..."> も同じ値に更新すること（キャッシュ対策）
-  version: "1.24.1",
+  version: "1.24.2",
 }
