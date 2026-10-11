@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 記事を news.md に足したら、ここにも activities.html?id=記事ID を1行足す -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://clh.or.jp/</loc><priority>1.0</priority></url>
+  <url><loc>https://clh.or.jp/activities.html</loc><priority>0.8</priority></url>
+  <url><loc>https://clh.or.jp/recruit.html</loc><priority>0.7</priority></url>
+  <url><loc>https://clh.or.jp/pccp/</loc><priority>0.8</priority></url>
+  <url><loc>https://clh.or.jp/activities.html?id=seminar-2026-08-report</loc><priority>0.5</priority></url>
+  <url><loc>https://clh.or.jp/activities.html?id=seminar-2026-08</loc><priority>0.5</priority></url>
+  <url><loc>https://clh.or.jp/activities.html?id=outlets-pilot</loc><priority>0.5</priority></url>
+  <url><loc>https://clh.or.jp/activities.html?id=bay-marathon</loc><priority>0.5</priority></url>
+</urlset>
