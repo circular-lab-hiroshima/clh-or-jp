@@ -5,17 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 <title>ページが見つかりません | サーキュラー・ラボ・広島</title>
+<meta name="theme-color" content="#B42020">
 <link rel="icon" type="image/png" href="/assets/logo-mark.png">
 <link rel="apple-touch-icon" href="/assets/logo-mark.png">
 <!-- 404 は任意の深さのURLで表示されるため、参照はすべてルート絶対パスにする -->
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること（理由は index.html 参照） -->
-<script src="/content.js?v=1.25.0"></script>
-<script src="/preview-badge.js?v=1.25.0"></script>
+<script src="/content.js?v=1.26.0"></script>
+<script src="/preview-badge.js?v=1.26.0"></script>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 /* ナビが sticky で 64px あるため、アンカーの着地位置をその分下げる */
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 
 :root {
   --red: #B42020;
@@ -107,7 +109,7 @@ nav {
 .nav-cta-ghost:hover { background: var(--orange); color: var(--white) !important; }
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 4px;
+  background: none; border: none; cursor: pointer; padding: 12px; margin-right: -12px;
 }
 .hamburger span {
   display: block; width: 22px; height: 2px;
@@ -179,7 +181,7 @@ footer p { color: inherit; }
 
 <nav aria-label="ナビゲーション">
   <a href="/" class="nav-logo">
-    <img src="/assets/logo-mark.png" alt="" class="nav-logo-mark">
+    <img width="714" height="711" src="/assets/logo-mark.png" alt="" class="nav-logo-mark">
     <span id="nav_logo">一般社団法人 サーキュラー・ラボ・広島</span>
   </a>
   <div class="nav-links">

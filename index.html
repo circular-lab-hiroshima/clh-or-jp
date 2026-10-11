@@ -5,6 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>サーキュラー・ラボ・広島</title>
 <meta name="description" content="広島から「捨てる」をなくす。一般社団法人サーキュラー・ラボ・広島は、企業・大学・地域と連携し、使い捨て容器などの廃棄物を「資源」として循環させる仕組みを設計・実装しています。">
+<meta name="theme-color" content="#B42020">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="サーキュラー・ラボ・広島">
+<meta property="og:title" content="サーキュラー・ラボ・広島">
+<meta property="og:description" content="広島から「捨てる」をなくす。一般社団法人サーキュラー・ラボ・広島は、企業・大学・地域と連携し、使い捨て容器などの廃棄物を「資源」として循環させる仕組みを設計・実装しています。">
+<meta property="og:url" content="https://clh.or.jp/">
+<meta property="og:image" content="https://clh.or.jp/assets/logo-full.png">
+<meta name="twitter:card" content="summary">
+<link rel="canonical" href="https://clh.or.jp/">
 <link rel="icon" type="image/png" href="assets/logo-mark.png">
 <link rel="apple-touch-icon" href="assets/logo-mark.png">
 <!-- ?v= はデプロイのたびに content.js の version と同じ値に更新すること。
@@ -23,9 +33,9 @@ if (location.hash.length > 1) {
   }, 1200);
 }
 </script>
-<script src="content.js?v=1.25.0"></script>
-<script src="news.js?v=1.25.0"></script>
-<script src="preview-badge.js?v=1.25.0"></script>
+<script src="content.js?v=1.26.0"></script>
+<script src="news.js?v=1.26.0"></script>
+<script src="preview-badge.js?v=1.26.0"></script>
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -54,6 +64,7 @@ if (location.hash.length > 1) {
 /* ナビが position:fixed で 64px あるため、その分アンカーの着地位置を下げる。
    これが無いとセクションの先頭がナビの裏に隠れ、どこへ飛んでも同じ見た目になる。 */
 html { scroll-behavior: smooth; scroll-padding-top: 72px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 /* 着地位置が確定するまでの数百ミリ秒だけ伏せる（付与は head のスクリプト） */
 html.anchor-pending { scroll-behavior: auto; }
 html.anchor-pending body { visibility: hidden; }
@@ -164,7 +175,7 @@ nav {
 
 .hamburger {
   display: none; flex-direction: column; gap: 5px;
-  background: none; border: none; cursor: pointer; padding: 4px;
+  background: none; border: none; cursor: pointer; padding: 12px; margin-right: -12px;
 }
 .hamburger span {
   display: block; width: 22px; height: 2px;
@@ -459,7 +470,7 @@ footer p { color: inherit; }
 
 <nav aria-label="メインメニュー">
   <a href="#top" class="nav-logo">
-    <img src="assets/logo-mark.png" alt="" class="nav-logo-mark">
+    <img width="714" height="711" src="assets/logo-mark.png" alt="" class="nav-logo-mark">
     <span id="nav_logo"></span>
   </a>
   <!-- 並び順はページ内のセクション順に合わせる。
@@ -489,6 +500,7 @@ footer p { color: inherit; }
   <a href="#contact"    class="ml">お問い合わせ</a>
 </div>
 
+<main>
 <section class="hero" id="top">
   <div class="hero-inner">
     <span class="tag" id="hero_tag"></span>
@@ -501,7 +513,7 @@ footer p { color: inherit; }
     </div>
   </div>
   <div class="hero-visual" aria-hidden="true">
-    <img src="assets/logo-mark.png" alt="">
+    <img width="714" height="711" src="assets/logo-mark.png" alt="">
   </div>
 </section>
 
@@ -530,11 +542,11 @@ footer p { color: inherit; }
       <h3 id="member_title"></h3>
       <div class="member-grid">
         <div class="member-card">
-          <div class="member-avatar"><img src="assets/member-kawamura.jpg" alt="河村 伸枝"></div>
+          <div class="member-avatar"><img width="320" height="320" src="assets/member-kawamura.jpg" alt="河村 伸枝"></div>
           <div><div class="member-role" id="m1_role"></div><div class="member-name" id="m1_name"></div><p class="member-desc" id="m1_desc"></p></div>
         </div>
         <div class="member-card">
-          <div class="member-avatar"><img src="assets/member-sadakane.jpg" alt="定金 基"></div>
+          <div class="member-avatar"><img width="320" height="320" src="assets/member-sadakane.jpg" alt="定金 基"></div>
           <div><div class="member-role" id="m2_role"></div><div class="member-name" id="m2_name"></div><p class="member-desc" id="m2_desc"></p></div>
         </div>
       </div>
@@ -559,12 +571,12 @@ footer p { color: inherit; }
       <p class="service-cases-lead" id="cases_lead"></p>
       <div class="case-grid">
         <div class="case-card">
-          <div class="case-photo"><img src="assets/case-marathon.jpg" alt="イベント会場での使用済み容器の分別作業" loading="lazy"></div>
+          <div class="case-photo"><img width="440" height="330" src="assets/case-marathon.jpg" alt="イベント会場での使用済み容器の分別作業" loading="lazy"></div>
           <h4 id="c1_title"></h4>
           <p id="c1_text"></p>
         </div>
         <div class="case-card">
-          <div class="case-photo"><img src="assets/case-collection.jpg" alt="商業施設フードコートに設置した紙コップの回収ボックス" loading="lazy"></div>
+          <div class="case-photo"><img width="440" height="330" src="assets/case-collection.jpg" alt="商業施設フードコートに設置した紙コップの回収ボックス" loading="lazy"></div>
           <h4 id="c2_title"></h4>
           <p id="c2_text"></p>
         </div>
@@ -580,7 +592,7 @@ footer p { color: inherit; }
     <div class="project-grid">
       <a class="project-card" href="pccp/">
         <!-- 何のプロジェクトか一目で伝えるため、回収BOXではなく紙コップそのものを出す -->
-        <div class="project-photo"><img src="pccp/assets/paper-cup.jpeg" alt="「ゴミじゃない箱に入れよう」と書かれた使用済みの紙コップ" loading="lazy"></div>
+        <div class="project-photo"><img width="1500" height="2000" src="pccp/assets/paper-cup.jpeg" alt="「ゴミじゃない箱に入れよう」と書かれた使用済みの紙コップ" loading="lazy"></div>
         <div>
           <!-- id は proj1_ 始まり。会員プラン側が p1_/p2_ を使っているため衝突させない。
                並びは /pccp/ のヒーローと揃えて「略称は小さく、正式名称を主役に」 -->
@@ -609,35 +621,35 @@ footer p { color: inherit; }
       <!-- ロゴと社名をまとめて1つのリンクにしている（どちらを押しても各社サイトへ） -->
       <div class="logo-grid">
         <a class="logo-item" href="https://kiriharayoki.co.jp/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/kirihara-yoki.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="400" height="73" src="assets/members/kirihara-yoki.png" alt="" loading="lazy"></span>
           <span class="logo-name">株式会社桐原容器工業所</span>
         </a>
         <a class="logo-item" href="https://hk-report.co.jp/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/hiroshima-keizai.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="400" height="68" src="assets/members/hiroshima-keizai.png" alt="" loading="lazy"></span>
           <span class="logo-name">株式会社広島経済研究所</span>
         </a>
         <a class="logo-item" href="https://www.shingi.co.jp/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/shingi.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="400" height="111" src="assets/members/shingi.png" alt="" loading="lazy"></span>
           <span class="logo-name">株式会社シンギ</span>
         </a>
         <a class="logo-item" href="https://nexycl.com/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/nexycl.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="400" height="74" src="assets/members/nexycl.png" alt="" loading="lazy"></span>
           <span class="logo-name">株式会社NEXYCL</span>
         </a>
         <a class="logo-item" href="https://c-pack.jp/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/chiyoda-pack.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="554" height="120" src="assets/members/chiyoda-pack.png" alt="" loading="lazy"></span>
           <span class="logo-name">株式会社チヨダパック</span>
         </a>
         <a class="logo-item" href="https://www.dentsusoken.com/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/dentsusoken.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="407" height="120" src="assets/members/dentsusoken.png" alt="" loading="lazy"></span>
           <span class="logo-name">株式会社電通総研</span>
         </a>
         <a class="logo-item" href="https://www.tokan.co.jp/" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/tokan.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="595" height="120" src="assets/members/tokan.png" alt="" loading="lazy"></span>
           <span class="logo-name">東罐興業株式会社</span>
         </a>
         <a class="logo-item" href="http://www.ts-spoon.com" target="_blank" rel="noopener noreferrer">
-          <span class="logo-card"><img src="assets/members/tosho-kagaku.png" alt="" loading="lazy"></span>
+          <span class="logo-card"><img width="638" height="120" src="assets/members/tosho-kagaku.png" alt="" loading="lazy"></span>
           <span class="logo-name">東商化学株式会社</span>
         </a>
       </div>
@@ -694,6 +706,8 @@ footer p { color: inherit; }
     <a class="btn btn-red" id="contact_btn"></a>
   </div>
 </section>
+
+</main>
 
 <footer>
   <p id="footer_text"></p>
@@ -898,7 +912,7 @@ footer p { color: inherit; }
     });
     // 判定はページ内の全セクションで行う。Join Us まで進んだら
     // Projects が点きっぱなしになるのを防ぐため。
-    var sections = [].slice.call(document.querySelectorAll('body > section[id]'));
+    var sections = [].slice.call(document.querySelectorAll('main > section[id]'));
     if (!sections.length) return function () {};
 
     return function update() {
