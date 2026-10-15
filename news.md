@@ -32,7 +32,7 @@
 id: outlets-annual-2026-10
 date: 2026-10-15
 project: pccp
-title: THE OUTLETS HIROSHIMA フードコートにおける使い捨て紙コップ資源化の通年運用開始について
+title: THE OUTLETS HIROSHIMAで紙コップの回収・再資源化を通年運用として開始
 
 一般社団法人サーキュラー・ラボ・広島は、THE OUTLETS HIROSHIMAのフードコートで使用される水飲み用使い捨て紙コップを回収・再資源化する取り組みを、2026年10月より通年運用として開始いたします。
 
